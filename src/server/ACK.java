@@ -3,9 +3,10 @@ package server;
 
 public enum ACK
 	{
-		/*
-		 * USERS
-		 */
+		//	USER	//
+		PasswordUnmatch,
+		UserAlreadyLoggedIn,
+		//	USERS	//
 		AlreadyRegistered,
 		EmptyField,
 		UserRegistered,
@@ -14,6 +15,14 @@ public enum ACK
 		UserNotFound,
 		UserDeleted,
 		UserNotDeleted,
+		
+		//	FRIENDS	//
+		AlreadyFriends,
+		FriendNotFound,
+		FriendAdded,
+		UserAdded,
+		AlreadyExisting,
+		FriendRemoved,
 		
 		OK;
 	}
