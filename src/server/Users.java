@@ -1,3 +1,17 @@
+/************************************************
+ * 																							*
+ * 										USERS											*
+ * 																							*
+ ************************************************
+ * 
+ * In questo file vengono implementati i metodi e
+ * le variabili per modellare il database degli utenti
+ * usando come modello dell'utente la classe 'user'
+ * 
+ * @author	Luca Canessa (Mat. 516639)
+ * @version	%I%
+ * @since		1.0
+ */
 package server;
 
 import java.io.*;
@@ -8,18 +22,26 @@ import org.json.simple.parser.ParseException;
 
 
 @SuppressWarnings( "serial" )
-public class Users extends JSONObject
+public class Users
 	{
-		private String							__PATHDBU = ".data/DB.json";
-		private int 								__size = -1;
-		private static Users 				__users = null;
-		private JSONParser 					__parser = null;
-		private static JSONObject 	__dbUser = null;
-		private FileWriter 					__dbFile = null;
+		//						//
+		//	VARIABLES	//
+		//						//
+		private static String				__PATHDBU = null; //path to users db
+		private int 								__size = -1; //number of users in db
+		private static Users 				__users = null; //singleton
+		private JSONParser 					__parser = null; //file parser
+		private static JSONObject 	__dbUser = null; //the real db 
+		private FileWriter 					__dbFile = null; //writer on file
 		
+		
+		//					//
+		//	METHODS	//
+		//					//
 		
 		/**
-		 * 
+		 * Costruttore del databse degli utenti. Implementato
+		 * come singoletto per evitare problemi di copie inconsistenti.
 		 */
 		private Users( )
 			{
@@ -42,28 +64,35 @@ public class Users extends JSONObject
 				catch( ParseException e )
 					{
 						// TODO Auto-generated catch block
+						System.err.println( "sono qui" );
+
 						e.printStackTrace();
 					}
 			}
 		
 		
 		/**
+		 * Inizializzatore del database. Si interfaccia direttamente
+		 * con il costruttore della classe
 		 * 
-		 * @return
+		 * @param dbPath	percorso al file json dove è salvato il db
+		 * @return oggetto che rappresenta il database
 		 */
-		public synchronized static Users init( )
+		public static Users init( String dbPath )
 			{
 				if( __users == null )
 					{
+						__PATHDBU = dbPath;
 						__users = new Users( );
 					}
+				
 				return __users;
 			}
 		
 		
 		/**
-		 * 
-		 * @return
+		 * Restituisce il numero di oggetti utenti all'interno del database
+		 * @return il numero degli utenti iscritti
 		 */
 		public synchronized int getNusers( )
 			{
@@ -71,9 +100,15 @@ public class Users extends JSONObject
 			}
 		
 		
-		
+		/**
+		 * Inserisce l'utente all'interno del database estrapolando i dati 
+		 * dall'oggetto 'user' passatogli
+		 * 
+		 * @param usr utente da inserire
+		 * @return valore ACK di ritorno 
+		 */
 		@SuppressWarnings( "unchecked" )
-		public synchronized ACK insertUser( User usr )
+		public synchronized ACK insertUser( User usr, Friendships f )
 			{
 				if( searchUser( usr.getID( ) ) == ACK.UserNotFound )
 					{
@@ -83,9 +118,16 @@ public class Users extends JSONObject
 						u.put( "surname", usr.getSurname( ) );
 						u.put( "TScore", usr.getTotScore( ) );
 						u.put( "LatestScore", usr.getChalScore( ) );
-						u.put( "STATUS", usr.getStatus( ) );
+						u.put( "STATUS", usr.getStatus( ).toString( ) );
 						
 						__dbUser.put( usr.getID( ), u );
+						
+						__size++;
+						
+						if( f.newUser( usr ) != ACK.UserAdded )
+							{
+								//TODO
+							}
 						
 						return ACK.UserRegistered; 
 					}
@@ -93,8 +135,11 @@ public class Users extends JSONObject
 				return ACK.UserFound;	
 			}
 		
-		
-		
+		/**
+		 * 		
+		 * @param nickname
+		 * @return
+		 */
 		public synchronized User getUser( String nickname )
 			{
 				JSONObject tmpU = null;
@@ -143,7 +188,7 @@ public class Users extends JSONObject
 						u.put( "surname", usr.getSurname( ) );
 						u.put( "TScore", usr.getTotScore( ) );
 						u.put( "LatestScore", usr.getChalScore( ) );
-						u.put( "STATUS", usr.getStatus( ) );
+						u.put( "STATUS", usr.getStatus( ).toString( ) );
 						
 						return ACK.OK;
 					}

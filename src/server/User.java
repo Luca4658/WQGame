@@ -4,13 +4,13 @@
  *																							*
  ************************************************
  *
- * In questo file sono stati implementati i metodi e le variabili 
- * per moedllare e gestire la classe 'utente' che rappresenta il
+ * In questo file vengono implementati i metodi e le variabili 
+ * per modellare e gestire la classe 'utente' che rappresenta il
  * client.
  * 
- * @author Luca Canessa
- * @version %I%
- * @since 1.0
+ * @author	Luca Canessa (Mat. 516639)
+ * @version	%I%
+ * @since		1.0
  */
 package server;
 
