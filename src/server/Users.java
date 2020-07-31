@@ -15,6 +15,16 @@
 package server;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
@@ -22,7 +32,7 @@ import org.json.simple.parser.ParseException;
 
 
 @SuppressWarnings( "serial" )
-public class Users
+public class Users implements Serializable
 	{
 		//						//
 		//	VARIABLES	//
@@ -116,8 +126,8 @@ public class Users
 						u.put( "password", usr.getPassword( ) );
 						u.put( "name", usr.getName( ) );
 						u.put( "surname", usr.getSurname( ) );
-						u.put( "TScore", usr.getTotScore( ) );
-						u.put( "LatestScore", usr.getChalScore( ) );
+						u.put( "TScore", ((Integer)usr.getTotScore( )).toString( ) );
+						u.put( "LatestScore", ((Integer)usr.getChalScore( )).toString() );
 						u.put( "STATUS", usr.getStatus( ).toString( ) );
 						
 						__dbUser.put( usr.getID( ), u );
@@ -126,7 +136,7 @@ public class Users
 						
 						if( f.newUser( usr ) != ACK.UserAdded )
 							{
-								//TODO
+								System.err.println( "proviamo qui" );
 							}
 						
 						return ACK.UserRegistered; 
@@ -161,8 +171,8 @@ public class Users
 							}
 					
 						newU = new User( nickname, password, name, sname );
-						newU.setTScore( (int) tmpU.get( "TScore") );
-						newU.setCScore( (int) tmpU.get( "LatestScore") );
+						newU.setTScore( Integer.valueOf( (String) tmpU.get( "TScore") ) );
+						newU.setCScore(  Integer.valueOf( (String) tmpU.get( "LatestScore") ) );
 					}
 				
 				return newU;
@@ -186,8 +196,8 @@ public class Users
 						u.put( "password", usr.getPassword( ) );
 						u.put( "name", usr.getName( ) );
 						u.put( "surname", usr.getSurname( ) );
-						u.put( "TScore", usr.getTotScore( ) );
-						u.put( "LatestScore", usr.getChalScore( ) );
+						u.put( "TScore", ((Integer)usr.getTotScore( )).toString( ) );
+						u.put( "LatestScore", ((Integer)usr.getChalScore( )).toString() );
 						u.put( "STATUS", usr.getStatus( ).toString( ) );
 						
 						return ACK.OK;
@@ -231,6 +241,44 @@ public class Users
 				return ACK.UserNotDeleted;
 			}
 		
+		@SuppressWarnings( "unchecked" )
+		protected HashMap<String, Integer> getRanking( )
+			{
+				HashMap<String, Integer> tempR = new HashMap<String, Integer>( );
+				Iterator<String> user = __dbUser.keySet( ).iterator( );
+				
+				while( user.hasNext( ) )
+					{
+						String sUsr = user.next( );
+						JSONObject field = (JSONObject) __dbUser.get( sUsr );
+
+						String p =  (String) field.get( "TScore" );
+						int score = Integer.valueOf( p );
+						
+						tempR.put( sUsr, score );
+					}
+				
+				
+				List<Entry<String,Integer>> list = new ArrayList<HashMap.Entry<String,Integer>>( tempR.entrySet( ) );
+				
+				Collections.sort( list, new Comparator<Map.Entry<String, Integer> >() 
+							{ 
+								public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2)
+									{ 
+										return (o1.getValue()).compareTo(o2.getValue()); 
+									}
+							});
+				
+				HashMap<String, Integer> rank = new LinkedHashMap<String, Integer>( );
+				
+				for( Map.Entry<String, Integer> el : list )
+					{
+						rank.put( el.getKey( ), el.getValue( ) );
+					}
+				
+				
+				return rank;
+			}
 		/**
 		 * 
 		 */
