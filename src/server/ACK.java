@@ -6,6 +6,8 @@ public enum ACK
 		//	USER	//
 		PasswordUnmatch,
 		UserAlreadyLoggedIn,
+		LoggedIn,
+		LoggedOut,
 		//	USERS	//
 		AlreadyRegistered,
 		EmptyField,
@@ -24,5 +26,6 @@ public enum ACK
 		AlreadyExisting,
 		FriendRemoved,
 		
+		OperationUnknown,
 		OK;
 	}
