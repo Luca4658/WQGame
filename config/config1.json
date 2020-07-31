@@ -1,19 +1,19 @@
 {
 	"_WARNING": "you can modify only the values of the keys BUT the keys MUST be the same",
 	"SERVER":{
-		"timeoutreq": 5000,
-		"timeoutgame": 60000,
-		"rmiport": 21895,
-		"port": 46058
+		"timeoutreq": "5000",
+		"timeoutgame": "60000",
+		"rmiport": "21895",
+		"port": "46058"
 	},
 	"DB":{ 
 		"userspath": ".data/users.json",
 		"friendpath": ".data/friendships.json"
 	},
 	"GAME":{
-		"word": 6,			
-		"correct": 3,
-		"wrong": 1,
-		"extra": 5
+		"word": "6",			
+		"correct": "3",
+		"wrong": "1",
+		"extra": "5"
 	}
 }
