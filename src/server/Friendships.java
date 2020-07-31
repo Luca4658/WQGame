@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.json.simple.JSONArray;
@@ -84,7 +83,7 @@ public class Friendships
 		@SuppressWarnings( "unchecked" )
 		public synchronized ACK addFriend( User a, User b )
 			{
-				if( searchFriend( a, b ) == ACK.FriendNotFound )
+				if( !a.getID( ).equals( b.getID( ) ) && searchFriend( a, b ) == ACK.FriendNotFound )
 					{
 						JSONObject userA = (JSONObject) __dbFriend.get( a.getID( ) );
 						JSONArray friendsA = (JSONArray) userA.get( "friends" );
@@ -141,19 +140,19 @@ public class Friendships
 		
 		
 		@SuppressWarnings( "unchecked" )
-		public synchronized ArrayList<String> getFriends( User a )
+		public synchronized JSONArray getFriends( User a )
 			{
-				ArrayList<String> Afriends = new ArrayList<String>( );
 				JSONObject userA = (JSONObject) __dbFriend.get( a.getID( ) );
 				JSONArray friendsA = (JSONArray) userA.get( "friends" );
 				Iterator<String> friends = friendsA.iterator( );
 				
+				JSONArray frdtoret = new JSONArray( );
 				while( friends.hasNext( ) )
 					{
-						Afriends.add( friends.next( ) );
+						frdtoret.add( friends.next( ) );
 					}
 				
-				return Afriends;
+				return frdtoret;
 			}
 		
 		
