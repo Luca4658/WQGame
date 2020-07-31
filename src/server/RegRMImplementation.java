@@ -6,9 +6,20 @@ import java.rmi.server.*;
 
 public class RegRMImplementation extends RemoteServer implements RegRMInterface 
 	{
-		@Override
-		public ACK RegUser( User usr, Users usrs, Friendships fdb ) throws RemoteException
+		private static final long serialVersionUID = 1L;
+		private Users __udb;
+		private Friendships __fdb;
+		
+		public RegRMImplementation( Users usrs, Friendships frd )
 			{
-				return usrs.insertUser( usr, fdb );
+				__udb = usrs;
+				__fdb = frd;
+			}
+		
+		
+		@Override
+		public ACK RegUser( User u ) throws RemoteException
+			{
+				return __udb.insertUser( u, __fdb );
 			}
 	}

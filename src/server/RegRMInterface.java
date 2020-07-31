@@ -5,5 +5,5 @@ import java.rmi.RemoteException;
 
 public interface RegRMInterface extends Remote
 	{
-		public ACK RegUser( User usr, Users usrs, Friendships fdb ) throws RemoteException;
+		public ACK RegUser( User u ) throws RemoteException;
 	}
