@@ -14,11 +14,15 @@
  */
 package server;
 
+import java.io.Serializable;
+
 import server.UStatus; //enum user status
 
 
-public class User
+public class User implements Serializable
 	{
+
+		private static final long serialVersionUID = 1L;
 		//						//
 		//	VARIABLES	//
 		//						//
@@ -29,6 +33,7 @@ public class User
 		private UStatus __status; //current user status
 		private int 		__tScore; //total user score
 		private int 		__chScore; //last challenge score
+
 		
 		
 		//					//
