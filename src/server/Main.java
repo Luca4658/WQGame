@@ -4,6 +4,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import java.rmi.AlreadyBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
+
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -72,6 +82,22 @@ class ConfParser
 				return path;
 			}
 		
+		public int getRMIPort( )
+			{
+				JSONObject field = (JSONObject) __conf.get( "SERVER" );
+				String path = (String) field.get( "rmiport" );
+				
+				if( path.equals( "null" ) || path.equals( "" ) )
+					{
+						System.err.println( "Error: Empty port RMI" );
+						System.exit( -1 );
+					}
+				
+				int port = Integer.valueOf( path );
+				
+				return port;
+			}
+		
 	}
 
 
@@ -79,51 +105,92 @@ class ConfParser
 
 public class Main
 	{
+		
+		private static ConfParser 	parser = null;
+		private static	Users 			UDB = null;
+		private static	Friendships	FDB = null;
+	
+		
 		public static void main( String[] args )
 			{
+				parser = new ConfParser( args[0] );
+				UDB = Users.init( parser.getUsersPath( ) );
+				FDB = Friendships.init( parser.getFriendPath( ) );
+
 				
-				ConfParser parser = new ConfParser( args[0] );
+//				try
+//					{
+//						RegRMImplementation srv = new RegRMImplementation( UDB, FDB );
+//						RegRMInterface stub = (RegRMInterface) UnicastRemoteObject.exportObject( srv, parser.getRMIPort( ) );
+//						Registry reg = LocateRegistry.createRegistry( parser.getRMIPort( ) );
+//						
+//						reg.bind( "ServerRMI", stub );
+//					} 
+//				catch( RemoteException | AlreadyBoundException e )
+//					{
+//						e.printStackTrace();
+//						System.exit( -1 );
+//					}
+//				
+//				while( true )
+//					{
+//						UDB.writeONfile( );
+//						FDB.writeONfile( );
+//						try
+//							{
+//								Thread.sleep( 2000 );
+//							} catch( InterruptedException e )
+//							{
+//								// TODO Auto-generated catch block
+//								e.printStackTrace();
+//							}
+//					}
 				
-				System.out.println( parser.getUsersPath( ) );
-				Users DB = Users.init( parser.getUsersPath( ) );
-				Friendships FDB = Friendships.init( parser.getFriendPath( ) );
-	
-				User a = new User( "Luca1", "Password1" );
-				User b = new User( "Luca2", "Password2", "LucaC", null );
-				User c = new User( "Luca3", "Password3" );
+				UDB.insertUser( new User( "Luca1", "Password" ), FDB );
+				UDB.insertUser( new User( "Luca2", "Password" ), FDB );
+				UDB.insertUser( new User( "Luca3", "Password" ), FDB );
+				UDB.insertUser( new User( "Luca4", "Password" ), FDB );
+				UDB.insertUser( (new User( "Luca5", "Password" )), FDB );
 				
-				DB.insertUser( a, FDB );
-				DB.insertUser( b, FDB );
-				DB.insertUser( c, FDB );
+				System.out.println( UDB.getRanking( ) );
 				
-				b.resetPassword( "Passwd2" );
-				a.resetName( "LucaD" );
-				
-				DB.updateUser( a );
-				DB.updateUser( b );
-				
-				FDB.addFriend( a, b );
-				FDB.addFriend( a, c );
-				
-				DB.writeONfile( );
 				FDB.writeONfile( );
+				UDB.writeONfile( );
 				
-				User l = DB.getUser( "Luca1" );
-				User k = DB.getUser( "Luca2" );
-				
-				System.out.println( FDB.getNFriends( a ) + " " + FDB.getNFriends( b ) + " " + FDB.getNFriends( c ) );
-				
-				
-				for( String f:FDB.getFriends( a ) )
+				for( int i = 0; i < 5; i++ )
 					{
-						System.out.print( f + "\t" );
+						int punti = (int) ( Math.random( ) *( 60 - 1 ) );
+						String l = "Luca" + (i+1);
+						if( l.equals( "Luca2" ) )
+							{
+								FDB.addFriend( UDB.getUser( l ), UDB.getUser( "Luca2" ) );
+								FDB.addFriend( UDB.getUser( l ), UDB.getUser( "Luca3" ) );
+								FDB.addFriend( UDB.getUser( l ), UDB.getUser( "Luca4" ) );
+								FDB.addFriend( UDB.getUser( l ), UDB.getUser( "Luca5" ) );
+							}
+						User u = UDB.getUser( l );
+						u.setTScore( punti );
+						UDB.updateUser( u );
 					}
 				
-				FDB.removeFriend( a, c );
-				
 				FDB.writeONfile( );
-			
+				UDB.writeONfile( );
 				
-				System.out.println( "\n" + l.getName( ) + "\t" + k.getPassword( ) );
+				HashMap<String, Integer> ranking = UDB.getRanking( );
+				HashMap<String, Integer> myranking = new HashMap<String, Integer>( );
+				JSONArray friendlist = FDB.getFriends( UDB.getUser( "Luca2" ) );
+				
+				for( int i = 0; i < friendlist.size( ); i++ )
+					{
+						String friend = (String) friendlist.get( i );
+						
+						myranking.put( friend, ranking.get( friend ) );
+					}
+				
+				
+				
+				
+				System.out.println( UDB.getRanking( ) + "mh\n" + myranking.toString( ) );		
+				
 			}
 	}
