@@ -27,5 +27,6 @@ public enum ACK
 		FriendRemoved,
 		
 		OperationUnknown,
-		OK;
+		OK,
+		ERROR;
 	}
