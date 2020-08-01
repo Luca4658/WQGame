@@ -1,0 +1,12 @@
+# other files
+*.eml
+*.iml
+null
+
+# eclipse
+.classpath
+.project
+.settings/
+.settings/*
+.idea/
+.idea/*
