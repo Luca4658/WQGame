@@ -6,7 +6,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.json.simple.JSONArray;
 
@@ -61,6 +67,71 @@ public class ClientTasks implements Runnable
 					}
 			}
 		
+		
+		
+		private HashMap<String, Integer> personalRank( )
+			{
+				HashMap<String, Integer> ranking = __udb.getRanking( );
+				HashMap<String, Integer> myranking = new HashMap<String, Integer>( );
+				JSONArray friendlist = __fdb.getFriends( __me );
+				
+				for( int i = 0; i < friendlist.size( ); i++ )
+					{
+						String friend = (String) friendlist.get( i );
+						
+						myranking.put( friend, ranking.get( friend ) );
+					}
+				
+				myranking.put( __me.getID( ), __me.getTotScore( ) );
+				
+				
+				List<Entry<String,Integer>> list = new ArrayList<HashMap.Entry<String,Integer>>( myranking.entrySet( ) );
+				
+				Collections.sort( list, new Comparator<Map.Entry<String, Integer> >() 
+					{ 
+						public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2)
+							{ 
+								return ( o1.getValue( ) ).compareTo( o2.getValue( ) ); 
+							}
+					});
+				
+				HashMap<String, Integer> rank = new LinkedHashMap<String, Integer>( );
+				
+				for( Map.Entry<String, Integer> el : list )
+					{
+						rank.put( el.getKey( ), el.getValue( ) );
+					}
+				
+				return rank;				
+			}
+
+
+		private void send( String msg )
+			{
+				try
+					{
+						__outBuff.writeBytes( msg + "\n");
+					}
+				catch( IOException e )
+					{
+						System.err.println( "problem to send message" );
+					}
+			}
+
+		private String recv( )
+			{
+				try
+					{
+						return __inBuff.readLine();
+					}
+				catch( IOException e )
+					{
+						System.err.println( "problem to receive message" );
+					}
+
+				return null;
+			}
+		
 		@Override
 		public void run( )
 			{
@@ -69,41 +140,50 @@ public class ClientTasks implements Runnable
 					{
 						try
 							{
-								String opRec = __inBuff.readLine( );
-								ClientMSG op = ClientMSG.valueOf( opRec );
-								
+								String opRec = recv( );
+
+								if( opRec == null )
+									{
+										end = true;
+										continue;
+									}
+
+								ClientMSG op = ClientMSG.valueOf( opRec );;
+
 								switch( op )
 									{
 										case LOGIN:
 											{
-												ACK ret;
-												String nickname = __inBuff.readLine( );
-												String psw = __inBuff.readLine( );
+												ACK ret = ACK.ERROR;
+												String nickname = recv( );
+												String psw = recv( );
+
 												try
 													{
 														__me = __udb.getUser( nickname );
+
+														ret = ACK.PasswordUnmatch;
+
 														if( __me.pswIsEqual( psw ) )
 															{
 																if( __me.getStatus( ) != UStatus.OFFLINE )
 																	{
 																		ret = ACK.UserAlreadyLoggedIn;
 																	}
-																else 
+																else
 																	{
 																		__me.setOnline( );
 																		__udb.updateUser( __me );
 																		ret = ACK.LoggedIn;
 																	}
 															}
-														ret = ACK.PasswordUnmatch;
-													} 
+													}
 												catch( Exception e )
 													{
 														ret = ACK.UserNotFound;
 													}
-												
-												String ackmsg = ret.name( );
-												__outBuff.writeChars( ackmsg );
+
+												send( ret.name() );
 											}
 										break;
 										case LOGOUT:
@@ -112,32 +192,32 @@ public class ClientTasks implements Runnable
 												__me.setOffline( );
 												__udb.updateUser( __me );
 												ret = ACK.LoggedOut;
-												String ackmsg = ret.name( );
-												__outBuff.writeChars( ackmsg );
+
+												send( ret.name( ) );
+
 											}
 										break;
 										case ADDFRIEND:
 											{
 												String name = __inBuff.readLine( );
 												User frd  = __udb.getUser( name );
-												ACK result = __fdb.addFriend( __me, frd );
-												String ackmsg = result.name( );
-												
-												__outBuff.writeChars( ackmsg );
+												ACK ret = __fdb.addFriend( __me, frd );
+
+												send( ret.name() );
 											}
 										break;
 										case GETFRIENDS:
 											{
 												String list = __fdb.getFriends( __me ).toJSONString( );
-												
-												__outBuff.writeChars( list );
+
+												send( list);
 											}
 										break;
 										case GETNFRIENDS:
 											{
 												long n = __fdb.getNFriends( __me );
-												
-												__outBuff.writeLong( n );
+
+												send( Long.toString( n )  );
 											}
 										break;
 										case CHSTARTED:
@@ -152,43 +232,28 @@ public class ClientTasks implements Runnable
 										break;
 										case UPDATEINFO:
 											{
-												String name = __inBuff.readLine( );
-												String sname = __inBuff.readLine( );
-												String psw = __inBuff.readLine( );
-												
+												String name = recv( );
+												String sname = recv( );
+												String psw = recv( );
+
 												__me.resetName( name );
 												__me.resetSurname( sname );
 												__me.resetPassword( psw );
 												
 												ACK ret = __udb.updateUser( __me );
-												
-												String ackmsg = ret.name( );
-												
-												__outBuff.writeChars( ackmsg );
+												send( ret.name( ) );
 											}
 										break;
 										case GETPOINTS:
 											{
 												int score = __me.getTotScore( );
-												
-												__outBuff.write( score );
+												send( Integer.toString( score ) );
 											}
 										break;
 										case GETRANK:
 											{
-												HashMap<String, Integer> ranking = __udb.getRanking( );
-												HashMap<String, Integer> myranking = new HashMap<String, Integer>( );
-												JSONArray friendlist = __fdb.getFriends( __me );
-												
-												for( int i = 0; i < friendlist.size( ); i++ )
-													{
-														String friend = (String) friendlist.get( i );
-														
-														myranking.put( friend, ranking.get( friend ) );
-													}
-												
-												myranking.toString( );
-												
+												HashMap<String, Integer> myrank = personalRank( );
+												send( myrank.toString( ) );
 											}
 										break;
 										default:
@@ -219,6 +284,18 @@ public class ClientTasks implements Runnable
 										e1.printStackTrace();
 									}
 							}
+					}
+				try
+					{
+						__inBuff.close( );
+						__outBuff.close( );
+						__cSocket.close( );
+						end = true;
+					}
+				catch( IOException e1 )
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 			}
 	}
