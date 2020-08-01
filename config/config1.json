@@ -1,10 +1,11 @@
 {
 	"_WARNING": "you can modify only the values of the keys BUT the keys MUST be the same",
 	"SERVER":{
-		"timeoutreq": "5000",
-		"timeoutgame": "60000",
 		"rmiport": "21895",
-		"port": "46058"
+		"port": "46058",
+		"maxconn": "20",
+		"timeoutreq": "5000",
+		"timeoutgame": "60000"
 	},
 	"DB":{ 
 		"userspath": ".data/users.json",
