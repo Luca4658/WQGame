@@ -4,14 +4,24 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import java.net.*;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Map.Entry;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -97,6 +107,32 @@ class ConfParser
 				
 				return port;
 			}
+
+		public int getMaxConnections( )
+			{
+				JSONObject field = (JSONObject) __conf.get( "SERVER" );
+				String s = (String)field.get( "maxconn" );
+				if( s.equals( "null" ) || s.equals( "" ) )
+					{
+						System.err.println( "Error: Empty port RMI" );
+						System.exit( -1 );
+					}
+
+				return Integer.valueOf( s );
+			}
+
+		public int getListnerPort( )
+			{
+				JSONObject field = (JSONObject) __conf.get( "SERVER" );
+				String s = (String)field.get( "port" );
+				if( s.equals( "null" ) || s.equals( "" ) )
+					{
+						System.err.println( "Error: Empty port RMI" );
+						System.exit( -1 );
+					}
+
+				return Integer.valueOf( s );
+			}
 		
 	}
 
@@ -106,91 +142,67 @@ class ConfParser
 public class Main
 	{
 		
-		private static ConfParser 	parser = null;
-		private static	Users 			UDB = null;
-		private static	Friendships	FDB = null;
+		private static  ConfParser 	      parser = null;
+		private static  Users 			      UDB = null;
+		private static  Friendships	      FDB = null;
+		private static  ExecutorService   Tpool = null;
+		private static  ServerSocket      LISTENER = null;
 	
 		
 		public static void main( String[] args )
 			{
+				if( args.length < 1 )
+					{
+						System.err.println( "Missing config path" );
+						System.exit( -1 );
+					}
+
 				parser = new ConfParser( args[0] );
 				UDB = Users.init( parser.getUsersPath( ) );
 				FDB = Friendships.init( parser.getFriendPath( ) );
 
+				Tpool = Executors.newCachedThreadPool( );
+
 				
-//				try
-//					{
-//						RegRMImplementation srv = new RegRMImplementation( UDB, FDB );
-//						RegRMInterface stub = (RegRMInterface) UnicastRemoteObject.exportObject( srv, parser.getRMIPort( ) );
-//						Registry reg = LocateRegistry.createRegistry( parser.getRMIPort( ) );
-//						
-//						reg.bind( "ServerRMI", stub );
-//					} 
-//				catch( RemoteException | AlreadyBoundException e )
-//					{
-//						e.printStackTrace();
-//						System.exit( -1 );
-//					}
-//				
-//				while( true )
-//					{
-//						UDB.writeONfile( );
-//						FDB.writeONfile( );
-//						try
-//							{
-//								Thread.sleep( 2000 );
-//							} catch( InterruptedException e )
-//							{
-//								// TODO Auto-generated catch block
-//								e.printStackTrace();
-//							}
-//					}
-				
-				UDB.insertUser( new User( "Luca1", "Password" ), FDB );
-				UDB.insertUser( new User( "Luca2", "Password" ), FDB );
-				UDB.insertUser( new User( "Luca3", "Password" ), FDB );
-				UDB.insertUser( new User( "Luca4", "Password" ), FDB );
-				UDB.insertUser( (new User( "Luca5", "Password" )), FDB );
-				
-				System.out.println( UDB.getRanking( ) );
-				
-				FDB.writeONfile( );
-				UDB.writeONfile( );
-				
-				for( int i = 0; i < 5; i++ )
+				try
 					{
-						int punti = (int) ( Math.random( ) *( 60 - 1 ) );
-						String l = "Luca" + (i+1);
-						if( l.equals( "Luca2" ) )
+						RegRMImplementation srv = new RegRMImplementation( UDB, FDB );
+						RegRMInterface stub = (RegRMInterface) UnicastRemoteObject.exportObject( srv, parser.getRMIPort( ) );
+						Registry reg = LocateRegistry.createRegistry( parser.getRMIPort( ) );
+
+						reg.bind( "ServerRMI", stub );
+					}
+				catch( RemoteException | AlreadyBoundException e )
+					{
+						e.printStackTrace();
+						System.exit( -1 );
+					}
+
+				try
+					{
+						InetAddress myAddress = InetAddress.getByName( null );
+						LISTENER = new ServerSocket( parser.getListnerPort( ), 0, myAddress ); //100 is the max connection in queue
+					}
+				catch( IOException e )
+					{
+						System.err.println( "problem to create the socket" );
+						System.exit( -1 );
+					}
+
+				while( true )
+					{
+						Socket newCliet = null;
+						ClientTasks cTask = null;
+						try
 							{
-								FDB.addFriend( UDB.getUser( l ), UDB.getUser( "Luca2" ) );
-								FDB.addFriend( UDB.getUser( l ), UDB.getUser( "Luca3" ) );
-								FDB.addFriend( UDB.getUser( l ), UDB.getUser( "Luca4" ) );
-								FDB.addFriend( UDB.getUser( l ), UDB.getUser( "Luca5" ) );
+								newCliet = LISTENER.accept( );
+								cTask = new ClientTasks( UDB, FDB, newCliet );
+								Tpool.execute( cTask );
 							}
-						User u = UDB.getUser( l );
-						u.setTScore( punti );
-						UDB.updateUser( u );
+						catch( IOException e )
+							{
+								System.err.println( "Problem to accept a new client" );
+							}
 					}
-				
-				FDB.writeONfile( );
-				UDB.writeONfile( );
-				
-				HashMap<String, Integer> ranking = UDB.getRanking( );
-				HashMap<String, Integer> myranking = new HashMap<String, Integer>( );
-				JSONArray friendlist = FDB.getFriends( UDB.getUser( "Luca2" ) );
-				
-				for( int i = 0; i < friendlist.size( ); i++ )
-					{
-						String friend = (String) friendlist.get( i );
-						
-						myranking.put( friend, ranking.get( friend ) );
-					}
-				
-				
-				
-				
-				System.out.println( UDB.getRanking( ) + "mh\n" + myranking.toString( ) );		
-				
 			}
 	}
