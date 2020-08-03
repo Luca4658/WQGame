@@ -3,18 +3,17 @@
 	"SERVER":{
 		"rmiport": "21895",
 		"port": "46058",
-		"maxconn": "20",
 		"timeoutreq": "5000",
-		"timeoutgame": "60000"
 	},
 	"DB":{ 
 		"userspath": ".data/users.json",
 		"friendpath": ".data/friendships.json"
 	},
 	"GAME":{
-		"word": "6",			
+		"words": "6",
 		"correct": "3",
 		"wrong": "1",
-		"extra": "5"
+		"extra": "5",
+		"timeoutgame": "60000"
 	}
 }
