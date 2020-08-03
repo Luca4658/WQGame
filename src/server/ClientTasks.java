@@ -5,16 +5,12 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 
 
 enum ClientMSG
@@ -24,8 +20,7 @@ enum ClientMSG
 		ADDFRIEND,
 		GETFRIENDS,
 		GETNFRIENDS,
-		SENDCH,
-		CHSTARTED,
+		STARTCH,
 		UPDATEINFO,
 		GETPOINTS,
 		GETRANK;
@@ -66,10 +61,9 @@ public class ClientTasks implements Runnable
 						e.printStackTrace();
 					}
 			}
+
 		
-		
-		
-		private HashMap<String, Integer> personalRank( )
+		private JSONObject personalRank( )
 			{
 				HashMap<String, Integer> ranking = __udb.getRanking( );
 				HashMap<String, Integer> myranking = new HashMap<String, Integer>( );
@@ -95,13 +89,16 @@ public class ClientTasks implements Runnable
 							}
 					});
 				
-				HashMap<String, Integer> rank = new LinkedHashMap<String, Integer>( );
+				JSONObject rank = new JSONObject( );
+				JSONObject usrrk = new JSONObject( );
 				
 				for( Map.Entry<String, Integer> el : list )
 					{
-						rank.put( el.getKey( ), el.getValue( ) );
+						usrrk.put( el.getKey( ), el.getValue( ) );
 					}
-				
+
+				rank.put( "ranking", usrrk );
+
 				return rank;				
 			}
 
@@ -131,7 +128,25 @@ public class ClientTasks implements Runnable
 
 				return null;
 			}
-		
+
+
+		private ACK checkFStatus( String Friend )
+			{
+				User frd = __udb.getUser( Friend );
+				if( __fdb.searchFriend( __me, frd ) != ACK.FriendNotFound )
+					{
+						return frd.getStatus( );
+					}
+				return ACK.FriendNotFound;
+			}
+
+
+		private ACK sendRequest( )
+			{
+				return ACK.OK;
+			}
+
+
 		@Override
 		public void run( )
 			{
@@ -166,7 +181,7 @@ public class ClientTasks implements Runnable
 
 														if( __me.pswIsEqual( psw ) )
 															{
-																if( __me.getStatus( ) != UStatus.OFFLINE )
+																if( __me.getStatus( ) != ACK.OFFLINE )
 																	{
 																		ret = ACK.UserAlreadyLoggedIn;
 																	}
@@ -220,14 +235,41 @@ public class ClientTasks implements Runnable
 												send( Long.toString( n )  );
 											}
 										break;
-										case CHSTARTED:
+										case STARTCH:
 											{
-												
-											}
-										break;
-										case SENDCH:
-											{
-											
+												String frd = recv( );
+												ACK ret = checkFStatus( frd );
+												switch( ret )
+													{
+														case FriendNotFound:
+														case OFFLINE:
+														case INCHALLENGE:
+															{
+																send( ret.name( ) );
+															}
+														continue;
+														case ONLINE:
+															{
+																ACK retReq = sendRequest( );
+																if( retReq == ACK.Rejected )
+																	{
+																		send(  retReq.name( ) );
+																		continue;
+																	}
+																else
+																	{
+																		User u = __udb.getUser( "pippo" );
+																	}
+															}
+														break;
+														default:
+															{
+																send( ACK.ERROR.name( ) );
+																System.err.println( "Unspecified error" );
+															}
+														break;
+													}
+
 											}
 										break;
 										case UPDATEINFO:
