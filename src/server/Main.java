@@ -108,26 +108,65 @@ class ConfParser
 				return port;
 			}
 
-		public int getMaxConnections( )
-			{
-				JSONObject field = (JSONObject) __conf.get( "SERVER" );
-				String s = (String)field.get( "maxconn" );
-				if( s.equals( "null" ) || s.equals( "" ) )
-					{
-						System.err.println( "Error: Empty port RMI" );
-						System.exit( -1 );
-					}
-
-				return Integer.valueOf( s );
-			}
-
 		public int getListnerPort( )
 			{
 				JSONObject field = (JSONObject) __conf.get( "SERVER" );
 				String s = (String)field.get( "port" );
 				if( s.equals( "null" ) || s.equals( "" ) )
 					{
-						System.err.println( "Error: Empty port RMI" );
+						System.err.println( "Error: Empty port" );
+						System.exit( -1 );
+					}
+
+				return Integer.valueOf( s );
+			}
+
+		public int getCorrectPoints( )
+			{
+				JSONObject field = (JSONObject) __conf.get( "GAME" );
+				String s = (String)field.get( "correct" );
+				if( s.equals( "null" ) || s.equals( "" ) )
+					{
+						System.err.println( "Error: Empty correct" );
+						System.exit( -1 );
+					}
+
+				return Integer.valueOf( s );
+			}
+
+		public int getWrongPoints( )
+			{
+				JSONObject field = (JSONObject) __conf.get( "GAME" );
+				String s = (String)field.get( "wrong" );
+				if( s.equals( "null" ) || s.equals( "" ) )
+					{
+						System.err.println( "Error: Empty wrong" );
+						System.exit( -1 );
+					}
+
+				return Integer.valueOf( s );
+			}
+
+		public int getExtraPoints( )
+			{
+				JSONObject field = (JSONObject) __conf.get( "GAME" );
+				String s = (String)field.get( "extra" );
+				if( s.equals( "null" ) || s.equals( "" ) )
+					{
+						System.err.println( "Error: Empty extra" );
+						System.exit( -1 );
+					}
+
+				return Integer.valueOf( s );
+			}
+
+		public int getNWords( )
+			{
+				JSONObject field = (JSONObject) __conf.get( "GAME" );
+				String s = (String)field.get( "words" );
+				if( s.equals( "null" ) || s.equals( "" ) )
+					{
+						System.err.println( "Error: Empty words" );
 						System.exit( -1 );
 					}
 

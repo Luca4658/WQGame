@@ -16,8 +16,6 @@ package server;
 
 import java.io.Serializable;
 
-import server.UStatus; //enum user status
-
 
 public class User implements Serializable
 	{
@@ -30,7 +28,7 @@ public class User implements Serializable
 		private String 	__password; //user password
 		private String 	__name; //user name
 		private String 	__surname; //user surname		
-		private UStatus __status; //current user status
+		private ACK     __status; //current user status
 		private int 		__tScore; //total user score
 		private int 		__chScore; //last challenge score
 
@@ -53,7 +51,7 @@ public class User implements Serializable
 				this.__password = Password;
 				this.__name = null;
 				this.__surname = null;
-				this.__status = UStatus.OFFLINE;
+				this.__status = ACK.OFFLINE;
 				this.__tScore = 0;
 				this.__chScore = 0;
 			}
@@ -74,7 +72,7 @@ public class User implements Serializable
 				this.__password = Password;
 				this.__name = Name;
 				this.__surname = Surname;
-				this.__status = UStatus.OFFLINE;
+				this.__status = ACK.OFFLINE;
 				this.__tScore = 0;
 				this.__chScore = 0;
 			}
@@ -95,7 +93,7 @@ public class User implements Serializable
 		 * 
 		 * @return lo stato dell'utente
 		 */
-		public UStatus getStatus( )
+		public ACK getStatus( )
 			{
 				return this.__status;
 			}
@@ -155,7 +153,7 @@ public class User implements Serializable
 		 */
 		public void setOnline( )
 			{
-				this.__status = UStatus.ONLINE;
+				this.__status = ACK.ONLINE;
 			}
 		
 		/**
@@ -163,7 +161,7 @@ public class User implements Serializable
 		 */
 		public void setOffline( )
 			{
-				this.__status = UStatus.OFFLINE;
+				this.__status = ACK.OFFLINE;
 			}
 		
 		/**
@@ -171,7 +169,7 @@ public class User implements Serializable
 		 */
 		public void setInChallenge( )
 			{
-				this.__status = UStatus.INCHALLENGE;
+				this.__status = ACK.INCHALLENGE;
 			}
 		
 		/**

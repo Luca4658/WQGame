@@ -8,6 +8,10 @@ public enum ACK
 		UserAlreadyLoggedIn,
 		LoggedIn,
 		LoggedOut,
+		ONLINE,
+		OFFLINE,
+		INCHALLENGE,
+
 		//	USERS	//
 		AlreadyRegistered,
 		EmptyField,
@@ -25,7 +29,12 @@ public enum ACK
 		UserAdded,
 		AlreadyExisting,
 		FriendRemoved,
-		
+
+		//  CHALLENGE //
+		Accepted,
+		Rejected,
+
+
 		OperationUnknown,
 		OK,
 		ERROR;
