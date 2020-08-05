@@ -4,43 +4,48 @@
  *																							*
  ************************************************
  *
- * In questo file vengono implementati i metodi e le variabili 
- * per modellare e gestire la classe 'utente' che rappresenta il
- * client.
- * 
- * @author	Luca Canessa (Mat. 516639)
- * @version	%I%
- * @since		1.0
  */
 package server;
 
 import java.io.Serializable;
 
 
+
+/**
+ * In questo file vengono implementati i metodi e le variabili necessari
+ * per modellare e gestire la classe 'User' che rappresenta il
+ * client. L'User è caratterizzato da proprietà che possono essere modificate
+ * una volta che l'User è creato. L'User è identificato UNIVOCAMENTE dal suo
+ * nickname che lo distingue da tutti gli altri User
+ *
+ * @class   User
+ * @author	Luca Canessa (Mat. 516639)
+ * @version	1.4
+ * @since		1.0
+ */
 public class User implements Serializable
 	{
-
-		private static final long serialVersionUID = 1L;
 		//						//
 		//	VARIABLES	//
 		//						//
-		private String 	__ID; //user id
-		private String 	__password; //user password
-		private String 	__name; //user name
-		private String 	__surname; //user surname		
-		private ACK     __status; //current user status
-		private int 		__tScore; //total user score
-		private int 		__chScore; //last challenge score
+		private static final long serialVersionUID = 1L; ///< variabile necessaria per rendere l'oggetto serializzabile
+		private String 	__ID; ///< nickname dell'utente - ID del database
+		private String 	__password; ///< password dell'utente
+		private String 	__name; ///< nome dell'utente
+		private String 	__surname; ///< cognome dell'utente
+		private ACK     __status; ///< stato sul server dell'utente
+		private int 		__tScore; ///< numero di punti totalizzati dall'utente
+		private int 		__chScore; ///< numero di punti ottenuti durante l'ultima parita dall'utente
 
-		
-		
+
+
 		//					//
 		//	METHODS	//
 		//					//
 
 		/**
 		 * Costruttore a due parametri che rappresentano codice univoco dell'utente
-		 * e la sua password. Le altre variabili sono impostate con valore di default
+		 * e la sua password. Le altre variabili sono impostate con valore di default.
 		 * 
 		 * @param Username	codice univoco (nickname) dell'utente
 		 * @param Password	password di accesso dell'utente
@@ -78,13 +83,13 @@ public class User implements Serializable
 			}
 		
 		/**
-		 * Restituisce il nickname dell'utente
+		 * Restituisce il nickname dell'User
 		 * 
-		 * @return il codice univoco (nickname)
+		 * @return  il codice univoco (nickname) come String
 		 */
 		public String getID( )
 			{
-				return this.__ID;
+				return __ID;
 			}
 		
 		/**
@@ -95,7 +100,7 @@ public class User implements Serializable
 		 */
 		public ACK getStatus( )
 			{
-				return this.__status;
+				return __status;
 			}
 		
 		/**
