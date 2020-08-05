@@ -1,8 +1,6 @@
 package server;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 import java.net.*;
 import java.rmi.AlreadyBoundException;
@@ -10,14 +8,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -27,166 +18,55 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import sun.misc.Signal;
+import sun.misc.SignalHandler;
 
 
 
-class ConfParser
+class DBsWriter implements Runnable
 	{
-		private String __confpath						= null;
-		private JSONObject __conf						= null;
-		
-		
-		public ConfParser( String confPath )
+		private Users __udb = null;
+		private Friendships __fdb = null;
+
+		DBsWriter( Users UDB, Friendships FDB )
 			{
-				JSONParser parser = new JSONParser( );				
-				__confpath = confPath;
-				
-						
-				try
-					{
-						__conf = (JSONObject)parser.parse( new FileReader( __confpath ) );
-					}
-				catch( FileNotFoundException e ) 
-					{
-						System.out.println( "Config file does not exist" );
-						System.exit( -1 );
-					}
-				catch( IOException e )
-					{
-						System.out.println( "Problem to open config file" );
-						System.exit( -1 );
-					}
-				catch( ParseException e )
-					{
-						System.out.println( e );
-						System.exit( -1 );
-					}
-			}
-		
-		
-		public String getUsersPath( )
-			{
-				JSONObject field = (JSONObject) __conf.get( "DB" );
-				String path = (String) field.get( "userspath" );
-				
-				if( path.equals( "null" ) || path.equals( "" ) )
-					{
-						System.err.println( "Error: Empty Path 'userspath'" );
-						System.exit( -1 );
-					}
-				
-				return path;
-			}
-		
-		public String getFriendPath( )
-			{
-				JSONObject field = (JSONObject) __conf.get( "DB" );
-				String path = (String) field.get( "friendpath" );
-				
-				if( path.equals( "null" ) || path.equals( "" ) )
-					{
-						System.err.println( "Error: Empty Path 'friendpath'" );
-						System.exit( -1 );
-					}
-				
-				return path;
-			}
-		
-		public int getRMIPort( )
-			{
-				JSONObject field = (JSONObject) __conf.get( "SERVER" );
-				String path = (String) field.get( "rmiport" );
-				
-				if( path.equals( "null" ) || path.equals( "" ) )
-					{
-						System.err.println( "Error: Empty port RMI" );
-						System.exit( -1 );
-					}
-				
-				int port = Integer.valueOf( path );
-				
-				return port;
+				__fdb = FDB;
+				__udb = UDB;
 			}
 
-		public int getListnerPort( )
+		@Override
+		public void run( )
 			{
-				JSONObject field = (JSONObject) __conf.get( "SERVER" );
-				String s = (String)field.get( "port" );
-				if( s.equals( "null" ) || s.equals( "" ) )
+				long time = Main.parser.getTimeUpdater( );
+				while( !Thread.currentThread().isInterrupted( ) )
 					{
-						System.err.println( "Error: Empty port" );
-						System.exit( -1 );
+						__udb.writeONfile( );
+						__fdb.writeONfile( );
+						System.err.println( "DBs updated" );
+						try
+							{
+								Thread.sleep( time );
+							}
+						catch( InterruptedException e )
+							{
+								__udb.writeONfile( );
+								__fdb.writeONfile( );
+							}
 					}
-
-				return Integer.valueOf( s );
 			}
 
-		public int getCorrectPoints( )
-			{
-				JSONObject field = (JSONObject) __conf.get( "GAME" );
-				String s = (String)field.get( "correct" );
-				if( s.equals( "null" ) || s.equals( "" ) )
-					{
-						System.err.println( "Error: Empty correct" );
-						System.exit( -1 );
-					}
-
-				return Integer.valueOf( s );
-			}
-
-		public int getWrongPoints( )
-			{
-				JSONObject field = (JSONObject) __conf.get( "GAME" );
-				String s = (String)field.get( "wrong" );
-				if( s.equals( "null" ) || s.equals( "" ) )
-					{
-						System.err.println( "Error: Empty wrong" );
-						System.exit( -1 );
-					}
-
-				return Integer.valueOf( s );
-			}
-
-		public int getExtraPoints( )
-			{
-				JSONObject field = (JSONObject) __conf.get( "GAME" );
-				String s = (String)field.get( "extra" );
-				if( s.equals( "null" ) || s.equals( "" ) )
-					{
-						System.err.println( "Error: Empty extra" );
-						System.exit( -1 );
-					}
-
-				return Integer.valueOf( s );
-			}
-
-		public int getNWords( )
-			{
-				JSONObject field = (JSONObject) __conf.get( "GAME" );
-				String s = (String)field.get( "words" );
-				if( s.equals( "null" ) || s.equals( "" ) )
-					{
-						System.err.println( "Error: Empty words" );
-						System.exit( -1 );
-					}
-
-				return Integer.valueOf( s );
-			}
-		
 	}
-
-
-
 
 public class Main
 	{
-		
-		private static  ConfParser 	      parser = null;
+		public static   ConfParser 	      parser = null;
 		private static  Users 			      UDB = null;
 		private static  Friendships	      FDB = null;
 		private static  ExecutorService   Tpool = null;
 		private static  ServerSocket      LISTENER = null;
-	
+		private static  ArrayList<String> Dictionary = null;
+		private static  Thread            updater = null;
+
 		
 		public static void main( String[] args )
 			{
@@ -197,12 +77,44 @@ public class Main
 					}
 
 				parser = new ConfParser( args[0] );
-				UDB = Users.init( parser.getUsersPath( ) );
-				FDB = Friendships.init( parser.getFriendPath( ) );
+				UDB = Users.init( );
+				FDB = Friendships.init( );
+				Dictionary = getDictionary( parser.getDictionaryPath( ) );
+
+				SignalHandler handler = new SignalHandler( )
+					{
+						@Override
+						public void handle( Signal signal )
+							{
+								System.err.println( "Quitting" );
+								if( updater != null )
+									{
+										updater.interrupt( );
+										Tpool.shutdown( );
+										while( !Tpool.isShutdown( ) )
+											{
+												System.out.println( "............................." );
+											}
+										try
+											{
+												Thread.sleep( 1000 );
+											}
+										catch( InterruptedException e )
+											{
+												e.printStackTrace( );
+											}
+									}
+								System.err.println( "Goodbye " );
+								System.exit( 0 );
+							}
+					};
+
+				Signal.handle( new Signal( "HUP" ), handler );
+				Signal.handle( new Signal( "INT" ), handler );
+
 
 				Tpool = Executors.newCachedThreadPool( );
 
-				
 				try
 					{
 						RegRMImplementation srv = new RegRMImplementation( UDB, FDB );
@@ -228,6 +140,10 @@ public class Main
 						System.exit( -1 );
 					}
 
+				updater = new Thread( new DBsWriter( UDB, FDB ) ); //update dbs
+				updater = new Thread( new DBsWriter( UDB, FDB ) ); //update dbs
+				updater.start( );
+
 				while( true )
 					{
 						Socket newCliet = null;
@@ -242,6 +158,104 @@ public class Main
 							{
 								System.err.println( "Problem to accept a new client" );
 							}
+					}
+			}
+
+
+		private static ArrayList<String> getDictionary(String filepath)
+			{
+				ArrayList<String> result = new ArrayList <String>( );
+
+				File input = new File(filepath);
+				Scanner scanner = null;
+				try
+					{
+						scanner = new Scanner(new FileReader(input));
+					}
+				catch( FileNotFoundException e )
+					{
+						System.err.println( "Problem to load dictionary" );
+						System.exit( -1 );
+					}
+				try
+					{
+						while( scanner.hasNextLine( ) )
+						{
+							String line = scanner.nextLine();
+							if( !line.startsWith( "#" ) )
+							{
+								result.add(line);
+							}
+						}
+					}
+				finally
+					{
+						scanner.close();
+					}
+
+				return result;
+			}
+
+
+		public static void setWords( String username ) throws IOException, ParseException
+			{
+				ArrayList<ArrayList<String>> matrix = new ArrayList <ArrayList<String>>(  );
+				Random rand = new Random(  );
+				int maxW = parser.getNWords( );
+				ArrayList<String> itWords = new ArrayList <String>(  );
+				for( int i = 0; i < maxW; i++ )
+					{
+						int iw = rand.nextInt( Dictionary.size( ) );
+						String w = Dictionary.get( iw );
+						if( itWords.contains( w ) )
+							{
+								i--;
+							}
+						else
+							{
+								itWords.add( w );
+							}
+					}
+
+				matrix.add( itWords );
+
+				ArrayList<String> words_en = new ArrayList<String>( );
+				for( String wordit:itWords )
+					{
+						String url = "https://api.mymemory.translated.net/get?q=" + wordit + "&langpair=it|en";
+						JSONParser ret_tras = new JSONParser( );
+						@SuppressWarnings( "resource" )
+						JSONObject tmp = (JSONObject)ret_tras.parse( new Scanner( new URL( url ).openStream( ), "UTF-8" ).useDelimiter( "\\A" ).next( ));
+						JSONObject rd =  (JSONObject) tmp.get( "responseData" );
+						words_en.add( (String)rd.get( "translatedText" ) );
+					}
+
+				matrix.add( words_en );
+
+
+				System.out.println( username.hashCode( ) );
+				FileOutputStream wrt = new FileOutputStream( "/tmp/" + username.hashCode( ) );
+				ObjectOutputStream out = new ObjectOutputStream( wrt );
+
+				out.writeObject( matrix );
+				out.flush( );
+				out.close();
+			}
+
+
+		public static String getWinner( User U1, User U2 )
+			{
+				if( U1.getChalScore( ) > U2.getChalScore() )
+					{
+						return U1.getID( );
+					}
+				if( U1.getChalScore( ) < U2.getChalScore() )
+					{
+						return U2.getID( );
+					}
+				else
+					{
+						return "TIE";
 					}
 			}
 	}
