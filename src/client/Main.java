@@ -23,7 +23,7 @@ enum ClientMSG
 		GETFRIENDS,
 		GETNFRIENDS,
 		SENDCH,
-		CHSTARTED,
+		ACCEPTEDCH,
 		UPDATEINFO,
 		GETPOINTS,
 		GETRANK;
@@ -37,35 +37,37 @@ public class Main
 			{
 
 				Scanner usrname = new Scanner( System.in );
-				User u = new User( "Luca2", "TuaSorella" );
+				User u = new User( "Luca3", "TuaSorella" );
 				
-//				try
-//					{
-//						Registry reg = LocateRegistry.getRegistry( 21895 );
-//						RegRMInterface stub = (RegRMInterface) reg.lookup( "ServerRMI" );
-//						stub.RegUser( u );
-//					}
-//				catch( RemoteException | NotBoundException e )
-//					{
-//						e.printStackTrace();
-//					}
+				try
+					{
+						Registry reg = LocateRegistry.getRegistry( 21895 );
+						RegRMInterface stub = (RegRMInterface) reg.lookup( "ServerRMI" );
+						System.err.println( stub.RegUser( u ) );
+					}
+				catch( RemoteException | NotBoundException e )
+					{
+						e.printStackTrace();
+					}
 
-//				DataOutputStream mout = null;
-//				BufferedReader min = null;
+				DataOutputStream mout = null;
+				BufferedReader min = null;
 //
-//				try
-//					{
-//						Socket me = new Socket( "localhost", 46058 );
-//						mout = new DataOutputStream( me.getOutputStream( ) );
-//						min = new BufferedReader( new InputStreamReader( me.getInputStream( ) ) );
-//					}
-//				catch( IOException e )
-//					{
-//						e.printStackTrace( );
-//					}
+				try
+					{
+						Socket me = new Socket( "localhost", 46058 );
+						mout = new DataOutputStream( me.getOutputStream( ) );
+						min = new BufferedReader( new InputStreamReader( me.getInputStream( ) ) );
+					}
+				catch( IOException e )
+					{
+						e.printStackTrace( );
+					}
 //
+
+
 //
-//				String msg = ClientMSG.LOGIN.name() + "\n";
+//				String msg = ClientMSG.ACCEPTEDCH.name() + "\n";
 //				try
 //					{
 //						mout.writeBytes( msg );
@@ -95,32 +97,10 @@ public class Main
 //
 //						Thread.sleep( 1000 );
 //					}
-//				catch( IOException | InterruptedException e )
+//				catch( IOException /*| InterruptedException*/ e )
 //					{
 //						e.printStackTrace( );
 //					}
-
-
-				for( int i = 0; i < 10; i++ )
-					{
-						switch( i )
-							{
-								case 1:
-								case 2:
-								case 3:
-								case 5:
-								{
-									System.out.println( "sono qui" + i );
-								}
-								continue;
-								default:
-								{
-									System.out.println( "e ora qui" + i);
-								}
-								break;
-							}
-						System.out.println( "YAGII" );
-					}
 
 
 			}
