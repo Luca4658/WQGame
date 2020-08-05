@@ -1,42 +1,87 @@
+/************************************************
+ *                                              *
+ *                  CLIENTTASK                  *
+ *                                              *
+ ************************************************
+ *
+ */
 package server;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+
 import java.net.Socket;
+
 import java.util.*;
 import java.util.Map.Entry;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 
 
 
+/**
+ * In questa enumerazione vengono implementati i messaggi che il server riceve
+ * dal client
+ *
+ * @class   ClientMSG
+ * @author  Luca Canessa (Mat. 516639)
+ * @version 1.1
+ * @since   1.0
+ */
 enum ClientMSG
 	{
-		LOGIN,
-		LOGOUT,
-		ADDFRIEND,
-		GETFRIENDS,
-		GETNFRIENDS,
-		STARTCH,
-		UPDATEINFO,
-		GETPOINTS,
-		GETRANK;
+		LOGIN, ///< richiesta di login
+		LOGOUT, ///< richiesta di logout
+		ADDFRIEND, ///< richiesta di aggiunta di amico alla lista
+		GETFRIENDS, ///< richiesta lista amicizie
+		GETNFRIENDS, ///< richiesto numero di amici
+		STARTCH, ///< richiesta di inizio di una sfida
+		ACCEPTEDCH, ///< accettazione della sfida arrivata
+		UPDATEINFO, ///< richiesta di aggiornamento dei dati
+		GETPOINTS, ///< richiesta punti totalizzati
+		GETRANK,  ///< richiesta della classifica
+		RMUSER, ///< richiesta rimozione dell'User
+		RMFRIEND; ///< richiesta rimozione dell'amico
 	}
 
 
-
+/**
+ * In questa classe vengono implementati i metodi e le variabili necessari per
+ * controllare le operazioni richieste dal client, identificate
+ * dall'enumerazione ClientMSG. Per ogni operazione richiesta viene eseguito un
+ * task e inviato il risultato della terminazione del task al client
+ *
+ * @class   ClientTasks
+ * @author  Luca Canessa (Mat. 516639)
+ * @version 1.5
+ * @since   1.0
+ */
 public class ClientTasks implements Runnable
 	{
-		private User							__me	= null;
-		private Users 						__udb = null;
-		private Friendships 			__fdb = null;
-		private Socket						__cSocket = null;
-		private BufferedReader		__inBuff = null;
-		private DataOutputStream 	__outBuff = null;
-		
+		//            //
+		//  VARIABLES //
+		//            //
+		private User							__me	= null; ///< User che si collega
+		private Users 						__udb = null; ///< databse degli User
+		private Friendships 			__fdb = null; ///< database delle amicizie
+		private Socket						__cSocket = null; ///< socket di comunicazione con il client
+		private BufferedReader		__inBuff = null; ///< buffer su cui scrive il client per comunicare
+		private DataOutputStream 	__outBuff = null; ///< buffer su cui scrive il Thread (l'oggetto ClientTask) in esecuzione per comunucare con il client
+
+
+		//          //
+		//  METHODS //
+		//          //
+
+		/**
+		 * Costruttore del gestore dei task dell'User, si occupa di inizializzare
+		 * le variabili
+		 *
+		 * @param udb     database degli utenti
+		 * @param fdb     database delle amicizie
+		 * @param socket  socket su cui comunicare con il client
+		 */
 		public ClientTasks( Users udb, Friendships fdb, Socket socket )
 			{
 				__udb = udb;
@@ -62,7 +107,13 @@ public class ClientTasks implements Runnable
 					}
 			}
 
-		
+		/**
+		 * Genera la classifica personale del User estrapolando gli amici e i loro
+		 * punti dalla classifica generale del gioco e restituendola ordinata per
+		 * il valore dei punti.
+		 *
+		 * @return il JSON con la classifica rispetto all'User
+		 */
 		private JSONObject personalRank( )
 			{
 				HashMap<String, Integer> ranking = __udb.getRanking( );
@@ -80,7 +131,8 @@ public class ClientTasks implements Runnable
 				
 				
 				List<Entry<String,Integer>> list = new ArrayList<HashMap.Entry<String,Integer>>( myranking.entrySet( ) );
-				
+
+				//reordering of personal ranking
 				Collections.sort( list, new Comparator<Map.Entry<String, Integer> >() 
 					{ 
 						public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2)
@@ -102,7 +154,12 @@ public class ClientTasks implements Runnable
 				return rank;				
 			}
 
-
+		/**
+		 * Scrive un messaggio sul buffer in uscita da mandare al client come
+		 * sequenza di Bytes (more DataOutputStream.writeBytes())
+		 *
+		 * @param msg messaggio da inviare al client
+		 */
 		private void send( String msg )
 			{
 				try
@@ -115,6 +172,12 @@ public class ClientTasks implements Runnable
 					}
 			}
 
+		/**
+		 * Aspetta di ricevere dati dal client sul buffer di ingresso come tipo
+		 * String (more BufferedReader.readLine())
+		 *
+		 * @return stringa di dati ricevuti dal Client
+		 */
 		private String recv( )
 			{
 				try
@@ -129,7 +192,15 @@ public class ClientTasks implements Runnable
 				return null;
 			}
 
-
+		/**
+		 * Controlla lo stato di attività dell'amico ritornando un messaggio di ACK
+		 *
+		 * @param Friend stringa del nickname dell'amico da controllare
+		 * @return  ONLINE se l'User ha effettuato il login al gioco
+		 *          OFFLINE se l'User non è presente al gioco
+		 *          INCHALLENGE se l'User sta già effettuando una sfida
+		 *          FriendNotFound se l'User non è tra le amicizie
+		 */
 		private ACK checkFStatus( String Friend )
 			{
 				User frd = __udb.getUser( Friend );
@@ -140,18 +211,115 @@ public class ClientTasks implements Runnable
 				return ACK.FriendNotFound;
 			}
 
-
+		/**
+		 * TODO
+		 * @return
+		 */
 		private ACK sendRequest( )
 			{
 				return ACK.OK;
 			}
 
+		/**
+		 * Metodo che gestisce l'inizio e la fine di ogni sfida aggiornando lo
+		 * stato dell'User in INCHALLENGE e preparando lista di parole da inviare
+		 * prima dell'avvio della sfida e dopo aver avviato la sfida attende che
+		 * questa sia finita per aggiornare nuovamente lo stato dell'User in ONLINE
+		 * e aggiornando i punti guadagnati all'User e decretare il vincitore della
+		 * sfida
+		 *
+		 * @param nickname  Stringa da usare per decodificare la sequenza di parole
+		 *                  da usare
+		 * @param rival Stringa per determinare il nome dell'avversario
+		 */
+		private void Game( String nickname, String rival )
+			{
+				FileInputStream rd = null;
+				ObjectInputStream stream = null;
+				ArrayList<ArrayList<String>> words = null;
+				Challenge challenge = null;
+				Thread cThread = null;
 
+				__me.setInChallenge( );
+				__udb.updateUser( __me );
+
+				try
+					{
+						rd = new FileInputStream( "/tmp/" + nickname.hashCode( ) );
+					  stream = new ObjectInputStream( rd );
+						words = (ArrayList<ArrayList<String>>) stream.readObject( );
+						stream.close();
+					}
+				catch( IOException | ClassNotFoundException e )
+					{
+						System.err.println( "Problem to read the stream" );
+					}
+
+
+				challenge = new Challenge(  __inBuff, __outBuff, words, __me, __udb, Thread.currentThread( ) );
+				cThread = new Thread( challenge );
+				cThread.start( );
+
+				try
+					{
+						Thread.sleep( Main.parser.getTimeoutGame( ) );
+						System.err.println( "Challenge Ended" );
+					}
+				catch( InterruptedException e )
+					{
+						System.err.println( "Challenge Ended" );
+					}
+
+				__me = __udb.getUser( __me.getID( ) );
+
+				String winner = Main.getWinner( __me, __udb.getUser( rival ) );
+				send( winner );
+
+				__me.setOnline( );
+				if( winner.equals( __me.getID( ) ) )
+					{
+						__me.setCScore( __me.getChalScore( ) + Main.parser.getExtraPoints( ) );
+						__me.setTScore( __me.getChalScore( ) );
+					}
+				else
+					{
+						__me.setTScore( __me.getChalScore( ) );
+					}
+
+				__udb.updateUser( __me );
+			}
+
+		/**
+		 * Metodo che mette in esecuzione il thread utile alla gestione del client
+		 * collegatosi. Permette di ricevere come primo pacchetto l'operazione da
+		 * eseguire, che è determinata attraverso la classe Enum ClientMSG. Per
+		 * ogni operazione richiesta esegue compiti differenti, mandando sempre al
+		 * client come risposta l'esito dell'operazione.
+		 * Le operazioni consentite dal client User sono possibili se e solo se
+		 * è stata effettuata come prima operazione quella di LOGIN, in caso
+		 * contrario non è possibile procedere.
+		 * Le operazioni consentite al User sono:
+		 * - LOGIN: si salva aggiornano le variabili dell'User in base a chi ha
+		 *          chiesto l'operazione
+		 * - LOGOUT: si resettano le variabili dell'User
+		 * - ADDFRIEND: si aggiunge l'User richiesto nella lista delle amicizie se
+		 *              e solo se questo esiste
+		 * - GETFRIENDS: si restituisce la lista delle amicizie dell'User
+		 * - GETNFRIENDS: si restituisce il numero di amici dell'User
+		 * - STARTCH: si invia una richiesta di sfida ad un altro User se possibile.
+		 *            Se questo accetta si avvia
+		 * - ACCEPTEDCH: si avvia la sfida che è stata appena accettata
+		 * - UPDATEINFO: si aggiornano le informazioni dell'User sul DB
+		 * - GETPOINTS: si invia al client il numero di punti accumulati durante
+		 *              tutto il gioco
+		 * - GETRANK: si invia al client la ranking personale del gioco in cui vi
+		 *            sono solo gli amici del User e l'User stesso
+		 */
 		@Override
 		public void run( )
 			{
 				boolean end = false;
-				while( !end )
+				while( !end || !Thread.currentThread( ).isInterrupted( ) )
 					{
 						try
 							{
@@ -203,10 +371,16 @@ public class ClientTasks implements Runnable
 										break;
 										case LOGOUT:
 											{
+												if( __me == null )
+													{
+														send( ACK.NotLogged.name( ) );
+														continue;
+													}
 												ACK ret;
 												__me.setOffline( );
 												__udb.updateUser( __me );
 												ret = ACK.LoggedOut;
+												__me = null;
 
 												send( ret.name( ) );
 
@@ -214,6 +388,11 @@ public class ClientTasks implements Runnable
 										break;
 										case ADDFRIEND:
 											{
+												if( __me == null )
+													{
+														send( ACK.NotLogged.name( ) );
+														continue;
+													}
 												String name = __inBuff.readLine( );
 												User frd  = __udb.getUser( name );
 												ACK ret = __fdb.addFriend( __me, frd );
@@ -223,6 +402,11 @@ public class ClientTasks implements Runnable
 										break;
 										case GETFRIENDS:
 											{
+												if( __me == null )
+													{
+														send( ACK.NotLogged.name( ) );
+														continue;
+													}
 												String list = __fdb.getFriends( __me ).toJSONString( );
 
 												send( list);
@@ -230,6 +414,11 @@ public class ClientTasks implements Runnable
 										break;
 										case GETNFRIENDS:
 											{
+												if( __me == null )
+													{
+														send( ACK.NotLogged.name( ) );
+														continue;
+													}
 												long n = __fdb.getNFriends( __me );
 
 												send( Long.toString( n )  );
@@ -237,6 +426,11 @@ public class ClientTasks implements Runnable
 										break;
 										case STARTCH:
 											{
+												if( __me == null )
+													{
+														send( ACK.NotLogged.name( ) );
+														continue;
+													}
 												String frd = recv( );
 												ACK ret = checkFStatus( frd );
 												switch( ret )
@@ -256,9 +450,18 @@ public class ClientTasks implements Runnable
 																		send(  retReq.name( ) );
 																		continue;
 																	}
-																else
+																else //accepted
 																	{
-																		User u = __udb.getUser( "pippo" );
+																		try
+																			{
+																				Main.setWords( __me.getID( ) );
+																			}
+																		catch( ParseException e )
+																			{
+																				System.err.println( "Problem to parse online JSON" );
+																			}
+
+																		Game( __me.getID( ), frd );
 																	}
 															}
 														break;
@@ -272,8 +475,24 @@ public class ClientTasks implements Runnable
 
 											}
 										break;
+										case ACCEPTEDCH:
+											{
+												if( __me == null )
+													{
+														send( ACK.NotLogged.name( ) );
+														continue;
+													}
+												String rival = recv( );
+												Game( rival, rival );
+											}
+										break;
 										case UPDATEINFO:
 											{
+												if( __me == null )
+													{
+														send( ACK.NotLogged.name( ) );
+														continue;
+													}
 												String name = recv( );
 												String sname = recv( );
 												String psw = recv( );
@@ -288,14 +507,48 @@ public class ClientTasks implements Runnable
 										break;
 										case GETPOINTS:
 											{
+												if( __me == null )
+													{
+														send( ACK.NotLogged.name( ) );
+														continue;
+													}
 												int score = __me.getTotScore( );
 												send( Integer.toString( score ) );
 											}
 										break;
 										case GETRANK:
 											{
+												if( __me == null )
+													{
+														send( ACK.NotLogged.name( ) );
+														continue;
+													}
 												HashMap<String, Integer> myrank = personalRank( );
 												send( myrank.toString( ) );
+											}
+										break;
+										case RMFRIEND:
+											{
+												if( __me == null )
+													{
+														send( ACK.NotLogged.name( ) );
+														continue;
+													}
+												String friend = recv( );
+												ACK ret = __fdb.removeFriend( __me, __udb.getUser( friend ) );
+												send( ret.name( ) );
+											}
+										break;
+										case RMUSER:
+											{
+												if( __me == null )
+													{
+														send( ACK.NotLogged.name( ) );
+														continue;
+													}
+												ACK ret = __udb.deleteUser( __me.getID( ), __fdb );
+												send( ret.name( ) );
+												__me = null;
 											}
 										break;
 										default:
