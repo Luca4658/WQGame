@@ -3,20 +3,13 @@
  * 										USERS											*
  * 																							*
  ************************************************
- * 
- * In questo file vengono implementati i metodi e
- * le variabili per modellare il database degli utenti
- * usando come modello dell'utente la classe 'user'
- * 
- * @author	Luca Canessa (Mat. 516639)
- * @version	%I%
- * @since		1.0
+ *
  */
 package server;
 
 import java.io.*;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -31,18 +24,29 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 
+
+/**
+ * In questo file vengono implementati i metodi e
+ * le variabili per modellare il database degli utenti
+ * usando come modello dell'utente la classe 'user'
+ *
+ * @class   Users
+ * @author	Luca Canessa (Mat. 516639)
+ * @version	1.5
+ * @since		1.0
+ */
 @SuppressWarnings( "serial" )
 public class Users implements Serializable
 	{
 		//						//
 		//	VARIABLES	//
 		//						//
-		private static String				__PATHDBU = null; //path to users db
-		private int 								__size = -1; //number of users in db
-		private static Users 				__users = null; //singleton
-		private JSONParser 					__parser = null; //file parser
-		private static JSONObject 	__dbUser = null; //the real db 
-		private FileWriter 					__dbFile = null; //writer on file
+		private static String				__PATHDBU = null; ///< path al file del db utent
+		private int 								__size = -1; ///< numero di utenti iscritti
+		private static Users 				__users = null; ///< singleton
+		private JSONParser 					__parser = null; ///< file parser
+		private static JSONObject 	__dbUser = null; ///< il db reale
+		private FileWriter 					__dbFile = null; ///< scrittore del db sul file '__PATHDBU'
 		
 		
 		//					//
@@ -50,8 +54,8 @@ public class Users implements Serializable
 		//					//
 		
 		/**
-		 * Costruttore del databse degli utenti. Implementato
-		 * come singoletto per evitare problemi di copie inconsistenti.
+		 * Costruttore del databse degli utenti. Implementato come singoletto per
+		 * evitare problemi di copie inconsistenti e/o ridondanze.
 		 */
 		private Users( )
 			{
@@ -79,43 +83,41 @@ public class Users implements Serializable
 						e.printStackTrace();
 					}
 			}
-		
-		
+
 		/**
 		 * Inizializzatore del database. Si interfaccia direttamente
 		 * con il costruttore della classe
 		 * 
-		 * @param dbPath	percorso al file json dove è salvato il db
 		 * @return oggetto che rappresenta il database
 		 */
-		public static Users init( String dbPath )
+		public static Users init( )
 			{
 				if( __users == null )
 					{
-						__PATHDBU = dbPath;
+						__PATHDBU = Main.parser.getUsersPath( );
 						__users = new Users( );
 					}
 				
 				return __users;
 			}
 		
-		
 		/**
-		 * Restituisce il numero di oggetti utenti all'interno del database
+		 * Restituisce il numero di oggetti User all'interno del database
+		 *
 		 * @return il numero degli utenti iscritti
 		 */
 		public synchronized int getNusers( )
 			{
 				return __size;
 			}
-		
-		
+
 		/**
-		 * Inserisce l'utente all'interno del database estrapolando i dati 
-		 * dall'oggetto 'user' passatogli
+		 * Inserisce l'utente all'interno del database estrapolando i dati
+		 * dall'oggetto User passatogli restituendo un valore ACK
 		 * 
 		 * @param usr utente da inserire
-		 * @return valore ACK di ritorno 
+		 * @return  UserRegistered se l'User è stato iscritto
+		 *          UserFound se l'User è già presente
 		 */
 		@SuppressWarnings( "unchecked" )
 		public synchronized ACK insertUser( User usr, Friendships f )
@@ -146,9 +148,10 @@ public class Users implements Serializable
 			}
 		
 		/**
-		 * 		
-		 * @param nickname
-		 * @return
+		 * Restituisce l'oggetto User se presente all'interno del db
+		 *
+		 * @param nickname stringa del nickname dell'User da estrapolare
+		 * @return l'oggetto User se presente, null altrimenti
 		 */
 		public synchronized User getUser( String nickname )
 			{
@@ -177,8 +180,15 @@ public class Users implements Serializable
 				
 				return newU;
 			}
-		
-		
+
+		/**
+		 * Aggiorana tutti i valori dell'User nel database e ritorna l'esito
+		 * dell'operazione come valore ACK
+		 *
+		 * @param usr ogetto User di cui si vogliono aggiornare i valori
+		 * @return  OK se l'operazione è riuscita
+		 *          UserNotFound se l'operazione non è terminata
+		 */
 		@SuppressWarnings( "unchecked" )
 		public synchronized ACK updateUser( User usr )
 			{
@@ -206,11 +216,12 @@ public class Users implements Serializable
 				return ACK.UserNotFound;
 			}
 
-		
 		/**
-		 * 
-		 * @param nickname
-		 * @return
+		 * Cerca all'interno del db se esiste l'User con il nickname 'nickname'
+		 *
+		 * @param nickname stringa del nickname dell'User da cercare
+		 * @return  UserFound se l'User è all'interno del db
+		 *          UserNotFound se l'User non è stato trovato
 		 */
 		public synchronized ACK searchUser( String nickname )
 			{
@@ -221,17 +232,19 @@ public class Users implements Serializable
 				
 				return ACK.UserNotFound;
 			}
-		
-		
+
 		/**
-		 * 
-		 * @param nickname
-		 * @return
+		 * Elimina un User dal db (se possibile)
+		 *
+		 * @param nickname stringa del nickname dell'User da rimuovere
+		 * @return  UserDeleted se l'operazione è riuscita
+		 *          UserNotDeleted se l'operazione non ha terminato con successo
 		 */
-		public synchronized ACK deleteUser( String nickname )
+		public synchronized ACK deleteUser( String nickname, Friendships f )
 			{
 				if( searchUser( nickname ) == ACK.UserFound ) //if user is into the DB then it will removed
 					{
+						f.removeUser( __users.getUser( nickname ) );
 						__dbUser.remove( nickname );
 						__size = __dbUser.size( );
 						
@@ -240,7 +253,14 @@ public class Users implements Serializable
 				
 				return ACK.UserNotDeleted;
 			}
-		
+
+		/**
+		 * Restituisce la ranking list del gioco ordinata per valore di punti in
+		 * ordine decrescente di tutti gli utenti
+		 *
+		 * @return  una HashMap con i nickname e i punti degli utenti
+		 *          una HashMap vuota nel caso non vi siano utenti
+		 */
 		@SuppressWarnings( "unchecked" )
 		protected HashMap<String, Integer> getRanking( )
 			{
@@ -276,11 +296,11 @@ public class Users implements Serializable
 						rank.put( el.getKey( ), el.getValue( ) );
 					}
 				
-				
 				return rank;
 			}
+
 		/**
-		 * 
+		 * Scrive sul file il db degli utenti
 		 */
 		protected synchronized void writeONfile( )
 			{
@@ -307,7 +327,7 @@ public class Users implements Serializable
 					}
 				catch (Exception e) 
 					{
-					// TODO: handle exception
-				}
+						// TODO: handle exception
+					}
 			}
 	}
