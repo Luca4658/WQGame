@@ -8,6 +8,10 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ExecutorService;
@@ -42,7 +46,7 @@ class DBsWriter implements Runnable
 					{
 						__udb.writeONfile( );
 						__fdb.writeONfile( );
-						System.err.println( "DBs updated" );
+						Main.logger( "DBs updated" );
 						try
 							{
 								Thread.sleep( time );
@@ -66,6 +70,7 @@ public class Main
 		private static  ServerSocket      LISTENER = null;
 		private static  ArrayList<String> Dictionary = null;
 		private static  Thread            updater = null;
+		private static  PrintStream       logfile = null;
 
 		
 		public static void main( String[] args )
@@ -75,20 +80,30 @@ public class Main
 						System.err.println( "Missing config path" );
 						System.exit( -1 );
 					}
-
 				parser = new ConfParser( args[0] );
+				try
+					{
+						logfile = new PrintStream( new FileOutputStream( parser.getLogfilePath( ), true ) );
+					}
+				catch( FileNotFoundException e )
+					{
+						e.printStackTrace( );
+					}
+				logger( "Staring" );
 				UDB = Users.init( );
 				FDB = Friendships.init( );
 				Dictionary = getDictionary( parser.getDictionaryPath( ) );
+
 
 				SignalHandler handler = new SignalHandler( )
 					{
 						@Override
 						public void handle( Signal signal )
 							{
-								System.err.println( "Quitting" );
+								Main.logger( "Quitting" );
 								if( updater != null )
 									{
+										UDB.shutdown( );
 										updater.interrupt( );
 										Tpool.shutdown( );
 										while( !Tpool.isShutdown( ) )
@@ -103,8 +118,9 @@ public class Main
 											{
 												e.printStackTrace( );
 											}
+
 									}
-								System.err.println( "Goodbye " );
+								Main.logger( "Goodbye\n\n\n" );
 								System.exit( 0 );
 							}
 					};
@@ -114,6 +130,8 @@ public class Main
 
 
 				Tpool = Executors.newCachedThreadPool( );
+				Main.logger( "Threadpool created" );
+
 
 				try
 					{
@@ -122,6 +140,8 @@ public class Main
 						Registry reg = LocateRegistry.createRegistry( parser.getRMIPort( ) );
 
 						reg.bind( "ServerRMI", stub );
+
+						Main.logger( "RMI initialized" );
 					}
 				catch( RemoteException | AlreadyBoundException e )
 					{
@@ -133,14 +153,16 @@ public class Main
 					{
 						InetAddress myAddress = InetAddress.getByName( null );
 						LISTENER = new ServerSocket( parser.getListnerPort( ), 0, myAddress ); //100 is the max connection in queue
+						Main.logger( "Listener socket ready" );
 					}
 				catch( IOException e )
 					{
-						System.err.println( "problem to create the socket" );
+						Main.logger( "problem to create the socket" );
 						System.exit( -1 );
 					}
 
-				updater = new Thread( new DBsWriter( UDB, FDB ) ); //update dbs
+				logger( "Server started" );
+
 				updater = new Thread( new DBsWriter( UDB, FDB ) ); //update dbs
 				updater.start( );
 
@@ -156,7 +178,7 @@ public class Main
 							}
 						catch( IOException e )
 							{
-								System.err.println( "Problem to accept a new client" );
+								Main.logger( "Problem to accept a new client" );
 							}
 					}
 			}
@@ -174,7 +196,7 @@ public class Main
 					}
 				catch( FileNotFoundException e )
 					{
-						System.err.println( "Problem to load dictionary" );
+						Main.logger( "Problem to load dictionary" );
 						System.exit( -1 );
 					}
 				try
@@ -191,6 +213,7 @@ public class Main
 				finally
 					{
 						scanner.close();
+						Main.logger( "Dictionary loaded" );
 					}
 
 				return result;
@@ -257,5 +280,27 @@ public class Main
 					{
 						return "TIE";
 					}
+			}
+
+
+		public static void logger( String log )
+			{
+				SimpleDateFormat dateform = new SimpleDateFormat( "HH:mm:ss:SS dd.MM.yyyy" );
+
+				System.setErr( logfile );
+
+				System.err.println( dateform.format( new Date(  ) ) + "\t:::\t" + log );
+			}
+
+
+		public static int getUniPort( String nickname )
+			{
+				int port = nickname.hashCode( ) % 65535;
+				if( port < 0 )
+					{
+						port = -port % 65535;
+					}
+
+				return ( port = ( port <= 1024) ? port += 1024 : port );
 			}
 	}

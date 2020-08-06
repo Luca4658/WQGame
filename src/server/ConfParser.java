@@ -65,12 +65,12 @@ public class ConfParser
           }
         catch( FileNotFoundException e )
           {
-            System.out.println( "Config file does not exist" );
+            System.err.println( "Config file does not exist" );
             System.exit( -1 );
           }
         catch( IOException e )
           {
-            System.out.println( "Problem to open config file" );
+            System.err.println( "Problem to open config file" );
             System.exit( -1 );
           }
         catch( ParseException e )
@@ -350,4 +350,25 @@ public class ConfParser
         return Long.valueOf( s );
       }
 
+    /**
+     * Cerca all'interno della configurazione il campo 'logpath',
+     * estrapolandolo dall'oggetto 'SERVER', estraendo il suo valore. Controlla
+     * poi se tale valore è utilizzabile, in caso negativo esce restituendo un
+     * errore.
+     *
+     * @return  il percorso al file di log del server
+     */
+    public String getLogfilePath( )
+      {
+        JSONObject field = (JSONObject) __conf.get( "SERVER" );
+        String path = (String) field.get( "logpath" );
+
+        if( path.equals( "null" ) || path.equals( "" ) )
+          {
+            System.err.println( "Error: Empty Path 'dictionary'" );
+            System.exit( -1 );
+          }
+
+        return path;
+      }
   }

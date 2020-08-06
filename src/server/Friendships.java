@@ -91,6 +91,7 @@ public class Friendships
 					{
 						__PATHDBF = Main.parser.getFriendPath( );
 						__friends = new Friendships( );
+						Main.logger( "Friendship database configured" );
 					}
 				
 				return __friends;
@@ -145,10 +146,12 @@ public class Friendships
 						friendsA.add( b.getID( ) );
 						friendsB.add( a.getID( ) );
 
+						Main.logger( a.getID()  + " and " + b.getID() + " now are friends");
 						
 						return ACK.FriendAdded;
 					}
-				
+
+				Main.logger( "Problem to make friendship between " + a.getID( ) + " " + b.getID( ) );
 				return ACK.AlreadyFriends;
 			}
 
@@ -244,10 +247,13 @@ public class Friendships
 						
 						friendsA.remove( b.getID( ) );
 						friendsB.remove( a.getID( ) );
-						
+
+						Main.logger( a.getID( ) + " and " + b.getID( ) + " have broken their friendships" );
+
 						return ACK.FriendRemoved;
 					}
-				
+
+				Main.logger( a.getID( ) + " and " + b.getID( ) + " are still friends" );
 				return ACK.AlreadyFriends;
 			}
 

@@ -72,14 +72,10 @@ public class Users implements Serializable
 					} 
 				catch( IOException e )
 					{
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} 
 				catch( ParseException e )
 					{
-						// TODO Auto-generated catch block
-						System.err.println( "sono qui" );
-
 						e.printStackTrace();
 					}
 			}
@@ -96,6 +92,7 @@ public class Users implements Serializable
 					{
 						__PATHDBU = Main.parser.getUsersPath( );
 						__users = new Users( );
+						Main.logger( "Users database configured" );
 					}
 				
 				return __users;
@@ -138,7 +135,9 @@ public class Users implements Serializable
 						
 						if( f.newUser( usr ) != ACK.UserAdded )
 							{
-								System.err.println( "proviamo qui" );
+								deleteUser( usr.getID( ), null );
+								Main.logger( "Unregistered client " + usr.getID( ) );
+								return ACK.ERROR;
 							}
 						
 						return ACK.UserRegistered; 
@@ -176,6 +175,20 @@ public class Users implements Serializable
 						newU = new User( nickname, password, name, sname );
 						newU.setTScore( Integer.valueOf( (String) tmpU.get( "TScore") ) );
 						newU.setCScore(  Integer.valueOf( (String) tmpU.get( "LatestScore") ) );
+						String status = (String) tmpU.get( "STATUS" );
+
+						if( "OFFLINE".equals( status ) )
+							{
+								newU.setOffline( );
+							}
+						else if( "ONLINE".equals( status ) )
+							{
+								newU.setOnline( );
+							}
+						else if( "INCHALLENGE".equals( status ) )
+							{
+								newU.setInChallenge( );
+							}
 					}
 				
 				return newU;
@@ -209,10 +222,13 @@ public class Users implements Serializable
 						u.put( "TScore", ((Integer)usr.getTotScore( )).toString( ) );
 						u.put( "LatestScore", ((Integer)usr.getChalScore( )).toString() );
 						u.put( "STATUS", usr.getStatus( ).toString( ) );
-						
+
+						Main.logger( usr.getID( ) + " is updated" );
+
 						return ACK.OK;
 					}
-				
+
+				Main.logger( usr.getID( ) + " cannot be updated" );
 				return ACK.UserNotFound;
 			}
 
@@ -247,10 +263,12 @@ public class Users implements Serializable
 						f.removeUser( __users.getUser( nickname ) );
 						__dbUser.remove( nickname );
 						__size = __dbUser.size( );
-						
+
+						Main.logger( nickname + " deleted" );
 						return ACK.UserDeleted;
 					}
-				
+
+				Main.logger( nickname + " cannot be deleted" );
 				return ACK.UserNotDeleted;
 			}
 
@@ -297,6 +315,18 @@ public class Users implements Serializable
 					}
 				
 				return rank;
+			}
+
+		protected synchronized void shutdown( )
+			{
+				Iterator<String> user = __dbUser.keySet( ).iterator( );
+				while( user.hasNext() )
+					{
+						String sUsr = user.next( );
+						JSONObject field = (JSONObject) __dbUser.get( sUsr );
+
+						field.put( "STATUS", "OFFLINE" );
+					}
 			}
 
 		/**

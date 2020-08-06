@@ -79,7 +79,7 @@ class Challenge implements Runnable
           }
         catch( IOException e )
           {
-            System.err.println( "Problem to recv MSG" );
+            Main.logger( "Problem to recv MSG" );
           }
 
         return null;
@@ -98,7 +98,7 @@ class Challenge implements Runnable
           }
         catch( IOException e )
           {
-            System.err.println( "Problem to send MSG" );
+            Main.logger( "Problem to send MSG" );
           }
       }
 
@@ -120,6 +120,8 @@ class Challenge implements Runnable
         boolean isFinished = false;
         int score = 0;
 
+        Main.logger( "Start to send words to " + __user.getID( ) );
+
         for( int iWord = 0; ( iWord < __words.get(0).size( ) ) && !isFinished; iWord++ )
           {
             send( __words.get(0).get( iWord ) );
@@ -128,6 +130,7 @@ class Challenge implements Runnable
             if( wordRec.equals( "**end**" ) )
               {
                 isFinished = true;
+                Main.logger( __user.getID() + " ended game" );
                 continue;
               }
             else
@@ -148,6 +151,7 @@ class Challenge implements Runnable
 
         if( !isFinished )
           {
+            Main.logger( __user.getID() + " was interrupted" );
             __usrT.interrupt( );
           }
       }
