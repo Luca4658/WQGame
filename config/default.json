@@ -5,11 +5,12 @@
 		"port": "46058",
 		"timeoutreq": "5000",
 		"dictionary": "resources/words.txt",
-		"updaterdb": "20000"
+		"updaterdb": "20000",
+		"logpath": "WQserver.log"
 	},
 	"DB":{ 
-		"userspath": ".data/users.json",
-		"friendpath": ".data/friendships.json"
+		"userspath": "data/users.json",
+		"friendpath": "data/friendships.json"
 	},
 	"GAME":{
 		"words": "6",
