@@ -1,0 +1,22 @@
+{
+	"_WARNING": "you can modify only the values of the keys BUT the keys MUST be the same",
+	"SERVER":{
+		"rmiport": "<porta-di-comunicazione-della-rmi>",
+		"port": "<porta-di-ascolto-del-server>",
+		"timeoutreq": "<tempo-massimo-di-attesa-della-risposta-alla-sfida>",
+		"dictionary": "<<percorso-al-dizionario-delle-parole>",
+		"updaterdb": "<tempo-di-aggiornamento-del-database>",
+		"logpath": "<percorso-al-file-di-log>"
+	},
+	"DB":{ 
+		"userspath": "<percorso-al-database-degli-utenti>",
+		"friendpath": "<percorso-al-database-delle-amicizie>"
+	},
+	"GAME":{
+		"words": "<numero-di-parole-da-inviare-agli-utenti>",
+		"correct": "<quantità-di-punti-da-assegnare-ad-ogni-risposta-corretta>",
+		"wrong": "<quantità-di-punti-da-levare-ad-ogni-risposta-errata>",
+		"extra": "<quantità-di-punti-extra-da-assegnare-al-vincitore>",
+		"timeoutgame": "<tempo-massimo-di-gioco>"
+	}
+}
