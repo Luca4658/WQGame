@@ -139,7 +139,8 @@ public class Users implements Serializable
 								Main.logger( "Unregistered client " + usr.getID( ) );
 								return ACK.ERROR;
 							}
-						
+
+						Main.logger( "New User " + usr.getID( ) + " has been registered" );
 						return ACK.UserRegistered; 
 					}
 				
