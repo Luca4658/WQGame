@@ -795,3 +795,434 @@ Exception in thread "pool-1-thread-1" java.lang.NullPointerException
 19:54:02:563 06.08.2020	:::	Client Socket[addr=/127.0.0.1,port=53740,localport=46058] connected
 19:54:07:461 06.08.2020	:::	problem to receive message
 19:54:07:462 06.08.2020	:::	problem to receive message
+16:47:43:882 07.08.2020	:::	Staring
+16:47:43:960 07.08.2020	:::	Users database configured
+16:47:43:963 07.08.2020	:::	Friendship database configured
+16:47:44:36 07.08.2020	:::	Dictionary loaded
+16:47:44:39 07.08.2020	:::	Threadpool created
+16:47:44:160 07.08.2020	:::	RMI initialized
+16:47:44:161 07.08.2020	:::	Listener socket ready
+16:47:44:161 07.08.2020	:::	Server started
+16:47:44:167 07.08.2020	:::	DBs updated
+16:48:04:169 07.08.2020	:::	DBs updated
+16:48:24:170 07.08.2020	:::	DBs updated
+16:48:44:172 07.08.2020	:::	DBs updated
+16:49:04:174 07.08.2020	:::	DBs updated
+16:49:24:175 07.08.2020	:::	DBs updated
+16:49:44:177 07.08.2020	:::	DBs updated
+16:50:04:178 07.08.2020	:::	DBs updated
+16:50:09:87 07.08.2020	:::	Quitting
+16:50:09:89 07.08.2020	:::	DBs updated
+16:50:10:88 07.08.2020	:::	Goodbye
+
+
+
+16:51:10:816 07.08.2020	:::	Staring
+16:51:10:856 07.08.2020	:::	Users database configured
+16:51:10:857 07.08.2020	:::	Friendship database configured
+16:51:10:913 07.08.2020	:::	Dictionary loaded
+16:51:10:917 07.08.2020	:::	Threadpool created
+16:51:11:44 07.08.2020	:::	RMI initialized
+16:51:11:45 07.08.2020	:::	Listener socket ready
+16:51:11:45 07.08.2020	:::	Server started
+16:51:11:50 07.08.2020	:::	DBs updated
+16:51:31:52 07.08.2020	:::	DBs updated
+16:51:51:53 07.08.2020	:::	DBs updated
+16:51:59:984 07.08.2020	:::	Quitting
+16:51:59:987 07.08.2020	:::	DBs updated
+16:52:00:985 07.08.2020	:::	Goodbye
+
+
+
+16:54:09:415 07.08.2020	:::	Staring
+16:54:09:451 07.08.2020	:::	Users database configured
+16:54:09:453 07.08.2020	:::	Friendship database configured
+16:54:09:506 07.08.2020	:::	Dictionary loaded
+16:54:09:511 07.08.2020	:::	Threadpool created
+16:54:09:624 07.08.2020	:::	RMI initialized
+16:54:09:626 07.08.2020	:::	Listener socket ready
+16:54:09:626 07.08.2020	:::	Server started
+16:54:09:631 07.08.2020	:::	DBs updated
+16:54:29:634 07.08.2020	:::	DBs updated
+16:54:49:636 07.08.2020	:::	DBs updated
+16:55:09:638 07.08.2020	:::	DBs updated
+16:55:29:640 07.08.2020	:::	DBs updated
+16:55:49:641 07.08.2020	:::	DBs updated
+16:56:09:455 07.08.2020	:::	Quitting
+16:56:09:457 07.08.2020	:::	DBs updated
+16:56:10:457 07.08.2020	:::	Goodbye
+
+
+
+17:11:39:686 07.08.2020	:::	Staring
+17:11:39:721 07.08.2020	:::	Users database configured
+17:11:39:723 07.08.2020	:::	Friendship database configured
+17:11:39:780 07.08.2020	:::	Dictionary loaded
+17:11:39:784 07.08.2020	:::	Threadpool created
+17:11:39:901 07.08.2020	:::	RMI initialized
+17:11:39:902 07.08.2020	:::	Listener socket ready
+17:11:39:902 07.08.2020	:::	Server started
+17:11:39:906 07.08.2020	:::	DBs updated
+17:11:59:908 07.08.2020	:::	DBs updated
+17:12:18:540 07.08.2020	:::	New User Luchino95 has been registered
+17:12:19:910 07.08.2020	:::	DBs updated
+17:12:35:893 07.08.2020	:::	Quitting
+17:12:35:895 07.08.2020	:::	DBs updated
+17:12:36:894 07.08.2020	:::	Goodbye
+
+
+
+17:14:07:949 07.08.2020	:::	Staring
+17:14:07:982 07.08.2020	:::	Users database configured
+17:14:07:983 07.08.2020	:::	Friendship database configured
+17:14:08:29 07.08.2020	:::	Dictionary loaded
+17:14:08:33 07.08.2020	:::	Threadpool created
+17:14:08:145 07.08.2020	:::	RMI initialized
+17:14:08:146 07.08.2020	:::	Listener socket ready
+17:14:08:146 07.08.2020	:::	Server started
+17:14:08:153 07.08.2020	:::	DBs updated
+17:14:28:155 07.08.2020	:::	DBs updated
+17:14:33:749 07.08.2020	:::	New User Luca95 has been registered
+17:14:42:987 07.08.2020	:::	Quitting
+17:14:42:989 07.08.2020	:::	DBs updated
+17:14:43:988 07.08.2020	:::	Goodbye
+
+
+
+17:30:27:692 07.08.2020	:::	Staring
+17:30:27:737 07.08.2020	:::	Users database configured
+17:30:27:739 07.08.2020	:::	Friendship database configured
+17:30:27:795 07.08.2020	:::	Dictionary loaded
+17:30:27:799 07.08.2020	:::	Threadpool created
+17:30:27:909 07.08.2020	:::	RMI initialized
+17:30:27:910 07.08.2020	:::	Listener socket ready
+17:30:27:910 07.08.2020	:::	Server started
+17:30:27:916 07.08.2020	:::	DBs updated
+17:30:47:918 07.08.2020	:::	DBs updated
+17:31:02:154 07.08.2020	:::	Quitting
+17:31:02:156 07.08.2020	:::	DBs updated
+17:31:03:155 07.08.2020	:::	Goodbye
+
+
+
+17:33:07:255 07.08.2020	:::	Staring
+17:33:07:289 07.08.2020	:::	Users database configured
+17:33:07:291 07.08.2020	:::	Friendship database configured
+17:33:07:342 07.08.2020	:::	Dictionary loaded
+17:33:07:347 07.08.2020	:::	Threadpool created
+17:33:07:453 07.08.2020	:::	RMI initialized
+17:33:07:453 07.08.2020	:::	Listener socket ready
+17:33:07:454 07.08.2020	:::	Server started
+17:33:07:460 07.08.2020	:::	DBs updated
+17:33:27:463 07.08.2020	:::	DBs updated
+17:33:35:970 07.08.2020	:::	Quitting
+17:33:35:973 07.08.2020	:::	DBs updated
+17:33:36:972 07.08.2020	:::	Goodbye
+
+
+
+17:35:07:703 07.08.2020	:::	Staring
+17:35:07:737 07.08.2020	:::	Users database configured
+17:35:07:739 07.08.2020	:::	Friendship database configured
+17:35:07:778 07.08.2020	:::	Dictionary loaded
+17:35:07:783 07.08.2020	:::	Threadpool created
+17:35:07:883 07.08.2020	:::	RMI initialized
+17:35:07:884 07.08.2020	:::	Listener socket ready
+17:35:07:884 07.08.2020	:::	Server started
+17:35:07:892 07.08.2020	:::	DBs updated
+17:35:27:894 07.08.2020	:::	DBs updated
+17:35:47:897 07.08.2020	:::	DBs updated
+17:36:07:898 07.08.2020	:::	DBs updated
+17:36:27:900 07.08.2020	:::	DBs updated
+17:36:47:902 07.08.2020	:::	DBs updated
+17:37:07:904 07.08.2020	:::	DBs updated
+17:37:27:906 07.08.2020	:::	DBs updated
+17:37:47:907 07.08.2020	:::	DBs updated
+17:38:07:909 07.08.2020	:::	DBs updated
+17:38:27:911 07.08.2020	:::	DBs updated
+17:38:47:913 07.08.2020	:::	DBs updated
+17:39:07:915 07.08.2020	:::	DBs updated
+17:39:27:916 07.08.2020	:::	DBs updated
+17:39:47:918 07.08.2020	:::	DBs updated
+17:40:07:921 07.08.2020	:::	DBs updated
+17:40:27:923 07.08.2020	:::	DBs updated
+17:40:30:954 07.08.2020	:::	New User vsbgrh has been registered
+17:40:47:925 07.08.2020	:::	DBs updated
+17:41:07:927 07.08.2020	:::	DBs updated
+17:41:27:928 07.08.2020	:::	DBs updated
+17:41:47:929 07.08.2020	:::	DBs updated
+17:42:07:931 07.08.2020	:::	DBs updated
+17:42:27:932 07.08.2020	:::	DBs updated
+17:42:47:934 07.08.2020	:::	DBs updated
+17:43:07:936 07.08.2020	:::	DBs updated
+17:43:27:937 07.08.2020	:::	DBs updated
+17:43:47:939 07.08.2020	:::	DBs updated
+17:44:07:941 07.08.2020	:::	DBs updated
+17:44:16:230 07.08.2020	:::	Quitting
+17:44:16:233 07.08.2020	:::	DBs updated
+17:44:17:231 07.08.2020	:::	Goodbye
+
+
+
+17:52:29:530 07.08.2020	:::	Staring
+17:52:29:587 07.08.2020	:::	Users database configured
+17:52:29:589 07.08.2020	:::	Friendship database configured
+17:52:29:649 07.08.2020	:::	Dictionary loaded
+17:52:29:656 07.08.2020	:::	Threadpool created
+17:52:29:788 07.08.2020	:::	RMI initialized
+17:52:29:789 07.08.2020	:::	Listener socket ready
+17:52:29:789 07.08.2020	:::	Server started
+17:52:29:795 07.08.2020	:::	DBs updated
+17:52:29:877 07.08.2020	:::	Quitting
+17:52:29:879 07.08.2020	:::	DBs updated
+17:52:35:688 07.08.2020	:::	Staring
+17:52:35:727 07.08.2020	:::	Users database configured
+17:52:35:729 07.08.2020	:::	Friendship database configured
+17:52:35:774 07.08.2020	:::	Dictionary loaded
+17:52:35:777 07.08.2020	:::	Threadpool created
+17:52:35:900 07.08.2020	:::	RMI initialized
+17:52:35:900 07.08.2020	:::	Listener socket ready
+17:52:35:901 07.08.2020	:::	Server started
+17:52:35:906 07.08.2020	:::	DBs updated
+17:52:52:686 07.08.2020	:::	Quitting
+17:52:52:688 07.08.2020	:::	DBs updated
+17:52:53:687 07.08.2020	:::	Goodbye
+
+
+
+18:05:34:956 07.08.2020	:::	Staring
+18:05:34:991 07.08.2020	:::	Users database configured
+18:05:34:993 07.08.2020	:::	Friendship database configured
+18:05:35:41 07.08.2020	:::	Dictionary loaded
+18:05:35:45 07.08.2020	:::	Threadpool created
+18:05:35:149 07.08.2020	:::	RMI initialized
+18:05:35:149 07.08.2020	:::	Listener socket ready
+18:05:35:150 07.08.2020	:::	Server started
+18:05:35:155 07.08.2020	:::	DBs updated
+18:05:55:157 07.08.2020	:::	DBs updated
+18:06:15:158 07.08.2020	:::	DBs updated
+18:06:35:160 07.08.2020	:::	DBs updated
+18:06:55:162 07.08.2020	:::	DBs updated
+18:07:15:164 07.08.2020	:::	DBs updated
+18:07:35:166 07.08.2020	:::	DBs updated
+18:07:55:168 07.08.2020	:::	DBs updated
+18:08:15:171 07.08.2020	:::	DBs updated
+18:08:35:172 07.08.2020	:::	DBs updated
+18:08:55:174 07.08.2020	:::	DBs updated
+18:09:15:176 07.08.2020	:::	DBs updated
+18:09:35:178 07.08.2020	:::	DBs updated
+18:09:55:180 07.08.2020	:::	DBs updated
+18:10:15:182 07.08.2020	:::	DBs updated
+18:10:35:183 07.08.2020	:::	DBs updated
+18:10:55:185 07.08.2020	:::	DBs updated
+18:11:15:187 07.08.2020	:::	DBs updated
+18:11:35:189 07.08.2020	:::	DBs updated
+18:11:55:191 07.08.2020	:::	DBs updated
+18:12:15:192 07.08.2020	:::	DBs updated
+18:12:35:194 07.08.2020	:::	DBs updated
+18:12:55:196 07.08.2020	:::	DBs updated
+18:13:15:198 07.08.2020	:::	DBs updated
+18:13:35:200 07.08.2020	:::	DBs updated
+18:13:55:202 07.08.2020	:::	DBs updated
+18:14:15:204 07.08.2020	:::	DBs updated
+18:14:35:205 07.08.2020	:::	DBs updated
+18:14:55:207 07.08.2020	:::	DBs updated
+18:15:15:209 07.08.2020	:::	DBs updated
+18:15:35:211 07.08.2020	:::	DBs updated
+18:15:55:213 07.08.2020	:::	DBs updated
+18:16:15:215 07.08.2020	:::	DBs updated
+18:16:35:217 07.08.2020	:::	DBs updated
+18:16:55:219 07.08.2020	:::	DBs updated
+18:17:15:221 07.08.2020	:::	DBs updated
+18:17:35:223 07.08.2020	:::	DBs updated
+18:17:55:225 07.08.2020	:::	DBs updated
+18:18:15:227 07.08.2020	:::	DBs updated
+18:18:35:228 07.08.2020	:::	DBs updated
+18:18:55:230 07.08.2020	:::	DBs updated
+18:19:15:232 07.08.2020	:::	DBs updated
+18:19:35:234 07.08.2020	:::	DBs updated
+18:19:55:235 07.08.2020	:::	DBs updated
+18:20:15:237 07.08.2020	:::	DBs updated
+18:20:35:238 07.08.2020	:::	DBs updated
+18:20:55:240 07.08.2020	:::	DBs updated
+18:21:15:242 07.08.2020	:::	DBs updated
+18:21:35:243 07.08.2020	:::	DBs updated
+18:21:55:245 07.08.2020	:::	DBs updated
+18:22:15:247 07.08.2020	:::	DBs updated
+18:22:35:248 07.08.2020	:::	DBs updated
+18:22:55:249 07.08.2020	:::	DBs updated
+18:23:15:250 07.08.2020	:::	DBs updated
+18:23:35:252 07.08.2020	:::	DBs updated
+18:23:55:253 07.08.2020	:::	DBs updated
+18:24:15:255 07.08.2020	:::	DBs updated
+18:24:35:256 07.08.2020	:::	DBs updated
+18:24:55:258 07.08.2020	:::	DBs updated
+18:25:15:260 07.08.2020	:::	DBs updated
+18:25:35:262 07.08.2020	:::	DBs updated
+18:25:55:263 07.08.2020	:::	DBs updated
+18:26:15:264 07.08.2020	:::	DBs updated
+18:26:35:266 07.08.2020	:::	DBs updated
+18:26:55:267 07.08.2020	:::	DBs updated
+18:27:15:269 07.08.2020	:::	DBs updated
+18:27:35:271 07.08.2020	:::	DBs updated
+18:27:55:272 07.08.2020	:::	DBs updated
+18:28:15:274 07.08.2020	:::	DBs updated
+18:28:35:276 07.08.2020	:::	DBs updated
+18:28:55:277 07.08.2020	:::	DBs updated
+18:29:15:279 07.08.2020	:::	DBs updated
+18:29:35:281 07.08.2020	:::	DBs updated
+18:29:55:282 07.08.2020	:::	DBs updated
+18:30:15:284 07.08.2020	:::	DBs updated
+18:30:35:285 07.08.2020	:::	DBs updated
+18:30:55:287 07.08.2020	:::	DBs updated
+18:31:15:289 07.08.2020	:::	DBs updated
+18:31:35:290 07.08.2020	:::	DBs updated
+18:31:55:292 07.08.2020	:::	DBs updated
+18:32:15:293 07.08.2020	:::	DBs updated
+18:32:35:295 07.08.2020	:::	DBs updated
+18:32:55:296 07.08.2020	:::	DBs updated
+18:33:15:298 07.08.2020	:::	DBs updated
+18:33:35:299 07.08.2020	:::	DBs updated
+18:33:55:300 07.08.2020	:::	DBs updated
+18:34:15:302 07.08.2020	:::	DBs updated
+18:34:35:303 07.08.2020	:::	DBs updated
+18:34:55:305 07.08.2020	:::	DBs updated
+18:35:15:306 07.08.2020	:::	DBs updated
+18:35:35:308 07.08.2020	:::	DBs updated
+18:35:55:310 07.08.2020	:::	DBs updated
+18:36:15:311 07.08.2020	:::	DBs updated
+18:36:35:313 07.08.2020	:::	DBs updated
+18:36:55:314 07.08.2020	:::	DBs updated
+18:37:15:315 07.08.2020	:::	DBs updated
+18:37:35:316 07.08.2020	:::	DBs updated
+18:37:55:318 07.08.2020	:::	DBs updated
+18:38:15:319 07.08.2020	:::	DBs updated
+18:38:35:320 07.08.2020	:::	DBs updated
+18:38:55:322 07.08.2020	:::	DBs updated
+18:39:15:323 07.08.2020	:::	DBs updated
+18:39:35:325 07.08.2020	:::	DBs updated
+18:39:55:326 07.08.2020	:::	DBs updated
+18:40:15:327 07.08.2020	:::	DBs updated
+18:40:35:329 07.08.2020	:::	DBs updated
+18:40:55:330 07.08.2020	:::	DBs updated
+18:41:15:331 07.08.2020	:::	DBs updated
+18:41:35:332 07.08.2020	:::	DBs updated
+18:41:55:334 07.08.2020	:::	DBs updated
+18:42:12:231 07.08.2020	:::	Quitting
+18:42:12:233 07.08.2020	:::	DBs updated
+19:03:09:247 07.08.2020	:::	Staring
+19:03:09:294 07.08.2020	:::	Users database configured
+19:03:09:297 07.08.2020	:::	Friendship database configured
+19:03:09:349 07.08.2020	:::	Dictionary loaded
+19:03:09:353 07.08.2020	:::	Threadpool created
+Exception in thread "main" java.lang.reflect.InaccessibleObjectException: Unable to make public abstract server.ACK server.RegRMInterface.RegUser(server.User) throws java.rmi.RemoteException accessible: module WQGame does not "exports server" to module java.rmi
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:340)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:280)
+	at java.base/java.lang.reflect.Method.checkCanSetAccessible(Method.java:198)
+	at java.base/java.lang.reflect.Method.setAccessible(Method.java:192)
+	at java.rmi/sun.rmi.server.UnicastServerRef$HashToMethod_Maps$1.run(UnicastServerRef.java:595)
+	at java.rmi/sun.rmi.server.UnicastServerRef$HashToMethod_Maps$1.run(UnicastServerRef.java:593)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.server.UnicastServerRef$HashToMethod_Maps.computeValue(UnicastServerRef.java:592)
+	at java.rmi/sun.rmi.server.UnicastServerRef$HashToMethod_Maps.computeValue(UnicastServerRef.java:572)
+	at java.rmi/sun.rmi.server.WeakClassHashMap.get(WeakClassHashMap.java:74)
+	at java.rmi/sun.rmi.server.UnicastServerRef.exportObject(UnicastServerRef.java:235)
+	at java.rmi/java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:470)
+	at java.rmi/java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:355)
+	at WQGame/server.Main.main(Main.java:139)
+19:04:08:666 07.08.2020	:::	Quitting
+19:04:08:667 07.08.2020	:::	Goodbye
+
+
+
+19:04:30:897 07.08.2020	:::	Staring
+19:04:30:928 07.08.2020	:::	Users database configured
+19:04:30:929 07.08.2020	:::	Friendship database configured
+19:04:30:969 07.08.2020	:::	Dictionary loaded
+19:04:30:972 07.08.2020	:::	Threadpool created
+Exception in thread "main" java.lang.reflect.InaccessibleObjectException: Unable to make public abstract server.ACK server.RegRMInterface.RegUser(server.User) throws java.rmi.RemoteException accessible: module WQGame does not "exports server" to module java.rmi
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:340)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:280)
+	at java.base/java.lang.reflect.Method.checkCanSetAccessible(Method.java:198)
+	at java.base/java.lang.reflect.Method.setAccessible(Method.java:192)
+	at java.rmi/sun.rmi.server.UnicastServerRef$HashToMethod_Maps$1.run(UnicastServerRef.java:595)
+	at java.rmi/sun.rmi.server.UnicastServerRef$HashToMethod_Maps$1.run(UnicastServerRef.java:593)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.server.UnicastServerRef$HashToMethod_Maps.computeValue(UnicastServerRef.java:592)
+	at java.rmi/sun.rmi.server.UnicastServerRef$HashToMethod_Maps.computeValue(UnicastServerRef.java:572)
+	at java.rmi/sun.rmi.server.WeakClassHashMap.get(WeakClassHashMap.java:74)
+	at java.rmi/sun.rmi.server.UnicastServerRef.exportObject(UnicastServerRef.java:235)
+	at java.rmi/java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:470)
+	at java.rmi/java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:355)
+	at WQGame/server.Main.main(Main.java:139)
+19:05:14:828 07.08.2020	:::	Quitting
+19:05:14:828 07.08.2020	:::	Goodbye
+
+
+
+19:05:23:228 07.08.2020	:::	Staring
+19:05:23:258 07.08.2020	:::	Users database configured
+19:05:23:259 07.08.2020	:::	Friendship database configured
+19:05:23:297 07.08.2020	:::	Dictionary loaded
+19:05:23:300 07.08.2020	:::	Threadpool created
+Exception in thread "main" java.lang.reflect.InaccessibleObjectException: Unable to make public abstract server.ACK server.RegRMInterface.RegUser(server.User) throws java.rmi.RemoteException accessible: module WQGame does not "exports server" to module java.rmi
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:340)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:280)
+	at java.base/java.lang.reflect.Method.checkCanSetAccessible(Method.java:198)
+	at java.base/java.lang.reflect.Method.setAccessible(Method.java:192)
+	at java.rmi/sun.rmi.server.UnicastServerRef$HashToMethod_Maps$1.run(UnicastServerRef.java:595)
+	at java.rmi/sun.rmi.server.UnicastServerRef$HashToMethod_Maps$1.run(UnicastServerRef.java:593)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.server.UnicastServerRef$HashToMethod_Maps.computeValue(UnicastServerRef.java:592)
+	at java.rmi/sun.rmi.server.UnicastServerRef$HashToMethod_Maps.computeValue(UnicastServerRef.java:572)
+	at java.rmi/sun.rmi.server.WeakClassHashMap.get(WeakClassHashMap.java:74)
+	at java.rmi/sun.rmi.server.UnicastServerRef.exportObject(UnicastServerRef.java:235)
+	at java.rmi/java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:470)
+	at java.rmi/java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:355)
+	at WQGame/server.Main.main(Main.java:139)
+19:05:36:170 07.08.2020	:::	Quitting
+19:05:36:171 07.08.2020	:::	Goodbye
+
+
+
+19:08:40:19 07.08.2020	:::	Staring
+19:08:40:120 07.08.2020	:::	Users database configured
+19:08:40:124 07.08.2020	:::	Friendship database configured
+19:08:40:247 07.08.2020	:::	Dictionary loaded
+19:08:40:251 07.08.2020	:::	Threadpool created
+Exception in thread "main" java.lang.reflect.InaccessibleObjectException: Unable to make public abstract server.ACK server.RegRMInterface.RegUser(server.User) throws java.rmi.RemoteException accessible: module WQGame does not "exports server" to module java.rmi
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:340)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:280)
+	at java.base/java.lang.reflect.Method.checkCanSetAccessible(Method.java:198)
+	at java.base/java.lang.reflect.Method.setAccessible(Method.java:192)
+	at java.rmi/sun.rmi.server.UnicastServerRef$HashToMethod_Maps$1.run(UnicastServerRef.java:595)
+	at java.rmi/sun.rmi.server.UnicastServerRef$HashToMethod_Maps$1.run(UnicastServerRef.java:593)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.server.UnicastServerRef$HashToMethod_Maps.computeValue(UnicastServerRef.java:592)
+	at java.rmi/sun.rmi.server.UnicastServerRef$HashToMethod_Maps.computeValue(UnicastServerRef.java:572)
+	at java.rmi/sun.rmi.server.WeakClassHashMap.get(WeakClassHashMap.java:74)
+	at java.rmi/sun.rmi.server.UnicastServerRef.exportObject(UnicastServerRef.java:235)
+	at java.rmi/java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:470)
+	at java.rmi/java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:355)
+	at WQGame/server.Main.main(Main.java:139)
+19:10:07:499 07.08.2020	:::	Quitting
+19:10:07:500 07.08.2020	:::	Goodbye
+
+
+
+19:10:14:376 07.08.2020	:::	Staring
+19:10:14:419 07.08.2020	:::	Users database configured
+19:10:14:421 07.08.2020	:::	Friendship database configured
+19:10:14:494 07.08.2020	:::	Dictionary loaded
+19:10:14:499 07.08.2020	:::	Threadpool created
+19:10:14:609 07.08.2020	:::	RMI initialized
+19:10:14:610 07.08.2020	:::	Listener socket ready
+19:10:14:610 07.08.2020	:::	Server started
+19:10:14:614 07.08.2020	:::	DBs updated
+19:10:34:617 07.08.2020	:::	DBs updated
+19:10:54:619 07.08.2020	:::	DBs updated
+19:11:14:622 07.08.2020	:::	DBs updated
+19:11:34:624 07.08.2020	:::	DBs updated
+19:11:54:625 07.08.2020	:::	DBs updated
+19:11:58:385 07.08.2020	:::	Quitting
+19:11:58:388 07.08.2020	:::	DBs updated
