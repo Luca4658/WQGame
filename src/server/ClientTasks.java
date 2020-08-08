@@ -62,6 +62,7 @@ public class ClientTasks implements Runnable
 		//            //
 		//  VARIABLES //
 		//            //
+		private boolean           end = false;
 		private User							__me	= null; ///< User che si collega
 		private Users 						__udb = null; ///< databse degli User
 		private Friendships 			__fdb = null; ///< database delle amicizie
@@ -189,6 +190,7 @@ public class ClientTasks implements Runnable
 				catch( IOException e )
 					{
 						Main.logger( "problem to receive message" );
+						end = true;
 					}
 
 				return null;
@@ -366,7 +368,7 @@ public class ClientTasks implements Runnable
 		public void run( )
 			{
 				Main.logger( "Client " + __cSocket.toString( ) + " connected" );
-				boolean end = false;
+				end = false;
 				while( !end || !Thread.currentThread( ).isInterrupted( ) )
 					{
 						try
@@ -376,7 +378,7 @@ public class ClientTasks implements Runnable
 								if( opRec == null )
 									{
 										end = true;
-										continue;
+										break;
 									}
 								ClientMSG op = null;
 								try
@@ -657,7 +659,9 @@ public class ClientTasks implements Runnable
 					}
 				try
 					{
-						Main.logger( "Client " + __cSocket.toString( ) + " disconnected" );
+						Main.logger( "Client " + __me.getID() + " disconnected" );
+						__me.setOffline();
+						__udb.updateUser( __me );
 						__inBuff.close( );
 						__outBuff.close( );
 						__cSocket.close( );
