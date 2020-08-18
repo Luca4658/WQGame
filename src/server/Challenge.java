@@ -122,15 +122,20 @@ class Challenge implements Runnable
 
         Main.logger( "Start to send words to " + __user.getID( ) );
 
+        String size = Integer.toString( __words.get( 0 ).size() );
+        send( size );
+
+        System.out.println( __user.getStatus() );
         for( int iWord = 0; ( iWord < __words.get(0).size( ) ) && !isFinished; iWord++ )
           {
-            send( __words.get(0).get( iWord ) );
+            String word = __words.get(0).get( iWord );
+            send( word );
             wordRec = recv( );
 
             if( wordRec.equals( "**end**" ) )
               {
                 isFinished = true;
-                Main.logger( __user.getID() + " ended game" );
+                Main.logger( __user.getID() + " was interrupted" );
                 continue;
               }
             else
@@ -146,13 +151,14 @@ class Challenge implements Runnable
               }
           }
 
+
+
+        Main.logger( __user.getID() + " ended game" );
+
         __user.setCScore( score );
+        __user.setOnline( );
         __udb.updateUser( __user );
 
-        if( !isFinished )
-          {
-            Main.logger( __user.getID() + " was interrupted" );
-            __usrT.interrupt( );
-          }
+        __usrT.interrupt( );
       }
   }

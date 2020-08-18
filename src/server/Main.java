@@ -220,9 +220,55 @@ public class Main
 			}
 
 
-		public static void setWords( String username ) throws IOException, ParseException
+		public static ArrayList<ArrayList<String>> getWords( String nickname )
 			{
-				ArrayList<ArrayList<String>> matrix = new ArrayList <ArrayList<String>>(  );
+				BufferedReader it = null;
+				BufferedReader en = null;
+				ArrayList <ArrayList <String>> words = new ArrayList <ArrayList <String>>( );
+				synchronized( Main.class )
+					{
+						try
+							{
+								it = new BufferedReader( new FileReader( "/tmp/it" + nickname.hashCode( ) ) );
+								en = new BufferedReader( new FileReader( "/tmp/en" + nickname.hashCode( ) ) );
+							}
+						catch( FileNotFoundException e )
+							{
+								e.printStackTrace( );
+							}
+
+						String itW;
+						String enW;
+						try
+							{
+								ArrayList <String> itA = new ArrayList <String>( );
+								while( ( itW = it.readLine( ) ) != null )
+									{
+										itA.add( itW );
+									}
+								ArrayList <String> enA = new ArrayList <String>( );
+								while( ( enW = en.readLine( ) ) != null )
+									{
+										enA.add( enW );
+									}
+
+								it.close( );
+								en.close( );
+
+								words.add( itA );
+								words.add( enA );
+							}
+						catch( IOException e )
+							{
+								e.printStackTrace( );
+							}
+					}
+				return words;
+			}
+
+
+		public synchronized static void setWords( String sender ) throws IOException, ParseException
+			{
 				Random rand = new Random(  );
 				int maxW = parser.getNWords( );
 				ArrayList<String> itWords = new ArrayList <String>(  );
@@ -240,8 +286,6 @@ public class Main
 							}
 					}
 
-				matrix.add( itWords );
-
 				ArrayList<String> words_en = new ArrayList<String>( );
 				for( String wordit:itWords )
 					{
@@ -253,21 +297,48 @@ public class Main
 						words_en.add( (String)rd.get( "translatedText" ) );
 					}
 
-				matrix.add( words_en );
 
+				FileWriter it = new FileWriter( "/tmp/it" + sender.hashCode(), false );
+				FileWriter en = new FileWriter( "/tmp/en" + sender.hashCode(), false );
 
-				System.out.println( username.hashCode( ) );
-				FileOutputStream wrt = new FileOutputStream( "/tmp/" + username.hashCode( ) );
-				ObjectOutputStream out = new ObjectOutputStream( wrt );
+				String its = "";
+				String ens = "";
+				for( String w: itWords )
+					{
+						its += w + "\n";
+					}
 
-				out.writeObject( matrix );
-				out.flush( );
-				out.close();
+				for( String w: words_en )
+					{
+						ens += w + "\n";
+					}
+
+				System.out.println( its );
+				System.out.println( ens );
+
+				it.write( its );
+				it.flush();
+				it.close();
+				en.write( ens );
+				en.flush();
+				en.close();
+
 			}
 
 
 		public static String getWinner( User U1, User U2 )
 			{
+				while( U1.getStatus( ) != ACK.ONLINE && U2.getStatus() != ACK.ONLINE );
+
+				try
+					{
+						Thread.sleep( 500 );
+					}
+				catch( InterruptedException e )
+					{
+						e.printStackTrace( );
+					}
+
 				if( U1.getChalScore( ) > U2.getChalScore() )
 					{
 						return U1.getID( );

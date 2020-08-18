@@ -167,7 +167,6 @@ public class ClientTasks implements Runnable
 					{
 						__outBuff.writeBytes( msg + "\n");
 						__outBuff.flush( );
-
 					}
 				catch( IOException e )
 					{
@@ -208,7 +207,6 @@ public class ClientTasks implements Runnable
 		private ACK checkFStatus( String Friend )
 			{
 				User frd = __udb.getUser( Friend );
-				System.out.println( frd.getStatus( ) );
 				if( __fdb.searchFriend( __me, frd ) != ACK.FriendNotFound )
 					{
 						return frd.getStatus( );
@@ -220,7 +218,7 @@ public class ClientTasks implements Runnable
 		 * TODO
 		 * @return
 		 */
-		private ACK sendRequest( )
+		private ACK sendRequest( String friendName )
 			{
 				DatagramSocket udpsockclient = null;
 				DatagramPacket udppk = null;
@@ -235,7 +233,7 @@ public class ClientTasks implements Runnable
 						// send //
 						buffers = __me.getID( ).getBytes( );
 						add = InetAddress.getByName( "localhost" );
-						udppk = new DatagramPacket( buffers, buffers.length, add, Main.getUniPort( __me.getID( ) ) );
+						udppk = new DatagramPacket( buffers, buffers.length, add, Main.getUniPort( friendName ) );
 						udpsockclient.send( udppk );
 
 						// receive //
@@ -283,26 +281,13 @@ public class ClientTasks implements Runnable
 		 */
 		private void Game( String nickname, String rival )
 			{
-				FileInputStream rd = null;
-				ObjectInputStream stream = null;
-				ArrayList<ArrayList<String>> words = null;
+				ArrayList<ArrayList<String>> words = Main.getWords( nickname );
+
 				Challenge challenge = null;
 				Thread cThread = null;
 
 				__me.setInChallenge( );
 				__udb.updateUser( __me );
-
-				try
-					{
-						rd = new FileInputStream( "/tmp/" + nickname.hashCode( ) );
-					  stream = new ObjectInputStream( rd );
-						words = (ArrayList<ArrayList<String>>) stream.readObject( );
-						stream.close();
-					}
-				catch( IOException | ClassNotFoundException e )
-					{
-						Main.logger( "Problem to read the stream" );
-					}
 
 
 				challenge = new Challenge(  __inBuff, __outBuff, words, __me, __udb, Thread.currentThread( ) );
@@ -319,12 +304,23 @@ public class ClientTasks implements Runnable
 						Main.logger( "Challenge Ended" );
 					}
 
+				try
+					{
+						Thread.sleep( 200 );
+					}
+				catch( InterruptedException e )
+					{
+						e.printStackTrace( );
+					}
+
 				__me = __udb.getUser( __me.getID( ) );
 
 				String winner = Main.getWinner( __me, __udb.getUser( rival ) );
+
 				send( winner );
 
-				__me.setOnline( );
+				System.out.println( winner );
+
 				if( winner.equals( __me.getID( ) ) )
 					{
 						__me.setCScore( __me.getChalScore( ) + Main.parser.getExtraPoints( ) );
@@ -335,6 +331,10 @@ public class ClientTasks implements Runnable
 						__me.setTScore( __me.getChalScore( ) );
 					}
 
+				File f = new File( "/tmp/it" + nickname.hashCode() );
+				f.delete();
+				f = new File( "/tmp/en" + nickname.hashCode() );
+				f.delete();
 				__udb.updateUser( __me );
 			}
 
@@ -369,6 +369,7 @@ public class ClientTasks implements Runnable
 			{
 				Main.logger( "Client " + __cSocket.toString( ) + " connected" );
 				end = false;
+				send( String.valueOf( Main.parser.getTimeoutGame() ) );
 				while( !end || !Thread.currentThread( ).isInterrupted( ) )
 					{
 						try
@@ -508,7 +509,7 @@ public class ClientTasks implements Runnable
 														break;
 														case ONLINE:
 															{
-																ACK retReq = sendRequest( );
+																ACK retReq = sendRequest( frd );
 																if( retReq == ACK.Rejected )
 																	{
 																		send(  retReq.name( ) );
@@ -517,6 +518,7 @@ public class ClientTasks implements Runnable
 																	}
 																else if( retReq == ACK.Accepted )//accepted
 																	{
+																		send( retReq.name( ) );
 																		try
 																			{
 																				Main.setWords( __me.getID( ) );
@@ -527,7 +529,7 @@ public class ClientTasks implements Runnable
 																			}
 
 																		Main.logger( __me.getID( ) + " has started the challenge with " + frd );
-
+																		Thread.sleep( 1000 );
 																		Game( __me.getID( ), frd );
 																	}
 																else
@@ -570,9 +572,18 @@ public class ClientTasks implements Runnable
 												String sname = recv( );
 												String psw = recv( );
 
-												__me.resetName( name );
-												__me.resetSurname( sname );
-												__me.resetPassword( psw );
+												if( !name.equals( "" ) )
+													{
+														__me.resetName( name );
+													}
+												if( !sname.equals( "" ) )
+													{
+														__me.resetSurname( sname );
+													}
+												if( !psw.equals( "" ) )
+													{
+														__me.resetPassword( psw );
+													}
 
 												ACK ret = __udb.updateUser( __me );
 												send( ret.name( ) );
@@ -641,7 +652,7 @@ public class ClientTasks implements Runnable
 										break;
 									}
 							} 
-						catch( IOException e )
+						catch( IOException | InterruptedException e )
 							{
 								try
 									{
@@ -659,9 +670,12 @@ public class ClientTasks implements Runnable
 					}
 				try
 					{
-						Main.logger( "Client " + __me.getID() + " disconnected" );
-						__me.setOffline();
-						__udb.updateUser( __me );
+						if( __me != null )
+							{
+								Main.logger( "Client " + __me.getID() + " disconnected" );
+								__me.setOffline();
+								__udb.updateUser( __me );
+							}
 						__inBuff.close( );
 						__outBuff.close( );
 						__cSocket.close( );

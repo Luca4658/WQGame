@@ -135,6 +135,10 @@ public class Friendships
 		@SuppressWarnings( "unchecked" )
 		public synchronized ACK addFriend( User a, User b )
 			{
+				if( a == null || b == null )
+					{
+						return ACK.UserNotFound;
+					}
 				if( !a.getID( ).equals( b.getID( ) ) && searchFriend( a, b ) == ACK.FriendNotFound )
 					{
 						JSONObject userA = (JSONObject) __dbFriend.get( a.getID( ) );
@@ -237,6 +241,10 @@ public class Friendships
 		 */
 		public synchronized ACK removeFriend( User a, User b )
 			{
+				if( a == null || b == null )
+					{
+						return ACK.UserNotFound;
+					}
 				if( searchFriend( a, b ) == ACK.AlreadyFriends )
 					{
 						JSONObject userA = (JSONObject) __dbFriend.get( a.getID( ) );

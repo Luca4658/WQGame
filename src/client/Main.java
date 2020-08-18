@@ -1,5 +1,8 @@
 package client;
 
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import server.RegRMInterface;
 
 import java.io.BufferedReader;
@@ -39,12 +42,21 @@ public class Main
 		private   static Socket           socket = null;
 		private   static BufferedReader   inBuff = null;
 		private   static DataOutputStream outBuff = null;
+		public    static ConfParser       parser = null;
 
 		public static void main( String[] args ) throws IOException
 			{
+				if( args.length < 1 )
+					{
+						System.out.println( "config not exists" );
+						System.exit( -1 );
+					}
+
+				parser = new ConfParser( args[0] );
+
 				try
 					{
-						reg = LocateRegistry.getRegistry( 21895 );
+						reg = LocateRegistry.getRegistry( parser.getRMIPort() );
 						stub = (RegRMInterface) reg.lookup( "ServerRMI" );
 					}
 				catch( IOException | NotBoundException e )
@@ -53,7 +65,24 @@ public class Main
 					}
 
 				connect( );
+				String timeoutgame = Main.recv( );
+				parser.setTimeoutGame( timeoutgame );
 				CGUI t = new CGUI( "Word Quizzle Game" );
+
+			}
+
+		public static int getMyPort( String myname )
+			{
+				System.out.println( myname );
+				int port = myname.hashCode( ) % 65535;
+				if( port < 0 )
+					{
+						port = -port % 65535;
+					}
+
+				port = ( port <= 1024) ? port += 1024 : port;
+
+				return port;
 			}
 
 
@@ -64,7 +93,10 @@ public class Main
 
 		public static String recv( ) throws IOException
 			{
-				return inBuff.readLine( );
+				String s = null;
+				s = inBuff.readLine( );
+
+				return s;
 			}
 
 		public static void connect( )
@@ -79,5 +111,21 @@ public class Main
 					{
 						e.printStackTrace( );
 					}
+			}
+
+
+		public static String getPoints( )
+			{
+				String point = null;
+				try
+					{
+						send( ClientMSG.GETPOINTS.name() );
+						point = recv();
+					}
+				catch( IOException e )
+					{
+						e.printStackTrace( );
+					}
+				return point;
 			}
 	}
