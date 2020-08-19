@@ -104,13 +104,15 @@ class Challenge implements Runnable
 
     /**
      * Metodo che mette in esecuzione il thread che gesitsce il gioco di un
-     * client. Invia una parola italaian alla volta e ne riceve la
+     * client. Invia una parola italiana alla volta e ne riceve la
      * corrispettiva traduzione del User dal client, ne controlla la
      * correttezza e ne aggiorna i punti, sommando un valore se corretto o
-     * levando dal toale della partita un altro valore. Tali valori di partita
+     * levando dal totale della partita un altro valore se traduzione errata,
+     * nessuna valutazione in caso di risposta assente. Tali valori di partita
      * sono presi dal file di configurazione. Quando termina aggiorna i punti
-     * della partita del User e alza un interrupt per il thread principale che
-     * lo avvisa della terminazione del gioco.
+     * della partita del User e aggiorna lo stato del User in ONLINE,
+     * terminando poi alzando un interrupt per il thread principale avvisandolo
+     * della terminazione del gioco.
      */
     @Override
     public void run( )
@@ -125,7 +127,6 @@ class Challenge implements Runnable
         String size = Integer.toString( __words.get( 0 ).size() );
         send( size );
 
-        System.out.println( __user.getStatus() );
         for( int iWord = 0; ( iWord < __words.get(0).size( ) ) && !isFinished; iWord++ )
           {
             String word = __words.get(0).get( iWord );
@@ -144,12 +145,14 @@ class Challenge implements Runnable
                   {
                     score += Main.parser.getCorrectPoints( );
                   }
-                else
+                else if( !wordRec.equals( "" ) )
                   {
                     score -= Main.parser.getWrongPoints( );
                   }
               }
           }
+
+        send( "#" );
 
 
 
@@ -159,6 +162,15 @@ class Challenge implements Runnable
         __user.setOnline( );
         __udb.updateUser( __user );
 
-        __usrT.interrupt( );
+        try
+          {
+            Thread.sleep( 100 );
+          }
+        catch( InterruptedException e )
+          {
+            e.printStackTrace( );
+          }
+
+        __usrT.interrupt();
       }
   }

@@ -51,7 +51,11 @@ public class ConfParser
     /**
      * Costruttore del parser. Prendendo come parametro la path del file JSON
      * su cui sono salvate le configurazioni, si preoccupa di salvare l'intero
-     * file in una struttura JSONObject per poter essere consultata
+     * file in una struttura JSONObject per poter essere consultata.
+     * Prima di terminare la creazione dell'parser controlla che tutti i valori
+     * di configurazione nel file siano attendibili e consistenti.
+     * !!! TUTTE LE QUANTITÀ DI TEMPO SONO DA RITENERSI IN UNITÀ DI TEMPO DI
+     * MILLISECONDI !!!
      *
      * @param confPath  path del file di configurazione
      */

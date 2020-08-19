@@ -54,7 +54,7 @@ enum ClientMSG
  *
  * @class   ClientTasks
  * @author  Luca Canessa (Mat. 516639)
- * @version 1.5
+ * @version 1.6
  * @since   1.0
  */
 public class ClientTasks implements Runnable
@@ -62,7 +62,7 @@ public class ClientTasks implements Runnable
 		//            //
 		//  VARIABLES //
 		//            //
-		private boolean           end = false;
+		private boolean           __end = false; ///< variabile usata per determinare la terminazione del ciclo principale 'while' nel metodo 'run'
 		private User							__me	= null; ///< User che si collega
 		private Users 						__udb = null; ///< databse degli User
 		private Friendships 			__fdb = null; ///< database delle amicizie
@@ -165,7 +165,7 @@ public class ClientTasks implements Runnable
 			{
 				try
 					{
-						__outBuff.writeBytes( msg + "\n");
+						__outBuff.writeBytes( msg + "\n"); //importante terminazione linea
 						__outBuff.flush( );
 					}
 				catch( IOException e )
@@ -189,7 +189,7 @@ public class ClientTasks implements Runnable
 				catch( IOException e )
 					{
 						Main.logger( "problem to receive message" );
-						end = true;
+						__end = true;
 					}
 
 				return null;
@@ -215,8 +215,18 @@ public class ClientTasks implements Runnable
 			}
 
 		/**
-		 * TODO
-		 * @return
+		 * Invia una richiesta di sfida di gioco al friend con nickname
+		 * 'friendName' utilizzando il protocollo UDP e indirizzando il pacchetto
+		 * verso la porta di destinazione identificata dal codice hash del nickname
+		 * dell'amico. (Nickname univoco quindi bassa possibilità di collisioni).
+		 * Attende la risposta del friend fino allo scadere del Timeout, poi
+		 * considera la sfida rifiutata. Tempo di Timeout preso dal file di
+		 * configurazione. Restituisce un valore di ACK
+		 *
+		 * @param friendName  nome dell'amico che si vuole sfidare
+		 * @return  ACK.Accepted se l'amico accetta la sfida
+		 *          ACK.Rejected se l'amico rifiuta la sfida o se scade il timeout
+		 *          ACK.ERROR se si presentano errori sulla socket UDP
 		 */
 		private ACK sendRequest( String friendName )
 			{
@@ -271,9 +281,9 @@ public class ClientTasks implements Runnable
 		 * Metodo che gestisce l'inizio e la fine di ogni sfida aggiornando lo
 		 * stato dell'User in INCHALLENGE e preparando lista di parole da inviare
 		 * prima dell'avvio della sfida e dopo aver avviato la sfida attende che
-		 * questa sia finita per aggiornare nuovamente lo stato dell'User in ONLINE
-		 * e aggiornando i punti guadagnati all'User e decretare il vincitore della
-		 * sfida
+		 * questa sia finita per aggiornare i punti guadagnati all'User e decretare
+		 * il vincitore della sfida. Terminata la sfida elimina i file su disco che
+		 * sono serviti per la condivisione delle parole.
 		 *
 		 * @param nickname  Stringa da usare per decodificare la sequenza di parole
 		 *                  da usare
@@ -294,32 +304,22 @@ public class ClientTasks implements Runnable
 				cThread = new Thread( challenge );
 				cThread.start( );
 
-				try
-					{
-						Thread.sleep( Main.parser.getTimeoutGame( ) );
-						Main.logger( "Challenge Ended" );
-					}
-				catch( InterruptedException e )
-					{
-						Main.logger( "Challenge Ended" );
-					}
 
 				try
 					{
-						Thread.sleep( 200 );
+						Thread.sleep( Main.parser.getTimeoutGame() * 3 );
+						Main.logger( "Challenge ended for " + __me.getID() );
+
 					}
 				catch( InterruptedException e )
 					{
-						e.printStackTrace( );
+						Main.logger( "Challenge ended for " + __me.getID() );
 					}
 
 				__me = __udb.getUser( __me.getID( ) );
 
-				String winner = Main.getWinner( __me, __udb.getUser( rival ) );
-
+				String winner = Main.getWinner( __me, __udb.getUser( rival ), __udb );
 				send( winner );
-
-				System.out.println( winner );
 
 				if( winner.equals( __me.getID( ) ) )
 					{
@@ -339,7 +339,7 @@ public class ClientTasks implements Runnable
 			}
 
 		/**
-		 * Metodo che mette in esecuzione il thread utile alla gestione del client
+		 * Metodo, messo in esecuzione da un thread, utile alla gestione del client
 		 * collegatosi. Permette di ricevere come primo pacchetto l'operazione da
 		 * eseguire, che è determinata attraverso la classe Enum ClientMSG. Per
 		 * ogni operazione richiesta esegue compiti differenti, mandando sempre al
@@ -368,9 +368,9 @@ public class ClientTasks implements Runnable
 		public void run( )
 			{
 				Main.logger( "Client " + __cSocket.toString( ) + " connected" );
-				end = false;
+				__end = false;
 				send( String.valueOf( Main.parser.getTimeoutGame() ) );
-				while( !end || !Thread.currentThread( ).isInterrupted( ) )
+				while( !__end || !Thread.currentThread( ).isInterrupted( ) )
 					{
 						try
 							{
@@ -378,7 +378,7 @@ public class ClientTasks implements Runnable
 
 								if( opRec == null )
 									{
-										end = true;
+										__end = true;
 										break;
 									}
 								ClientMSG op = null;
@@ -647,7 +647,7 @@ public class ClientTasks implements Runnable
 												__inBuff.close( );
 												__outBuff.close( );
 												__cSocket.close( );
-												end = true;
+												__end = true;
 											}
 										break;
 									}
@@ -660,7 +660,7 @@ public class ClientTasks implements Runnable
 										__inBuff.close( );
 										__outBuff.close( );
 										__cSocket.close( );
-										end = true;
+										__end = true;
 									} 
 								catch( IOException e1 )
 									{
@@ -679,7 +679,7 @@ public class ClientTasks implements Runnable
 						__inBuff.close( );
 						__outBuff.close( );
 						__cSocket.close( );
-						end = true;
+						__end = true;
 					}
 				catch( IOException e1 )
 					{
