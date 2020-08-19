@@ -8,12 +8,12 @@
 package client;
 
 /**
- * In questo file vengono implementati i messaggi da inviare al client a
+ * In questo file vengono implementati i messaggi ricevuti dal server a
  * termine delle operazioni richieste
  *
  * @class   ACK
  * @author  Luca Canessa (Mat. 516639)
- * @version 1.6
+ * @version 1.0
  * @since   1.0
  */
 public enum ACK

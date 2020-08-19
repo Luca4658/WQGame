@@ -1,27 +1,45 @@
+/************************************************
+ *                                              *
+ *                MYACTIONLISTENER              *
+ *                                              *
+ ************************************************
+ *
+ */
 package client;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import server.User;
-
 import javax.swing.*;
-import javax.swing.event.MouseInputAdapter;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import java.io.IOException;
-import java.rmi.RemoteException;
-import java.util.Iterator;
-import java.util.Timer;
 
 
 
+/**
+ * Classe con metodi statici utile per gestire gli input che l'utente invia
+ * attraverso la GUI
+ *
+ * @class   MyActionListener
+ * @author  Luca Canessa (Mat. 516639)
+ * @version 1.3
+ * @since   1.0
+ */
 class MyActionListener
   {
+
+    /**
+     * Metodo che effettua il cambio di scenario da pannello di Login a
+     * pannello con il menù principale
+     *
+     * @param back1   bottone che riceve l'input
+     * @param loginP  pannello di login
+     * @param mainW   finestra principale su cui cambiare pannelli
+     * @param firstP  pannello con menù iniziale
+     */
     public static void setBack1( JButton back1, JPanel loginP, JFrame mainW, JPanel firstP )
       {
         back1.addMouseListener( new MouseAdapter( )
@@ -36,6 +54,15 @@ class MyActionListener
           } );
       }
 
+    /**
+     * Metodo che effettua il cambio di scenario da pannello di registrazione
+     * a pannello con il menù principale
+     *
+     * @param back2   bottone che riceve input
+     * @param signupP pannello di registrazione dell'utente
+     * @param mainW   finestra principale
+     * @param firstP  pannello con menù principale
+     */
     public static void setBack2( JButton back2, JPanel signupP, JFrame mainW, JPanel firstP )
       {
         back2.addMouseListener( new MouseAdapter( )
@@ -50,9 +77,15 @@ class MyActionListener
           } );
       }
 
-
-
-
+    /**
+     * Metodo predisosto alla registrazione dell'utente
+     *
+     * @param goup    bottone che riceve l'input da gestire
+     * @param nick    nickname dell'utente
+     * @param pass    password dell'utente
+     * @param name    nome dell'utente
+     * @param surname cognome dell'utente
+     */
     public static void setGoReg( JButton goup, JTextField nick, JPasswordField pass, JTextField name, JTextField surname )
       {
         goup.addMouseListener( new MouseAdapter( )
@@ -85,10 +118,20 @@ class MyActionListener
                 nick.setText( "" );
                 pass.setText( "" );
                 name.setText( "" );
-                surname.setText( "" );              }
+                surname.setText( "" );
+              }
           } );
       }
 
+    /**
+     * Metodo per effettuare il login dell'utente e visualizzare i tasks
+     * possibili e richiedibili al server
+     *
+     * @param go    bottone che riceve l'input da gestire
+     * @param nick  nickname dell'utente
+     * @param pass  password dell'utente
+     * @param gui   riferimento al gestore della GUI
+     */
     public static void setGoLogin( JButton go, JTextField nick, JPasswordField pass, CGUI gui )
       {
         go.addMouseListener( new MouseAdapter( )
@@ -112,7 +155,7 @@ class MyActionListener
                         gui.friends( list, String.valueOf( list.length ) );
 
                         gui.setnicLab( nickname );
-                        gui.setPoint( Main.getPoints( ) );
+                        gui.setPoint( Tasks.getPoints( ) );
 
                         Thread udp = new Thread( new comUDP( Main.getMyPort( nickname ), gui ) );
                         udp.start();
@@ -148,7 +191,7 @@ class MyActionListener
                         String[] list = Tasks.friendlist();
                         gui.friends( list, String.valueOf( list.length ) );
                         gui.setnicLab( nickname );
-                        gui.setPoint( Main.getPoints( ) );
+                        gui.setPoint( Tasks.getPoints( ) );
 
                         Thread udp = new Thread( new comUDP( Main.getMyPort( nickname ), gui ) );
                         udp.start();
@@ -165,8 +208,15 @@ class MyActionListener
           } );
       }
 
-
-
+    /**
+     * Metodo per effettuare il cambio scenario da pannello principale a
+     * pannello per effettuare il login
+     *
+     * @param signin  bottone che riceve l'input da gestire
+     * @param mainW   finestra principale su gestire gli scenari
+     * @param firstP  pannello del menù principale
+     * @param loginP  pannello per eseguire il login
+     */
     public static void setSignin( JButton signin, JFrame mainW, JPanel firstP, JPanel loginP )
       {
         signin.addMouseListener( new MouseAdapter( )
@@ -200,8 +250,15 @@ class MyActionListener
           } );
       }
 
-
-
+    /**
+     * Metodo per effettuare il cambio scenario da pannello principale a
+     * pannello per effettuare la registrazione utente
+     *
+     * @param signup  bottone che riceve l'input
+     * @param mainW   finestra principale su cui eseguire lo scenario
+     * @param firstP  pannello del menù principale
+     * @param signupP pannello per effettuare la registrazione
+     */
     public static void setSignup( JButton signup, JFrame mainW, JPanel firstP, JPanel signupP )
       {
         signup.addMouseListener( new MouseAdapter( )
@@ -234,7 +291,15 @@ class MyActionListener
           } );
       }
 
-
+    /**
+     * Metodo per gestire la richiesta di aggiunta di un amico alla lista
+     * Per l'aggiunta dell'amico viene creata una nuova finestra in cui si può
+     * inserire il Nickname desiderato e inviarlo al server e visualizzare la
+     * risposta all'operazione richiesta.
+     *
+     * @param addfrd  bottone per richiedere l'operazione di aggiunta dell'amico
+     * @param ui      riferimento al gestore della GUI
+     */
     public static void setAddFriend( JButton addfrd, CGUI ui )
       {
         addfrd.addMouseListener( new MouseAdapter( )
@@ -291,6 +356,15 @@ class MyActionListener
           } );
       }
 
+    /**
+     * Metodo per gestire la richiesta di rimozione di un amico dalla lista
+     * Per la rimozione dell'amico viene creata una nuova finestra in cui si
+     * può inserire il Nickname desiderato e inviarlo al server e visualizzare
+     * la risposta all'operazione richiesta.
+     *
+     * @param rm  bottone che riceve l'input per la richiesta della rimozione dell'amico
+     * @param ui  riferimento al gestore della GUI
+     */
     public static void removeFriend( JButton rm, CGUI ui )
       {
         rm.addMouseListener( new MouseAdapter( )
@@ -344,6 +418,13 @@ class MyActionListener
           } );
       }
 
+    /**
+     * Metodo che richiede la lista delle amicizie al server quando l'utente
+     * preme il bottone e aggiorna la lista visualizzata.
+     *
+     * @param update  bottone per richiedere l'aggiornamento lista
+     * @param ui      riferimento al gestore della GUI
+     */
     public static void updateFriend( JButton update, CGUI ui )
       {
         update.addMouseListener( new MouseAdapter( )
@@ -357,6 +438,13 @@ class MyActionListener
           } );
       }
 
+    /**
+     * Metodo che richiede la classifica dell'utente al server e la visualizza
+     * nella GUI
+     *
+     * @param rank  bottone per richiedere la visualizzazione della classifica
+     * @param ui    riferimento al gestore della GUI
+     */
     public static void getRank( JButton rank, CGUI ui )
       {
         rank.addMouseListener( new MouseAdapter( )
@@ -370,6 +458,13 @@ class MyActionListener
           } );
       }
 
+    /**
+     * Metodo che effettua il logout quando riceve risposta positiva dal server
+     * cambiando contesto.
+     *
+     * @param logout  bottone per richiedere il logout dell'utente
+     * @param ui      riferimento al gestore GUI
+     */
     public static void logout( JButton logout, CGUI ui )
       {
         logout.addMouseListener( new MouseAdapter( )
@@ -388,6 +483,13 @@ class MyActionListener
           } );
       }
 
+    /**
+     * Metodo che si preoccupa di gestire la richiesta di rimozione dell'utente
+     * dal gioco
+     *
+     * @param remove  bottone per richiedere la cancellazione dell'utente
+     * @param ui      riferimento al gestore della GUI
+     */
     public static void removeUser( JButton remove, CGUI ui )
       {
         remove.addMouseListener( new MouseAdapter( )
@@ -405,6 +507,13 @@ class MyActionListener
           } );
       }
 
+    /**
+     * Metodo incaricato di gestire la richiesta di aggiornamento del profilo
+     * dell'utente
+     *
+     * @param up  bottone per richiedere l'aggiornamento del profilo
+     * @param ui  riferimento al gestore della GUI
+     */
     public static void update( JButton up, CGUI ui )
       {
         up.addMouseListener( new MouseAdapter( )
@@ -417,6 +526,15 @@ class MyActionListener
           } );
       }
 
+    /**
+     * Metodo che effettua il cambio di scenario da pannello di aggiornamento
+     * del profilo a pannello con i tasks possibili e richiedibili
+     *
+     * @param back3   bottone per richiedere il cambio di contesto
+     * @param tasks   pannello con i tasks possibili
+     * @param mainW   finestra su cui effettuare il cambio contesto
+     * @param updateU pannello per l'aggiornamento profilo
+     */
     public static void setBack3( JButton back3, JPanel tasks, JFrame mainW, JPanel updateU )
       {
         back3.addMouseListener( new MouseAdapter( )
@@ -431,6 +549,17 @@ class MyActionListener
           } );
       }
 
+    /**
+     * Metodo per la gestione dell'aggiornamento del profilo, invia al server i
+     * dati da aggiornare e visualizza un popup di sistema con il messaggio di
+     * risposta del server
+     *
+     * @param go      bottone per richiedere l'invio dei dati al server
+     * @param name    campo dove prelevare il nome dell'utente
+     * @param surname campo dove prelevare il cognome dell'utente
+     * @param pass    campodove prelevare la password dell'utente
+     * @param ui      riferimento al gestore della GUI
+     */
     public static void goUpdate( JButton go, JTextField name, JTextField surname, JPasswordField pass, CGUI ui )
       {
         go.addMouseListener( new MouseAdapter( )
@@ -452,21 +581,31 @@ class MyActionListener
           } );
       }
 
-
+    /**
+     * Metodo predisposto per gestire l'invio della richiesta di sfida e
+     * rispettiva risposta. Crea una finestra in cui indicare l'amico da
+     * sfidare e poter richiedere la sfida al server, e nel caso di risposta
+     * positiva dall'amico fa partire il thread per la gestiore del gioco e
+     * chiude la finestra appea utilizzata
+     *
+     * @param sendCh  bottone per richiedere l'operazione di invio richiesta sfida
+     * @param ui      riferimento al gestore della GUI
+     */
     public static void challenge( JButton sendCh, CGUI ui )
       {
+        final boolean[] clicked = { false };
         sendCh.addMouseListener( new MouseAdapter( )
           {
             @Override
             public void mouseClicked( MouseEvent e )
               {
                 JFrame newF = new JFrame( "Sfida un amico" );
-                JPanel pan = new JPanel(  );
-                JTextField txt = new JTextField(  );
+                JPanel pan = new JPanel( );
+                JTextField txt = new JTextField( );
                 JButton ch = new JButton( "Sfida" );
-                JLabel ret = new JLabel(  );
-                JLabel txtLab = new JLabel(  );
-                pan.setBackground( new Color( 0, 0, 26) );
+                JLabel ret = new JLabel( );
+                JLabel txtLab = new JLabel( );
+                pan.setBackground( new Color( 0, 0, 26 ) );
                 txtLab.setForeground( Color.WHITE );
                 ret.setForeground( Color.WHITE );
 
@@ -479,9 +618,6 @@ class MyActionListener
                 pan.add( ch );
                 pan.add( ret );
                 newF.add( pan );
-                newF.setSize( 400, 300 );
-                newF.setLocationRelativeTo( null );
-                newF.setVisible( true );
 
                 ch.addMouseListener( new MouseAdapter( )
                   {
@@ -495,30 +631,33 @@ class MyActionListener
                           }
                         else
                           {
-                            String rec = Tasks.sendChRequest( name );
-                            ret.setText( rec );
                             try
                               {
-                                if( rec.equals( ACK.Accepted.name() ) )
+                                clicked[0] = true;
+                                Main.send( ClientMSG.STARTCH.name() );
+                                Main.send( name );
+                                String rec = Main.recv();
+                                ret.setText( rec );
+                                if( rec.equals( ACK.Accepted.name( ) ) )
                                   {
                                     Thread T = new Thread( new Game( ui ) );
                                     T.start( );
+                                    newF.dispose();
                                   }
-                                Thread.sleep( 1000 );
                               }
-                            catch( InterruptedException interruptedException )
+                            catch( IOException Exception )
                               {
-                                interruptedException.printStackTrace( );
+                                Exception.printStackTrace( );
                               }
-
-                            newF.dispose();
                           }
                         txt.setText( "" );
                       }
                   } );
+
+                newF.setSize( 400, 300 );
+                newF.setLocationRelativeTo( null );
+                newF.setVisible( true );
               }
           } );
       }
-
-
   }

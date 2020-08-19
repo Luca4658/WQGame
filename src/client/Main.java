@@ -1,21 +1,36 @@
+/************************************************
+ *                                              *
+ *                    MAIN                      *
+ *                                              *
+ ************************************************
+ *
+ */
 package client;
 
-import org.json.simple.JSONArray;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
 import server.RegRMInterface;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
 import java.net.Socket;
+
 import java.rmi.NotBoundException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 
-
+/**
+ * In questa enumerazione vengono implementati i messaggi che il server riceve
+ * dal client
+ *
+ * @class   ClientMSG
+ * @author  Luca Canessa (Mat. 516639)
+ * @version 1.1
+ * @since   1.0
+ */
 enum ClientMSG
 	{
 		LOGIN, ///< richiesta di login
@@ -33,17 +48,43 @@ enum ClientMSG
 	}
 
 
-
-
+/**
+ * Classe principale che permette di eseguire il client
+ *
+ * @class   Main
+ * @author  Luca Canessa (Mat. 516639)
+ * @version 1.6
+ * @since   1.0
+ */
 public class Main
 	{
-		protected static Registry         reg = null;
-		protected static RegRMInterface   stub = null;
-		private   static Socket           socket = null;
-		private   static BufferedReader   inBuff = null;
-		private   static DataOutputStream outBuff = null;
-		public    static ConfParser       parser = null;
+		//            //
+		//  VARIABLES //
+		//            //
+		protected static Registry         reg = null; ///< registro dei serivizi del server
+		protected static RegRMInterface   stub = null; ///< interfaccia RMI del server
+		private   static Socket           socket = null; ///< socket con cui connettersi al server
+		private   static BufferedReader   inBuff = null; ///< buffer di ingresso per la socket
+		private   static DataOutputStream outBuff = null; ///< buffer di uscita per la socket
+		public    static ConfParser       parser = null; ///< parser della configurazione
 
+		//          //
+		//  METHODS //
+		//          //
+
+		/**
+		 * Metodo principale per l'avvio del client. Tale metodo ha il compito di
+		 * settare il registro dei servizi su RMI del server e il servizio
+		 * desiderato (iscrizione dell'utente); di inizializzare la socket e i
+		 * buffers di comunicazione con il server ed avviare la connessione; di
+		 * inizializzare il gestore della grafica; e di aggioranare il parametro di
+		 * timeout sul file di configurazione, dopo che lo ha ricevuto dal server.
+		 * Tutti i valori necessari per l'inizializzazione vengono prelevati dal
+		 * file di configurazione salvato nel filesystem
+		 *
+		 * @param args  percorso al file di configurazione
+		 * @throws IOException nel caso di problemi con RMI
+		 */
 		public static void main( String[] args ) throws IOException
 			{
 				if( args.length < 1 )
@@ -71,9 +112,16 @@ public class Main
 
 			}
 
+		/**
+		 * Metodo statico usato per individuare il numero di porta su cui
+		 * comunicare quando viene usato il protocollo UDP. Numero ricavato
+		 * attraverso l'hash code del nickname dell'utente
+		 *
+		 * @param myname  nickname dell'utente
+		 * @return port  numero di porta da utilizzare per la socket UDP
+		 */
 		public static int getMyPort( String myname )
 			{
-				System.out.println( myname );
 				int port = myname.hashCode( ) % 65535;
 				if( port < 0 )
 					{
@@ -85,12 +133,25 @@ public class Main
 				return port;
 			}
 
-
+		/**
+		 * Ha il compito di inviare il messaggio passatogli come parametro al
+		 * server attraverso la socket di comunicazione.
+		 *
+		 * @param toSend  messaggio da inviare al server
+		 * @throws IOException
+		 */
 		public static void send( String toSend ) throws IOException
 			{
 				outBuff.writeBytes( toSend + "\n" );
 			}
 
+		/**
+		 * Ha il compito di ricevere dati dal server e trascriverli in una stringa
+		 * per poter essere utlilizzati in altre parti del codice
+		 *
+		 * @return  s String ottenuta leggendo il buffer di ingresso della socket
+		 * @throws IOException
+		 */
 		public static String recv( ) throws IOException
 			{
 				String s = null;
@@ -99,6 +160,11 @@ public class Main
 				return s;
 			}
 
+		/**
+		 * Metodo con il compito di instaurare la connessione con il server usando
+		 * il protocollo di trasporto TCP, e di inizializzare i buffer di ingresso
+		 * e uscita.
+		 */
 		public static void connect( )
 			{
 				try
@@ -111,21 +177,5 @@ public class Main
 					{
 						e.printStackTrace( );
 					}
-			}
-
-
-		public static String getPoints( )
-			{
-				String point = null;
-				try
-					{
-						send( ClientMSG.GETPOINTS.name() );
-						point = recv();
-					}
-				catch( IOException e )
-					{
-						e.printStackTrace( );
-					}
-				return point;
 			}
 	}

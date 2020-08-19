@@ -1,3 +1,10 @@
+/************************************************
+ *                                              *
+ *                    TASKS                     *
+ *                                              *
+ ************************************************
+ *
+ */
 package client;
 
 import server.User;
@@ -15,8 +22,26 @@ import java.util.Iterator;
 
 
 
+/**
+ * Classe con metodi statici necessari per il compimento dei tasks richiesti
+ * dal client
+ *
+ * @class   Tasks
+ * @author  Luca Canessa (Mat. 516639)
+ * @version 1.2
+ * @since   1.0
+ */
 class Tasks
   {
+    /**
+     * Metodo con il compito di richiedere al server di effettuare il login
+     * all'utente, inviandogli il suo nickname e la password corrispondente.
+     * Ritorna la rispota del server
+     *
+     * @param nickname  nickname dell'utente
+     * @param Password  password dell'utente
+     * @return  rec risposta del server all'esecuzione dell'operazione
+     */
     public static String login( String nickname, String Password )
       {
         String rec = null;
@@ -35,6 +60,16 @@ class Tasks
         return rec;
       }
 
+    /**
+     * Richiesta di registrazione di un utente attraverso il RemoteMethodInvocation.
+     * Crea popup di sistema con messaggio del risultato dell'operazione
+     * (nickname e password OBBLIGATORI)
+     *
+     * @param nickin  nickname dell'utente
+     * @param passin  password dell'utente
+     * @param name    nome dell'utente
+     * @param surname cognome dell'utente
+     */
     public static void reg( String nickin, String passin, String name, String surname )
       {
         if( name.equals( "" ) )
@@ -65,6 +100,12 @@ class Tasks
           }
       }
 
+    /**
+     * Metodo per la richiesta di aggiunta di un amico nella propria lista
+     *
+     * @param name  nickname dell'amico
+     * @return ret  risultato dell'operazione
+     */
     public static String addFriend( String name )
       {
         String ret = null;
@@ -81,6 +122,12 @@ class Tasks
         return ret;
       }
 
+    /**
+     * Metodo che richiede al server la rimozione di un amico dalla propria lista
+     *
+     * @param name  nickname dell'amico
+     * @return ret  risultato dell'operazione
+     */
     public static String rmFriend( String name )
       {
         String ret = null;
@@ -95,9 +142,13 @@ class Tasks
             e.printStackTrace( );
           }
         return ret;
-
       }
 
+    /**
+     * Richiede al server la lista dei propri amici
+     *
+     * @return una array con i nickname degli amici
+     */
     public static String[] friendlist( )
       {
         try
@@ -137,6 +188,11 @@ class Tasks
         return list;
       }
 
+    /**
+     * Richiede al server la ranking list personale.
+     *
+     * @return array con i nomi e il punteggio degli amici
+     */
     public static String[] getRank( )
       {
         String rec = null;
@@ -177,6 +233,11 @@ class Tasks
         return msg;
       }
 
+    /**
+     * Richiede al server di effettuare il logout per l'utente
+     *
+     * @return rec  il risultato dell'operazione
+     */
     public static String logout( )
       {
         String rec = null;
@@ -193,6 +254,11 @@ class Tasks
         return rec;
       }
 
+    /**
+     * Richiede al server la rimozione dell'utente dal gioco
+     *
+     * @return rec  risultato dell'operazione
+     */
     public static String rmUser( )
       {
         String rec = null;
@@ -209,6 +275,15 @@ class Tasks
         return rec;
       }
 
+    /**
+     * Richiede al server l'aggiornamento del profilo personale.
+     * Stampa il risultato dell'operazione su un popup di sistema
+     *
+     * @param name      nome dell'utente
+     * @param surname   cognome dell'utente
+     * @param password  password dell'utente
+     * @return rec  risultato dell'operazione
+     */
     public static String updateProfile( String name, String surname, String password )
       {
         String rec = null;
@@ -227,7 +302,7 @@ class Tasks
         return rec;
       }
 
-    public static String sendChRequest( String name )
+/*    public static String sendChRequest( String name )
       {
         String rec = null;
         try
@@ -241,5 +316,25 @@ class Tasks
             e.printStackTrace( );
           }
         return rec;
+      }*/
+
+    /**
+     * Richiede al server il punteggio totalizzato fino a quel momento
+     *
+     * @return point  il numero di punti guadagnati
+     */
+    public static String getPoints( )
+      {
+        String point = null;
+        try
+          {
+            Main.send( ClientMSG.GETPOINTS.name() );
+            point = Main.recv();
+          }
+        catch( IOException e )
+          {
+            e.printStackTrace( );
+          }
+        return point;
       }
   }

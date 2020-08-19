@@ -22,17 +22,13 @@ import java.io.IOException;
  * In questa classe viene gestito il parser del file di configurazione dal
  * quale si estraggono i valori di default del client. Di default il file
  * di configurazione è all'interno della cartella conf.
- * Il file è composto da tre oggetti principali:
- * - CLIENT:  ci sono tutti i valori che servono per le configurazioni di base
- *            del server
- * - GAME:  ci sono tutti i valori utili per settare le sfide tra gli utenti
  *
  *  !!! NECCESSARIO CHE NESSUN VALORE DELLE CHIAVI IN QUESTO FILE SIA VUOTO !!!
  *  controlla che tutti i campi siano consistenti appena l'oggetto viene creato
  *
  * @class   ConfParser
  * @author  Luca Canessa (Mat. 516639)
- * @version 1.2
+ * @version 1.1
  * @since   1.0
  */
 public class ConfParser
@@ -201,6 +197,10 @@ public class ConfParser
         updateConf( );
       }
 
+    /**
+     * Scrive su file l'aggiornamento della configurazione che gli è arrivata
+     * dal server.
+     */
     private void updateConf( )
       {
         FileWriter __confFile = null;
@@ -210,7 +210,7 @@ public class ConfParser
           }
         catch (IOException e)
           {
-            // TODO: handle exception
+            e.printStackTrace();
           }
         try
           {
@@ -218,7 +218,7 @@ public class ConfParser
           }
         catch( Exception e )
           {
-            // TODO: handle exception
+            e.printStackTrace();
           }
         try
           {
@@ -227,7 +227,7 @@ public class ConfParser
           }
         catch (Exception e)
           {
-            // TODO: handle exception
+            e.printStackTrace();
           }
       }
   }
