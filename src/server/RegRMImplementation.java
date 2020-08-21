@@ -46,7 +46,7 @@ public class RegRMImplementation extends RemoteServer implements RegRMInterface
 		 * predisposto per questo utilizzo. Ritorna un valore di ACK.
 		 *
 		 * @param u User da inserire del database
-		 * @return //TODO
+		 * @return ACK (dipende da Users.insertUser())
 		 * @throws RemoteException
 		 */
 		@Override

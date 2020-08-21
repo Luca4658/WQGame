@@ -341,7 +341,7 @@ public class Users implements Serializable
 					}
 				catch (IOException e) 
 					{
-						// TODO: handle exception
+						Main.logger( "Problem to open the user DB!" );
 					}
 				try
 					{
@@ -349,7 +349,7 @@ public class Users implements Serializable
 					} 
 				catch( Exception e )
 					{
-						// TODO: handle exception
+						Main.logger( "Problem to update the user DB!" );
 					}
 				try
 					{
@@ -358,7 +358,7 @@ public class Users implements Serializable
 					}
 				catch (Exception e) 
 					{
-						// TODO: handle exception
+						Main.logger( "Problem to close the user DB!" );
 					}
 			}
 	}

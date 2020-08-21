@@ -94,8 +94,7 @@ public class ClientTasks implements Runnable
 					} 
 				catch( IOException e )
 					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						Main.logger( "Problem to create the input buffer" );
 					}
 				try
 					{
@@ -103,8 +102,7 @@ public class ClientTasks implements Runnable
 					} 
 				catch( IOException e )
 					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						Main.logger( "Problem to create the output buffer" );
 					}
 			}
 

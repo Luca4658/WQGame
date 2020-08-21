@@ -69,11 +69,11 @@ public class Friendships
 					}
 				catch( IOException e ) 
 					{
-					// TODO: handle exception
+						Main.logger( "Problem to read the friendships database!" );
 					}
 				catch( ParseException e )
 					{
-						//TODO
+						Main.logger( "Problem to parse the friendships database!" );
 					}
 			}
 
@@ -298,7 +298,7 @@ public class Friendships
 					}
 				catch (IOException e) 
 					{
-						// TODO: handle exception
+						Main.logger( "Problem to open the friendships database!" );
 					}
 				try
 					{
@@ -306,7 +306,7 @@ public class Friendships
 					} 
 				catch( Exception e )
 					{
-						// TODO: handle exception
+						Main.logger( "Problem to update the friendships database!" );
 					}
 				try
 					{
@@ -315,7 +315,7 @@ public class Friendships
 					}
 				catch (Exception e) 
 					{
-					// TODO: handle exception
-				}
+						Main.logger( "Problem to close the friendships database!" );
+					}
 			}
 	}
