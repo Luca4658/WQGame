@@ -3,7 +3,7 @@
 *.iml
 null
 
-# eclipse
+# eclipse / IntelliJ
 .classpath
 .project
 .settings/
@@ -11,4 +11,6 @@ null
 .idea/
 .idea/*
 
+# doc
 doc/latex/*
+doc/.~lock.Relazione.odt#
