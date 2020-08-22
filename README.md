@@ -1,4 +1,4 @@
-# WQGame [![Made with](https://img.shields.io/badge/JAVA-v11.0.0-orange)]() [![version](https://img.shields.io/badge/version-v1.0--alpha3-yellowgreen)]() [![coverage](https://img.shields.io/badge/coverage-40%25-lightgrey) ![use](https://img.shields.io/badge/use-UniProject-blue)]() 
+# WQGame [![Made with](https://img.shields.io/badge/JAVA-v11.0.0-orange)]() [![version](https://img.shields.io/badge/version-v1.5.8-yellowgreen)]() [![coverage](https://img.shields.io/badge/coverage-100%25-lightgrey) ![use](https://img.shields.io/badge/use-UniProject-blue)]() 
 
 ---
 
