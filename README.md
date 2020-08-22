@@ -55,7 +55,7 @@ In particolare:
 - L'utente interagisce con WQ mediante un client che può utilizzare una semplice interfaccia grafica, oppure una interfaccia a linea di comando, definendo un insieme di comandi, presentati in un menu.
 - Il server persiste le informazioni di registrazione, relazioni di amicizia e punteggio degli utenti su file JSON.
 
-## Progettazione/Implementazione/Sviluppo
+## Progettazione/Implementazione/Sviluppo [![pdf](https://img.shields.io/badge/view-ORIGINAL-yellow)](https://github.com/Luca4658/WQGame/blob/master/doc/Relazione.pdf)
 
 #### Introduzione
 
