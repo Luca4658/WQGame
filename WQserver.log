@@ -1,555 +1,187 @@
-12:08:57:495 19.08.2020	:::	Staring
-12:08:57:531 19.08.2020	:::	Users database configured
-12:08:57:533 19.08.2020	:::	Friendship database configured
-12:08:57:572 19.08.2020	:::	Dictionary loaded
-12:08:57:576 19.08.2020	:::	Threadpool created
-12:08:57:667 19.08.2020	:::	RMI initialized
-12:08:57:667 19.08.2020	:::	Listener socket ready
-12:08:57:668 19.08.2020	:::	Server started
-12:08:57:671 19.08.2020	:::	DBs updated
-12:09:17:673 19.08.2020	:::	DBs updated
-12:09:37:675 19.08.2020	:::	DBs updated
-12:09:57:677 19.08.2020	:::	DBs updated
-12:10:17:679 19.08.2020	:::	DBs updated
-12:10:37:680 19.08.2020	:::	DBs updated
-12:10:57:682 19.08.2020	:::	DBs updated
-12:11:17:683 19.08.2020	:::	DBs updated
-12:11:37:685 19.08.2020	:::	DBs updated
-12:11:57:687 19.08.2020	:::	DBs updated
-12:12:17:688 19.08.2020	:::	DBs updated
-12:12:37:690 19.08.2020	:::	DBs updated
-12:12:57:691 19.08.2020	:::	DBs updated
-12:13:17:693 19.08.2020	:::	DBs updated
-12:13:37:695 19.08.2020	:::	DBs updated
-12:13:57:696 19.08.2020	:::	DBs updated
-12:14:17:698 19.08.2020	:::	DBs updated
-12:14:37:699 19.08.2020	:::	DBs updated
-12:14:57:701 19.08.2020	:::	DBs updated
-12:15:17:702 19.08.2020	:::	DBs updated
-12:15:37:704 19.08.2020	:::	DBs updated
-12:15:57:705 19.08.2020	:::	DBs updated
-12:16:17:707 19.08.2020	:::	DBs updated
-12:16:37:709 19.08.2020	:::	DBs updated
-12:16:57:710 19.08.2020	:::	DBs updated
-12:17:17:712 19.08.2020	:::	DBs updated
-12:17:37:714 19.08.2020	:::	DBs updated
-12:17:50:479 19.08.2020	:::	Quitting
-12:17:50:482 19.08.2020	:::	DBs updated
-12:17:51:481 19.08.2020	:::	Goodbye
+19:43:04:919 22.08.2020	:::	Staring
+19:43:04:971 22.08.2020	:::	Users database configured
+19:43:04:973 22.08.2020	:::	Friendship database configured
+19:43:05:39 22.08.2020	:::	Dictionary loaded
+19:43:05:44 22.08.2020	:::	Threadpool created
+19:43:05:189 22.08.2020	:::	RMI initialized
+19:43:05:189 22.08.2020	:::	Listener socket ready
+19:43:05:190 22.08.2020	:::	Server started
+19:43:05:199 22.08.2020	:::	DBs updated
+19:43:13:590 22.08.2020	:::	Client Socket[addr=/127.0.0.1,port=40826,localport=46058] connected
+19:43:25:200 22.08.2020	:::	DBs updated
+19:43:25:712 22.08.2020	:::	New User Luca has been registered
+19:43:33:94 22.08.2020	:::	Luca is updated
+19:43:33:95 22.08.2020	:::	Luca logged-in
+19:43:38:996 22.08.2020	:::	Luca asked to start a new challenge with pippo
+19:43:38:998 22.08.2020	:::	Luca cannot start the challenge with pippo
+19:43:45:204 22.08.2020	:::	DBs updated
+19:43:55:355 22.08.2020	:::	Client Luca disconnected
+19:43:55:356 22.08.2020	:::	Luca is updated
+19:43:56:962 22.08.2020	:::	Quitting
+19:43:56:964 22.08.2020	:::	DBs updated
+19:43:57:963 22.08.2020	:::	Goodbye
 
 
 
-12:18:12:224 19.08.2020	:::	Staring
-12:18:12:260 19.08.2020	:::	Users database configured
-12:18:12:261 19.08.2020	:::	Friendship database configured
-12:18:12:300 19.08.2020	:::	Dictionary loaded
-12:18:12:303 19.08.2020	:::	Threadpool created
-12:18:12:393 19.08.2020	:::	RMI initialized
-12:18:12:393 19.08.2020	:::	Listener socket ready
-12:18:12:394 19.08.2020	:::	Server started
-12:18:12:399 19.08.2020	:::	DBs updated
-12:18:32:401 19.08.2020	:::	DBs updated
-12:18:52:402 19.08.2020	:::	DBs updated
-12:19:01:63 19.08.2020	:::	Quitting
-12:19:01:66 19.08.2020	:::	DBs updated
-12:19:02:65 19.08.2020	:::	Goodbye
+19:44:13:394 22.08.2020	:::	Staring
+19:44:13:426 22.08.2020	:::	Users database configured
+19:44:13:428 22.08.2020	:::	Friendship database configured
+19:44:13:479 22.08.2020	:::	Dictionary loaded
+19:44:13:483 22.08.2020	:::	Threadpool created
+19:44:13:576 22.08.2020	:::	RMI initialized
+19:44:13:576 22.08.2020	:::	Listener socket ready
+19:44:13:577 22.08.2020	:::	Server started
+19:44:13:580 22.08.2020	:::	DBs updated
+19:44:26:720 22.08.2020	:::	Client Socket[addr=/127.0.0.1,port=40840,localport=46058] connected
+19:44:33:582 22.08.2020	:::	DBs updated
+19:44:34:985 22.08.2020	:::	Luca is updated
+19:44:34:987 22.08.2020	:::	Luca logged-in
+19:44:39:973 22.08.2020	:::	Luca asked to start a new challenge with pippo
+19:44:39:974 22.08.2020	:::	Luca cannot start the challenge with pippo
+19:44:50:979 22.08.2020	:::	Luca asked to start a new challenge with Pippo
+19:44:50:980 22.08.2020	:::	Luca cannot start the challenge with Pippo
+19:44:53:584 22.08.2020	:::	DBs updated
+19:45:02:133 22.08.2020	:::	Client Luca disconnected
+19:45:02:134 22.08.2020	:::	Luca is updated
+19:45:11:841 22.08.2020	:::	Quitting
+19:45:11:843 22.08.2020	:::	DBs updated
+19:45:12:842 22.08.2020	:::	Goodbye
 
 
 
-12:20:41:91 19.08.2020	:::	Staring
-12:20:41:127 19.08.2020	:::	Users database configured
-12:20:41:129 19.08.2020	:::	Friendship database configured
-12:20:41:167 19.08.2020	:::	Dictionary loaded
-12:20:41:171 19.08.2020	:::	Threadpool created
-12:20:41:262 19.08.2020	:::	RMI initialized
-12:20:41:263 19.08.2020	:::	Listener socket ready
-12:20:41:263 19.08.2020	:::	Server started
-12:20:41:266 19.08.2020	:::	DBs updated
-12:21:01:268 19.08.2020	:::	DBs updated
-12:21:21:269 19.08.2020	:::	DBs updated
-12:21:41:271 19.08.2020	:::	DBs updated
-12:21:41:585 19.08.2020	:::	Quitting
-12:21:41:588 19.08.2020	:::	DBs updated
-12:21:42:587 19.08.2020	:::	Goodbye
+19:48:48:959 22.08.2020	:::	Staring
+19:48:48:996 22.08.2020	:::	Users database configured
+19:48:48:998 22.08.2020	:::	Friendship database configured
+19:48:49:40 22.08.2020	:::	Dictionary loaded
+19:48:49:44 22.08.2020	:::	Threadpool created
+19:48:49:133 22.08.2020	:::	RMI initialized
+19:48:49:134 22.08.2020	:::	Listener socket ready
+19:48:49:134 22.08.2020	:::	Server started
+19:48:49:137 22.08.2020	:::	DBs updated
+19:49:09:139 22.08.2020	:::	DBs updated
+19:49:29:141 22.08.2020	:::	DBs updated
+19:49:49:143 22.08.2020	:::	DBs updated
+19:50:09:144 22.08.2020	:::	DBs updated
+19:50:29:146 22.08.2020	:::	DBs updated
+19:50:49:147 22.08.2020	:::	DBs updated
+19:51:09:150 22.08.2020	:::	DBs updated
+19:51:13:492 22.08.2020	:::	Client Socket[addr=/127.0.0.1,port=40970,localport=46058] connected
+19:51:29:152 22.08.2020	:::	DBs updated
+19:51:49:153 22.08.2020	:::	DBs updated
+19:52:09:154 22.08.2020	:::	DBs updated
+19:52:29:155 22.08.2020	:::	DBs updated
+19:52:49:156 22.08.2020	:::	DBs updated
+19:53:01:235 22.08.2020	:::	Quitting
+19:53:01:238 22.08.2020	:::	DBs updated
+19:53:02:237 22.08.2020	:::	Goodbye
 
 
 
-12:25:25:856 19.08.2020	:::	Staring
-12:25:25:891 19.08.2020	:::	Users database configured
-12:25:25:893 19.08.2020	:::	Friendship database configured
-12:25:25:933 19.08.2020	:::	Dictionary loaded
-12:25:25:936 19.08.2020	:::	Threadpool created
-12:25:26:27 19.08.2020	:::	RMI initialized
-12:25:26:27 19.08.2020	:::	Listener socket ready
-12:25:26:27 19.08.2020	:::	Server started
-12:25:26:30 19.08.2020	:::	DBs updated
-12:25:27:739 19.08.2020	:::	Quitting
-12:25:27:741 19.08.2020	:::	DBs updated
-12:25:28:740 19.08.2020	:::	Goodbye
+19:53:20:741 22.08.2020	:::	Staring
+19:53:20:777 22.08.2020	:::	Users database configured
+19:53:20:779 22.08.2020	:::	Friendship database configured
+19:53:20:819 22.08.2020	:::	Dictionary loaded
+19:53:20:822 22.08.2020	:::	Threadpool created
+19:53:20:913 22.08.2020	:::	RMI initialized
+19:53:20:913 22.08.2020	:::	Listener socket ready
+19:53:20:913 22.08.2020	:::	Server started
+19:53:20:917 22.08.2020	:::	DBs updated
+19:53:40:919 22.08.2020	:::	DBs updated
+19:53:48:309 22.08.2020	:::	Client Socket[addr=/127.0.0.1,port=41022,localport=46058] connected
+19:54:00:920 22.08.2020	:::	DBs updated
+19:54:20:921 22.08.2020	:::	DBs updated
+19:54:40:923 22.08.2020	:::	DBs updated
+19:55:00:924 22.08.2020	:::	DBs updated
+19:55:20:926 22.08.2020	:::	DBs updated
+19:55:40:928 22.08.2020	:::	DBs updated
+19:56:00:929 22.08.2020	:::	DBs updated
+19:56:01:816 22.08.2020	:::	Client Socket[addr=/127.0.0.1,port=41104,localport=46058] connected
+19:56:05:369 22.08.2020	:::	Client Socket[addr=/127.0.0.1,port=41108,localport=46058] connected
+19:56:20:930 22.08.2020	:::	DBs updated
+19:56:40:932 22.08.2020	:::	DBs updated
+19:56:41:526 22.08.2020	:::	Luca is updated
+19:56:41:527 22.08.2020	:::	Luca logged-in
+19:56:46:432 22.08.2020	:::	Luca asked to start a new challenge with Pippo
+19:56:46:434 22.08.2020	:::	Luca cannot start the challenge with Pippo
+19:56:48:904 22.08.2020	:::	Client Luca disconnected
+19:56:48:905 22.08.2020	:::	Luca is updated
+19:57:00:934 22.08.2020	:::	DBs updated
+19:57:02:178 22.08.2020	:::	Client Socket[addr=/127.0.0.1,port=41122,localport=46058] connected
+19:57:04:496 22.08.2020	:::	Client Socket[addr=/127.0.0.1,port=41126,localport=46058] connected
+19:57:20:936 22.08.2020	:::	DBs updated
+19:57:40:937 22.08.2020	:::	DBs updated
+19:58:00:938 22.08.2020	:::	DBs updated
+19:58:20:940 22.08.2020	:::	DBs updated
+19:58:40:942 22.08.2020	:::	DBs updated
+19:58:54:725 22.08.2020	:::	Quitting
+19:58:54:727 22.08.2020	:::	DBs updated
+19:58:55:726 22.08.2020	:::	Goodbye
 
 
 
-12:25:44:543 19.08.2020	:::	Staring
-12:25:44:579 19.08.2020	:::	Users database configured
-12:25:44:581 19.08.2020	:::	Friendship database configured
-12:25:44:623 19.08.2020	:::	Dictionary loaded
-12:25:44:627 19.08.2020	:::	Threadpool created
-12:25:44:717 19.08.2020	:::	RMI initialized
-12:25:44:718 19.08.2020	:::	Listener socket ready
-12:25:44:718 19.08.2020	:::	Server started
-12:25:44:721 19.08.2020	:::	DBs updated
-12:25:46:420 19.08.2020	:::	Quitting
-12:25:46:423 19.08.2020	:::	DBs updated
-12:25:47:421 19.08.2020	:::	Goodbye
+19:58:58:916 22.08.2020	:::	Staring
+19:58:58:953 22.08.2020	:::	Users database configured
+19:58:58:955 22.08.2020	:::	Friendship database configured
+19:58:58:993 22.08.2020	:::	Dictionary loaded
+19:58:58:996 22.08.2020	:::	Threadpool created
+19:58:59:87 22.08.2020	:::	RMI initialized
+19:58:59:88 22.08.2020	:::	Listener socket ready
+19:58:59:88 22.08.2020	:::	Server started
+19:58:59:91 22.08.2020	:::	DBs updated
+19:59:06:424 22.08.2020	:::	Client Socket[addr=/127.0.0.1,port=41142,localport=46058] connected
+19:59:09:228 22.08.2020	:::	Client Socket[addr=/127.0.0.1,port=41146,localport=46058] connected
+19:59:19:93 22.08.2020	:::	DBs updated
+19:59:27:116 22.08.2020	:::	New User Pippo has been registered
+19:59:36:292 22.08.2020	:::	Client Socket[addr=/127.0.0.1,port=41150,localport=46058] connected
+19:59:39:95 22.08.2020	:::	DBs updated
+19:59:43:612 22.08.2020	:::	Pippo is updated
+19:59:43:614 22.08.2020	:::	Pippo logged-in
+19:59:50:832 22.08.2020	:::	Luca is updated
+19:59:50:832 22.08.2020	:::	Luca logged-in
+19:59:59:96 22.08.2020	:::	DBs updated
+20:00:05:319 22.08.2020	:::	Luca is updated
+20:00:05:321 22.08.2020	:::	Luca logged-out
+20:00:12:144 22.08.2020	:::	Pippo asked to start a new challenge with Piiop
+20:00:12:146 22.08.2020	:::	Pippo cannot start the challenge with Piiop
+20:00:15:559 22.08.2020	:::	Pippo asked to start a new challenge with Pippo
+20:00:15:560 22.08.2020	:::	Pippo cannot start the challenge with Pippo
+20:00:18:375 22.08.2020	:::	Pippo asked to start a new challenge with Luca
+20:00:18:376 22.08.2020	:::	Pippo cannot start the challenge with Luca
+20:00:19:98 22.08.2020	:::	DBs updated
+20:00:23:496 22.08.2020	:::	Client Pippo disconnected
+20:00:23:497 22.08.2020	:::	Pippo is updated
+20:00:39:100 22.08.2020	:::	DBs updated
+20:00:50:642 22.08.2020	:::	Quitting
+20:00:50:645 22.08.2020	:::	DBs updated
+20:00:51:643 22.08.2020	:::	Goodbye
 
 
 
-12:27:22:427 19.08.2020	:::	Staring
-12:27:22:463 19.08.2020	:::	Users database configured
-12:27:22:464 19.08.2020	:::	Friendship database configured
-12:27:22:503 19.08.2020	:::	Dictionary loaded
-12:27:22:507 19.08.2020	:::	Threadpool created
-12:27:22:596 19.08.2020	:::	RMI initialized
-12:27:22:596 19.08.2020	:::	Listener socket ready
-12:27:22:597 19.08.2020	:::	Server started
-12:27:22:601 19.08.2020	:::	DBs updated
-12:27:42:357 19.08.2020	:::	Quitting
-12:27:42:361 19.08.2020	:::	DBs updated
-12:27:43:359 19.08.2020	:::	Goodbye
-
-
-
-12:28:34:122 19.08.2020	:::	Staring
-12:28:34:159 19.08.2020	:::	Users database configured
-12:28:34:160 19.08.2020	:::	Friendship database configured
-12:28:34:199 19.08.2020	:::	Dictionary loaded
-12:28:34:203 19.08.2020	:::	Threadpool created
-12:28:34:292 19.08.2020	:::	RMI initialized
-12:28:34:293 19.08.2020	:::	Listener socket ready
-12:28:34:293 19.08.2020	:::	Server started
-12:28:34:296 19.08.2020	:::	DBs updated
-12:28:54:298 19.08.2020	:::	DBs updated
-12:29:14:300 19.08.2020	:::	DBs updated
-12:29:34:302 19.08.2020	:::	DBs updated
-12:29:54:303 19.08.2020	:::	DBs updated
-12:30:07:610 19.08.2020	:::	Quitting
-12:30:07:613 19.08.2020	:::	DBs updated
-12:30:08:612 19.08.2020	:::	Goodbye
-
-
-
-12:35:20:304 19.08.2020	:::	Staring
-12:35:20:341 19.08.2020	:::	Users database configured
-12:35:20:343 19.08.2020	:::	Friendship database configured
-12:35:20:382 19.08.2020	:::	Dictionary loaded
-12:35:20:385 19.08.2020	:::	Threadpool created
-12:35:20:476 19.08.2020	:::	RMI initialized
-12:35:20:477 19.08.2020	:::	Listener socket ready
-12:35:20:477 19.08.2020	:::	Server started
-12:35:20:481 19.08.2020	:::	DBs updated
-12:35:40:482 19.08.2020	:::	DBs updated
-12:35:54:722 19.08.2020	:::	Quitting
-12:35:54:725 19.08.2020	:::	DBs updated
-12:35:55:724 19.08.2020	:::	Goodbye
-
-
-
-12:36:20:225 19.08.2020	:::	Staring
-12:36:20:261 19.08.2020	:::	Users database configured
-12:36:20:263 19.08.2020	:::	Friendship database configured
-12:36:20:301 19.08.2020	:::	Dictionary loaded
-12:36:20:305 19.08.2020	:::	Threadpool created
-12:36:20:395 19.08.2020	:::	RMI initialized
-12:36:20:395 19.08.2020	:::	Listener socket ready
-12:36:20:395 19.08.2020	:::	Server started
-12:36:20:399 19.08.2020	:::	DBs updated
-12:36:22:806 19.08.2020	:::	Staring
-12:36:22:844 19.08.2020	:::	Users database configured
-12:36:22:846 19.08.2020	:::	Friendship database configured
-12:36:22:894 19.08.2020	:::	Dictionary loaded
-12:36:22:898 19.08.2020	:::	Threadpool created
-java.rmi.server.ExportException: Port already in use: 21895; nested exception is: 
-	java.net.BindException: Address already in use (Bind failed)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.listen(TCPTransport.java:335)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.exportObject(TCPTransport.java:243)
-	at java.rmi/sun.rmi.transport.tcp.TCPEndpoint.exportObject(TCPEndpoint.java:412)
-	at java.rmi/sun.rmi.transport.LiveRef.exportObject(LiveRef.java:147)
-	at java.rmi/sun.rmi.server.UnicastServerRef.exportObject(UnicastServerRef.java:234)
-	at java.rmi/java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:470)
-	at java.rmi/java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:355)
-	at server.Main.main(Main.java:139)
-Caused by: java.net.BindException: Address already in use (Bind failed)
-	at java.base/java.net.PlainSocketImpl.socketBind(Native Method)
-	at java.base/java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:436)
-	at java.base/java.net.ServerSocket.bind(ServerSocket.java:395)
-	at java.base/java.net.ServerSocket.<init>(ServerSocket.java:257)
-	at java.base/java.net.ServerSocket.<init>(ServerSocket.java:149)
-	at java.rmi/sun.rmi.transport.tcp.TCPDirectSocketFactory.createServerSocket(TCPDirectSocketFactory.java:45)
-	at java.rmi/sun.rmi.transport.tcp.TCPEndpoint.newServerSocket(TCPEndpoint.java:670)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.listen(TCPTransport.java:324)
-	... 7 more
-12:36:33:600 19.08.2020	:::	Quitting
-12:36:33:602 19.08.2020	:::	DBs updated
-12:36:34:601 19.08.2020	:::	Goodbye
-
-
-
-12:47:28:645 19.08.2020	:::	Staring
-12:47:28:682 19.08.2020	:::	Users database configured
-12:47:28:683 19.08.2020	:::	Friendship database configured
-12:47:28:722 19.08.2020	:::	Dictionary loaded
-12:47:28:725 19.08.2020	:::	Threadpool created
-12:47:28:818 19.08.2020	:::	RMI initialized
-12:47:28:818 19.08.2020	:::	Listener socket ready
-12:47:28:819 19.08.2020	:::	Server started
-12:47:28:822 19.08.2020	:::	DBs updated
-12:47:34:31 19.08.2020	:::	Staring
-12:47:34:68 19.08.2020	:::	Users database configured
-12:47:34:69 19.08.2020	:::	Friendship database configured
-12:47:34:110 19.08.2020	:::	Dictionary loaded
-12:47:34:113 19.08.2020	:::	Threadpool created
-java.rmi.server.ExportException: Port already in use: 21895; nested exception is: 
-	java.net.BindException: Address already in use (Bind failed)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.listen(TCPTransport.java:335)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.exportObject(TCPTransport.java:243)
-	at java.rmi/sun.rmi.transport.tcp.TCPEndpoint.exportObject(TCPEndpoint.java:412)
-	at java.rmi/sun.rmi.transport.LiveRef.exportObject(LiveRef.java:147)
-	at java.rmi/sun.rmi.server.UnicastServerRef.exportObject(UnicastServerRef.java:234)
-	at java.rmi/java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:470)
-	at java.rmi/java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:355)
-	at server.Main.main(Main.java:139)
-Caused by: java.net.BindException: Address already in use (Bind failed)
-	at java.base/java.net.PlainSocketImpl.socketBind(Native Method)
-	at java.base/java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:436)
-	at java.base/java.net.ServerSocket.bind(ServerSocket.java:395)
-	at java.base/java.net.ServerSocket.<init>(ServerSocket.java:257)
-	at java.base/java.net.ServerSocket.<init>(ServerSocket.java:149)
-	at java.rmi/sun.rmi.transport.tcp.TCPDirectSocketFactory.createServerSocket(TCPDirectSocketFactory.java:45)
-	at java.rmi/sun.rmi.transport.tcp.TCPEndpoint.newServerSocket(TCPEndpoint.java:670)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.listen(TCPTransport.java:324)
-	... 7 more
-12:47:48:824 19.08.2020	:::	DBs updated
-12:47:55:92 19.08.2020	:::	Staring
-12:47:55:128 19.08.2020	:::	Users database configured
-12:47:55:130 19.08.2020	:::	Friendship database configured
-12:47:55:169 19.08.2020	:::	Dictionary loaded
-12:47:55:172 19.08.2020	:::	Threadpool created
-java.rmi.server.ExportException: Port already in use: 21895; nested exception is: 
-	java.net.BindException: Address already in use (Bind failed)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.listen(TCPTransport.java:335)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.exportObject(TCPTransport.java:243)
-	at java.rmi/sun.rmi.transport.tcp.TCPEndpoint.exportObject(TCPEndpoint.java:412)
-	at java.rmi/sun.rmi.transport.LiveRef.exportObject(LiveRef.java:147)
-	at java.rmi/sun.rmi.server.UnicastServerRef.exportObject(UnicastServerRef.java:234)
-	at java.rmi/java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:470)
-	at java.rmi/java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:355)
-	at server.Main.main(Main.java:139)
-Caused by: java.net.BindException: Address already in use (Bind failed)
-	at java.base/java.net.PlainSocketImpl.socketBind(Native Method)
-	at java.base/java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:436)
-	at java.base/java.net.ServerSocket.bind(ServerSocket.java:395)
-	at java.base/java.net.ServerSocket.<init>(ServerSocket.java:257)
-	at java.base/java.net.ServerSocket.<init>(ServerSocket.java:149)
-	at java.rmi/sun.rmi.transport.tcp.TCPDirectSocketFactory.createServerSocket(TCPDirectSocketFactory.java:45)
-	at java.rmi/sun.rmi.transport.tcp.TCPEndpoint.newServerSocket(TCPEndpoint.java:670)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.listen(TCPTransport.java:324)
-	... 7 more
-12:48:08:826 19.08.2020	:::	DBs updated
-12:48:18:278 19.08.2020	:::	Quitting
-12:48:18:280 19.08.2020	:::	DBs updated
-12:48:19:279 19.08.2020	:::	Goodbye
-
-
-
-12:53:02:995 19.08.2020	:::	Staring
-12:53:03:32 19.08.2020	:::	Users database configured
-12:53:03:34 19.08.2020	:::	Friendship database configured
-12:53:03:72 19.08.2020	:::	Dictionary loaded
-12:53:03:76 19.08.2020	:::	Threadpool created
-12:53:03:167 19.08.2020	:::	RMI initialized
-12:53:03:167 19.08.2020	:::	Listener socket ready
-12:53:03:167 19.08.2020	:::	Server started
-12:53:03:170 19.08.2020	:::	DBs updated
-12:53:23:172 19.08.2020	:::	DBs updated
-12:53:28:443 19.08.2020	:::	Quitting
-12:53:28:446 19.08.2020	:::	DBs updated
-12:53:29:445 19.08.2020	:::	Goodbye
-
-
-
-12:57:37:394 19.08.2020	:::	Staring
-12:57:37:430 19.08.2020	:::	Users database configured
-12:57:37:432 19.08.2020	:::	Friendship database configured
-12:57:37:470 19.08.2020	:::	Dictionary loaded
-12:57:37:474 19.08.2020	:::	Threadpool created
-12:57:37:564 19.08.2020	:::	RMI initialized
-12:57:37:564 19.08.2020	:::	Listener socket ready
-12:57:37:565 19.08.2020	:::	Server started
-12:57:37:569 19.08.2020	:::	DBs updated
-12:57:42:679 19.08.2020	:::	Quitting
-12:57:42:681 19.08.2020	:::	DBs updated
-12:57:43:680 19.08.2020	:::	Goodbye
-
-
-
-15:21:03:564 19.08.2020	:::	Staring
-15:21:03:600 19.08.2020	:::	Users database configured
-15:21:03:602 19.08.2020	:::	Friendship database configured
-15:21:03:643 19.08.2020	:::	Dictionary loaded
-15:21:03:646 19.08.2020	:::	Threadpool created
-15:21:03:738 19.08.2020	:::	RMI initialized
-15:21:03:738 19.08.2020	:::	Listener socket ready
-15:21:03:738 19.08.2020	:::	Server started
-15:21:03:742 19.08.2020	:::	DBs updated
-15:21:18:24 19.08.2020	:::	Quitting
-15:21:18:26 19.08.2020	:::	DBs updated
-15:21:19:25 19.08.2020	:::	Goodbye
-
-
-
-15:21:25:489 19.08.2020	:::	Staring
-15:21:25:525 19.08.2020	:::	Users database configured
-15:21:25:527 19.08.2020	:::	Friendship database configured
-15:21:25:566 19.08.2020	:::	Dictionary loaded
-15:21:25:569 19.08.2020	:::	Threadpool created
-15:21:25:660 19.08.2020	:::	RMI initialized
-15:21:25:661 19.08.2020	:::	Listener socket ready
-15:21:25:661 19.08.2020	:::	Server started
-15:21:25:664 19.08.2020	:::	DBs updated
-15:21:32:192 19.08.2020	:::	Quitting
-15:21:32:194 19.08.2020	:::	DBs updated
-15:21:33:193 19.08.2020	:::	Goodbye
-
-
-
-15:22:23:593 19.08.2020	:::	Staring
-15:22:23:630 19.08.2020	:::	Users database configured
-15:22:23:632 19.08.2020	:::	Friendship database configured
-15:22:23:670 19.08.2020	:::	Dictionary loaded
-15:22:23:674 19.08.2020	:::	Threadpool created
-15:22:23:766 19.08.2020	:::	RMI initialized
-15:22:23:766 19.08.2020	:::	Listener socket ready
-15:22:23:766 19.08.2020	:::	Server started
-15:22:23:771 19.08.2020	:::	DBs updated
-15:22:35:225 19.08.2020	:::	Quitting
-15:22:35:228 19.08.2020	:::	DBs updated
-15:22:36:227 19.08.2020	:::	Goodbye
-
-
-
-15:42:10:942 19.08.2020	:::	Staring
-15:42:10:979 19.08.2020	:::	Users database configured
-15:42:10:981 19.08.2020	:::	Friendship database configured
-15:42:11:21 19.08.2020	:::	Dictionary loaded
-15:42:11:24 19.08.2020	:::	Threadpool created
-15:42:11:115 19.08.2020	:::	RMI initialized
-15:42:11:116 19.08.2020	:::	Listener socket ready
-15:42:11:116 19.08.2020	:::	Server started
-15:42:11:120 19.08.2020	:::	DBs updated
-15:42:18:678 19.08.2020	:::	Client Socket[addr=/127.0.0.1,port=53156,localport=46058] connected
-15:42:28:156 19.08.2020	:::	Luca is updated
-15:42:28:158 19.08.2020	:::	Luca logged-in
-15:42:31:122 19.08.2020	:::	DBs updated
-15:42:34:234 19.08.2020	:::	Client Socket[addr=/127.0.0.1,port=53174,localport=46058] connected
-15:42:51:123 19.08.2020	:::	DBs updated
-15:43:11:125 19.08.2020	:::	DBs updated
-15:43:18:941 19.08.2020	:::	New User Luca95 has been registered
-15:43:29:335 19.08.2020	:::	Luca95 is updated
-15:43:29:336 19.08.2020	:::	Luca95 logged-in
-15:43:31:127 19.08.2020	:::	DBs updated
-15:43:35:306 19.08.2020	:::	Luca95 and Luca now are friends
-15:43:41:640 19.08.2020	:::	Luca95 asked to start a new challenge with Luca
-15:43:43:452 19.08.2020	:::	Luca has accepted the challenge with Luca95
-15:43:45:892 19.08.2020	:::	Luca95 has started the challenge with Luca
-15:43:45:892 19.08.2020	:::	Luca is updated
-15:43:45:894 19.08.2020	:::	Start to send words to Luca
-15:43:46:893 19.08.2020	:::	Luca95 is updated
-15:43:46:895 19.08.2020	:::	Start to send words to Luca95
-15:43:51:128 19.08.2020	:::	DBs updated
-15:44:11:130 19.08.2020	:::	DBs updated
-15:44:13:932 19.08.2020	:::	Luca ended game
-15:44:13:932 19.08.2020	:::	Luca is updated
-15:44:14:34 19.08.2020	:::	Challenge ended for Luca
-15:44:15:369 19.08.2020	:::	Luca95 ended game
-15:44:15:370 19.08.2020	:::	Luca95 is updated
-15:44:15:471 19.08.2020	:::	Challenge ended for Luca95
-15:44:15:881 19.08.2020	:::	Luca is updated
-15:44:15:972 19.08.2020	:::	Luca95 is updated
-15:44:20:904 19.08.2020	:::	Client Luca95 disconnected
-15:44:20:904 19.08.2020	:::	Luca95 is updated
-15:44:22:846 19.08.2020	:::	Client Luca disconnected
-15:44:22:847 19.08.2020	:::	Luca is updated
-15:44:31:132 19.08.2020	:::	DBs updated
-15:44:42:292 19.08.2020	:::	Quitting
-15:44:42:295 19.08.2020	:::	DBs updated
-15:44:43:293 19.08.2020	:::	Goodbye
-
-
-
-15:51:54:136 19.08.2020	:::	Staring
-15:51:54:185 19.08.2020	:::	Users database configured
-15:51:54:187 19.08.2020	:::	Friendship database configured
-15:51:54:248 19.08.2020	:::	Dictionary loaded
-15:51:54:251 19.08.2020	:::	Threadpool created
-15:51:54:372 19.08.2020	:::	RMI initialized
-15:51:54:372 19.08.2020	:::	Listener socket ready
-15:51:54:373 19.08.2020	:::	Server started
-15:51:54:383 19.08.2020	:::	DBs updated
-15:52:04:182 19.08.2020	:::	Client Socket[addr=/127.0.0.1,port=53828,localport=46058] connected
-15:52:06:947 19.08.2020	:::	Client Socket[addr=/127.0.0.1,port=53840,localport=46058] connected
-15:52:11:786 19.08.2020	:::	Luca is updated
-15:52:11:787 19.08.2020	:::	Luca logged-in
-15:52:14:385 19.08.2020	:::	DBs updated
-15:52:18:623 19.08.2020	:::	Luca95 is updated
-15:52:18:624 19.08.2020	:::	Luca95 logged-in
-15:52:29:736 19.08.2020	:::	Luca95 asked to start a new challenge with Luca
-15:52:31:440 19.08.2020	:::	Luca has accepted the challenge with Luca95
-15:52:33:115 19.08.2020	:::	Luca95 has started the challenge with Luca
-15:52:33:116 19.08.2020	:::	Luca is updated
-15:52:33:118 19.08.2020	:::	Start to send words to Luca
-15:52:34:116 19.08.2020	:::	Luca95 is updated
-15:52:34:117 19.08.2020	:::	Start to send words to Luca95
-15:52:34:387 19.08.2020	:::	DBs updated
-15:52:36:738 19.08.2020	:::	Luca ended game
-15:52:36:739 19.08.2020	:::	Luca is updated
-15:52:36:841 19.08.2020	:::	Challenge ended for Luca
-15:52:40:513 19.08.2020	:::	Luca95 ended game
-15:52:40:513 19.08.2020	:::	Luca95 is updated
-15:52:40:614 19.08.2020	:::	Challenge ended for Luca95
-15:52:41:23 19.08.2020	:::	Luca & Luca95 tie the match
-15:52:41:24 19.08.2020	:::	Luca is updated
-15:52:41:115 19.08.2020	:::	Luca95 & Luca tie the match
-15:52:41:116 19.08.2020	:::	Luca95 is updated
-15:52:54:388 19.08.2020	:::	DBs updated
-15:53:03:431 19.08.2020	:::	Luca asked to start a new challenge with Luca95
-15:53:04:691 19.08.2020	:::	Luca95 has accepted the challenge with Luca
-15:53:06:774 19.08.2020	:::	Luca has started the challenge with Luca95
-15:53:06:774 19.08.2020	:::	Luca95 is updated
-15:53:06:775 19.08.2020	:::	Start to send words to Luca95
-15:53:07:775 19.08.2020	:::	Luca is updated
-15:53:07:776 19.08.2020	:::	Start to send words to Luca
-15:53:14:389 19.08.2020	:::	DBs updated
-15:53:28:642 19.08.2020	:::	Luca95 ended game
-15:53:28:643 19.08.2020	:::	Luca95 is updated
-15:53:28:744 19.08.2020	:::	Challenge ended for Luca95
-15:53:31:986 19.08.2020	:::	Luca ended game
-15:53:31:986 19.08.2020	:::	Luca is updated
-15:53:32:87 19.08.2020	:::	Challenge ended for Luca
-15:53:32:487 19.08.2020	:::	Luca95 won
-15:53:32:488 19.08.2020	:::	Luca95 is updated
-15:53:32:588 19.08.2020	:::	Luca95 won
-15:53:32:589 19.08.2020	:::	Luca is updated
-15:53:34:391 19.08.2020	:::	DBs updated
-15:53:54:392 19.08.2020	:::	DBs updated
-15:54:00:743 19.08.2020	:::	Client Luca95 disconnected
-15:54:00:744 19.08.2020	:::	Luca95 is updated
-15:54:02:826 19.08.2020	:::	Client Luca disconnected
-15:54:02:827 19.08.2020	:::	Luca is updated
-15:54:05:574 19.08.2020	:::	Quitting
-15:54:05:576 19.08.2020	:::	DBs updated
-15:54:06:575 19.08.2020	:::	Goodbye
-
-
-
-16:03:03:893 19.08.2020	:::	Staring
-16:03:03:932 19.08.2020	:::	Users database configured
-16:03:03:934 19.08.2020	:::	Friendship database configured
-16:03:03:989 19.08.2020	:::	Dictionary loaded
-16:03:03:993 19.08.2020	:::	Threadpool created
-16:03:04:164 19.08.2020	:::	RMI initialized
-16:03:04:165 19.08.2020	:::	Listener socket ready
-16:03:04:165 19.08.2020	:::	Server started
-16:03:04:171 19.08.2020	:::	DBs updated
-16:03:13:344 19.08.2020	:::	Client Socket[addr=/127.0.0.1,port=54502,localport=46058] connected
-16:03:17:204 19.08.2020	:::	Client Socket[addr=/127.0.0.1,port=54518,localport=46058] connected
-16:03:21:484 19.08.2020	:::	Luca is updated
-16:03:21:485 19.08.2020	:::	Luca logged-in
-16:03:24:172 19.08.2020	:::	DBs updated
-16:03:33:735 19.08.2020	:::	Luca95 is updated
-16:03:33:736 19.08.2020	:::	Luca95 logged-in
-16:03:40:168 19.08.2020	:::	Luca95 asked to start a new challenge with Luca
-16:03:41:868 19.08.2020	:::	Luca has accepted the challenge with Luca95
-16:03:44:129 19.08.2020	:::	Luca95 has started the challenge with Luca
-16:03:44:129 19.08.2020	:::	Luca is updated
-16:03:44:131 19.08.2020	:::	Start to send words to Luca
-16:03:44:174 19.08.2020	:::	DBs updated
-16:03:45:130 19.08.2020	:::	Luca95 is updated
-16:03:45:131 19.08.2020	:::	Start to send words to Luca95
-16:03:49:217 19.08.2020	:::	Luca was interrupted
-16:03:49:218 19.08.2020	:::	Luca ended game
-16:03:49:218 19.08.2020	:::	Luca is updated
-16:03:49:319 19.08.2020	:::	Challenge ended for Luca
-16:03:52:690 19.08.2020	:::	Luca95 was interrupted
-16:03:52:690 19.08.2020	:::	Luca95 ended game
-16:03:52:691 19.08.2020	:::	Luca95 is updated
-16:03:52:792 19.08.2020	:::	Challenge ended for Luca95
-16:03:53:203 19.08.2020	:::	Luca & Luca95 tie the match
-16:03:53:204 19.08.2020	:::	Luca is updated
-16:03:53:292 19.08.2020	:::	Luca95 & Luca tie the match
-16:03:53:293 19.08.2020	:::	Luca95 is updated
-16:04:04:176 19.08.2020	:::	DBs updated
-16:04:21:453 19.08.2020	:::	Client Luca disconnected
-16:04:21:453 19.08.2020	:::	Luca is updated
-16:04:24:177 19.08.2020	:::	DBs updated
-16:04:24:762 19.08.2020	:::	Client Socket[addr=/127.0.0.1,port=54592,localport=46058] connected
-16:04:26:964 19.08.2020	:::	Client Luca95 disconnected
-16:04:26:964 19.08.2020	:::	Luca95 is updated
-16:04:28:642 19.08.2020	:::	Client Socket[addr=/127.0.0.1,port=54608,localport=46058] connected
-16:04:34:528 19.08.2020	:::	Luca95 is updated
-16:04:34:529 19.08.2020	:::	Luca95 logged-in
-16:04:39:330 19.08.2020	:::	Luca is updated
-16:04:39:330 19.08.2020	:::	Luca logged-in
-16:04:44:179 19.08.2020	:::	DBs updated
-16:04:46:155 19.08.2020	:::	Luca asked to start a new challenge with Luca95
-16:04:47:835 19.08.2020	:::	Luca95 has accepted the challenge with Luca
-16:04:49:460 19.08.2020	:::	Luca has started the challenge with Luca95
-16:04:49:460 19.08.2020	:::	Luca95 is updated
-16:04:49:461 19.08.2020	:::	Start to send words to Luca95
-16:04:50:461 19.08.2020	:::	Luca is updated
-16:04:50:462 19.08.2020	:::	Start to send words to Luca
-16:05:04:180 19.08.2020	:::	DBs updated
-16:05:23:860 19.08.2020	:::	Luca ended game
-16:05:23:861 19.08.2020	:::	Luca is updated
-16:05:23:962 19.08.2020	:::	Challenge ended for Luca
-16:05:24:181 19.08.2020	:::	DBs updated
-16:05:31:155 19.08.2020	:::	Luca95 ended game
-16:05:31:156 19.08.2020	:::	Luca95 is updated
-16:05:31:257 19.08.2020	:::	Challenge ended for Luca95
-16:05:31:657 19.08.2020	:::	Luca95 won
-16:05:31:658 19.08.2020	:::	Luca is updated
-16:05:31:758 19.08.2020	:::	Luca95 won
-16:05:31:758 19.08.2020	:::	Luca95 is updated
-16:05:44:183 19.08.2020	:::	DBs updated
-16:05:46:964 19.08.2020	:::	Client Luca95 disconnected
-16:05:46:964 19.08.2020	:::	Luca95 is updated
-16:05:49:962 19.08.2020	:::	Client Luca disconnected
-16:05:49:962 19.08.2020	:::	Luca is updated
-16:05:53:75 19.08.2020	:::	Client Socket[addr=/127.0.0.1,port=54698,localport=46058] connected
-16:05:57:483 19.08.2020	:::	Luca is updated
-16:05:57:483 19.08.2020	:::	Luca logged-in
-16:06:04:184 19.08.2020	:::	DBs updated
-16:06:04:284 19.08.2020	:::	Luca has required to remove Luca95 from own friendships
-16:06:04:285 19.08.2020	:::	Luca and Luca95 have broken their friendships
-16:06:09:215 19.08.2020	:::	Client Socket[addr=/127.0.0.1,port=54722,localport=46058] connected
-16:06:21:915 19.08.2020	:::	Luca95 is updated
-16:06:21:915 19.08.2020	:::	Luca95 logged-in
-16:06:24:185 19.08.2020	:::	DBs updated
-16:06:35:356 19.08.2020	:::	Luca95 and Luca now are friends
-16:06:44:186 19.08.2020	:::	DBs updated
-16:07:04:188 19.08.2020	:::	DBs updated
-16:07:18:835 19.08.2020	:::	Luca is updated
-16:07:24:189 19.08.2020	:::	DBs updated
-16:07:44:191 19.08.2020	:::	DBs updated
-16:08:04:192 19.08.2020	:::	DBs updated
-16:08:16:595 19.08.2020	:::	Luca has required the deletion
-16:08:16:596 19.08.2020	:::	Luca deleted
-16:08:24:194 19.08.2020	:::	DBs updated
-16:08:37:43 19.08.2020	:::	Luca95 has required the deletion
-16:08:37:43 19.08.2020	:::	Luca95 deleted
-16:08:44:195 19.08.2020	:::	DBs updated
-16:08:58:417 19.08.2020	:::	Quitting
-16:08:58:420 19.08.2020	:::	DBs updated
-16:08:59:418 19.08.2020	:::	Goodbye
+20:01:51:218 22.08.2020	:::	Staring
+20:01:51:254 22.08.2020	:::	Users database configured
+20:01:51:256 22.08.2020	:::	Friendship database configured
+20:01:51:295 22.08.2020	:::	Dictionary loaded
+20:01:51:298 22.08.2020	:::	Threadpool created
+20:01:51:389 22.08.2020	:::	RMI initialized
+20:01:51:390 22.08.2020	:::	Listener socket ready
+20:01:51:390 22.08.2020	:::	Server started
+20:01:51:393 22.08.2020	:::	DBs updated
+20:01:56:138 22.08.2020	:::	Client Socket[addr=/127.0.0.1,port=41178,localport=46058] connected
+20:01:59:442 22.08.2020	:::	Client Socket[addr=/127.0.0.1,port=41182,localport=46058] connected
+20:02:09:782 22.08.2020	:::	New User Luca95 has been registered
+20:02:11:395 22.08.2020	:::	DBs updated
+20:02:18:908 22.08.2020	:::	Luca95 is updated
+20:02:18:909 22.08.2020	:::	Luca95 logged-in
+20:02:25:513 22.08.2020	:::	Luca is updated
+20:02:25:513 22.08.2020	:::	Luca logged-in
+20:02:31:397 22.08.2020	:::	DBs updated
+20:02:34:231 22.08.2020	:::	Luca95 is updated
+20:02:34:233 22.08.2020	:::	Luca95 logged-out
+20:02:36:872 22.08.2020	:::	Luca is updated
+20:02:36:872 22.08.2020	:::	Luca logged-out
+20:02:45:449 22.08.2020	:::	Quitting
+20:02:45:452 22.08.2020	:::	DBs updated
+20:02:46:450 22.08.2020	:::	Goodbye
 
 
 

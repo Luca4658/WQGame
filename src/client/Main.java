@@ -169,7 +169,7 @@ public class Main
 			{
 				try
 					{
-						socket = new Socket( "localhost", 46058 );
+						socket = new Socket( "localhost", parser.getPort( ) );
 						inBuff = new BufferedReader( new InputStreamReader( socket.getInputStream( ) ) );
 						outBuff = new DataOutputStream( socket.getOutputStream( ) );
 					}

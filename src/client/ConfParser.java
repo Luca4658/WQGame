@@ -78,7 +78,7 @@ public class ConfParser
 
         getRMIPort( );
         getRMIName( );
-        getListnerPort( );
+        getPort( );
         getTimeoutGame( );
         getTimeoutReply( );
       }
@@ -134,7 +134,7 @@ public class ConfParser
      * @return  il numero di porta da utilizzare per la socket listener su cui
      *          il server accetta le connessioni in entrata
      */
-    public int getListnerPort( )
+    public int getPort( )
       {
         String s = (String)__conf.get( "port" );
         if( s.equals( "null" ) || s.equals( "" ) )
@@ -143,7 +143,7 @@ public class ConfParser
             System.exit( -1 );
           }
 
-        return Integer.valueOf( s );
+        return Integer.parseInt( s );
       }
 
     /**

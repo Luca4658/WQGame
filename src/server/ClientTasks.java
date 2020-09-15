@@ -205,7 +205,7 @@ public class ClientTasks implements Runnable
 		private ACK checkFStatus( String Friend )
 			{
 				User frd = __udb.getUser( Friend );
-				if( __fdb.searchFriend( __me, frd ) != ACK.FriendNotFound )
+				if( frd != null && __fdb.searchFriend( __me, frd ) != ACK.FriendNotFound )
 					{
 						return frd.getStatus( );
 					}
