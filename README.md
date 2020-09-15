@@ -1,4 +1,4 @@
-# WQGame [![Made with](https://img.shields.io/badge/JAVA-v11.0.0-orange)]() [![version](https://img.shields.io/badge/version-v1.0--alpha3-yellowgreen)]() [![coverage](https://img.shields.io/badge/coverage-40%25-lightgrey) ![use](https://img.shields.io/badge/use-UniProject-blue)]() 
+# WQGame [![Made with](https://img.shields.io/badge/JAVA-v11.0.0-orange)]() [![version](https://img.shields.io/badge/version-v1.5.8-yellowgreen)]() [![coverage](https://img.shields.io/badge/coverage-100%25-lightgrey) ![use](https://img.shields.io/badge/use-UniProject-blue)]() 
 
 ---
 
@@ -55,7 +55,9 @@ In particolare:
 - L'utente interagisce con WQ mediante un client che può utilizzare una semplice interfaccia grafica, oppure una interfaccia a linea di comando, definendo un insieme di comandi, presentati in un menu.
 - Il server persiste le informazioni di registrazione, relazioni di amicizia e punteggio degli utenti su file JSON.
 
-## Progettazione/Implementazione/Sviluppo
+---
+
+## Progettazione/Implementazione/Sviluppo [![pdf](https://img.shields.io/badge/view-ORIGINAL-yellow)](https://github.com/Luca4658/WQGame/blob/master/doc/Relazione.pdf)
 
 #### Introduzione
 
